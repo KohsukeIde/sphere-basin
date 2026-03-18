@@ -38,32 +38,10 @@ def sigma_max_from_angle(angle_deg: float) -> float:
     return float(np.tan(np.deg2rad(angle_deg)))
 
 
-def make_fixed_noise(
-    model,
-    *,
-    batch_size: int,
-    device: torch.device,
-    seed: int,
-) -> torch.Tensor:
-    rng_devices = [device] if device.type == 'cuda' else []
-    with torch.random.fork_rng(devices=rng_devices):
-        torch.manual_seed(seed)
-        return torch.randn(batch_size, *model.latent_shape[1:], device=device)
-
-
-def _closest(values: list[float], target: float) -> float:
-    if not values:
-        return target
-    return min(values, key=lambda x: abs(x - target))
-
-
-def _rows_to_map(rows: list[dict], key_name: str) -> dict[float, dict]:
-    return {float(row[key_name]): row for row in rows}
-
-
 def _metric_suffix(value: float) -> str:
-    text = f'{value:g}'
-    return text.replace('-', 'm').replace('.', 'p')
+    if float(value).is_integer():
+        return f'{int(value):02d}'
+    return str(value).replace('.', 'p')
 
 
 def _normalize_rows(arr: np.ndarray) -> np.ndarray:
@@ -111,7 +89,8 @@ def build_train_latent_bank(
 ) -> np.ndarray:
     local_rows = []
     for batch in loader:
-        imgs, labels = batch[0].to(device), batch[1].to(device)
+        imgs = batch[0].to(device, non_blocking=True)
+        labels = batch[1].to(device, non_blocking=True)
         y = labels if model.num_classes > 0 else None
         z_clean = model.encoder(imgs, y)
         v = model.spherify(z_clean, sampling=False)
@@ -126,6 +105,29 @@ def build_train_latent_bank(
     if num_data_samples > 0 and bank.shape[0] > num_data_samples:
         bank = bank[:num_data_samples]
     return _normalize_rows(bank.astype(np.float32, copy=False))
+
+
+def make_fixed_noise(
+    model,
+    *,
+    batch_size: int,
+    device: torch.device,
+    seed: int,
+) -> torch.Tensor:
+    rng_devices = [device] if device.type == 'cuda' else []
+    with torch.random.fork_rng(devices=rng_devices):
+        torch.manual_seed(seed)
+        return torch.randn(batch_size, *model.latent_shape[1:], device=device)
+
+
+def _closest(values: list[float], target: float) -> float:
+    if not values:
+        return target
+    return min(values, key=lambda x: abs(x - target))
+
+
+def _rows_to_map(rows: list[dict], key_name: str) -> dict[float, dict]:
+    return {float(row[key_name]): row for row in rows}
 
 
 @torch.no_grad()
@@ -208,6 +210,7 @@ def probe_prior(
 
         for tau in taus_deg:
             row = {
+                'mode': 'prior',
                 'forward_steps': int(fwd),
                 'tau_deg': float(tau),
                 'terminal_capture_mass': float((terminal_angles <= tau).mean()),
@@ -298,25 +301,19 @@ def summarize_theory_metrics(
         fwd = int(row['forward_steps'])
         tau_suffix = _metric_suffix(float(row['tau_deg']))
         metrics[f'Theory/Terminal_CDF/M{fwd}_tau{tau_suffix}_deg'] = float(
-            row.get('terminal_capture_mass', 0.0)
+            row.get('terminal_capture_mass', row['capture_mass'])
         )
-        metrics[f'Theory/NN_Manifold/Capture/M{fwd}_eps{tau_suffix}_deg'] = float(
-            row.get('capture_mass', 0.0)
+        metrics[f'Theory/NN_Manifold/Capture/M{fwd}_tau{tau_suffix}_deg'] = float(
+            row['capture_mass']
         )
+
+    for row in prior_shared_rows:
         if float(row['tau_deg']) != tau:
             continue
-        metrics[f'Theory/Basin_Mass/M{fwd}'] = float(row.get('capture_mass', 0.0))
+        fwd = int(row['forward_steps'])
+        metrics[f'Theory/Basin_Mass/M{fwd}'] = float(row['capture_mass'])
         metrics[f'Theory/Terminal_Angle/M{fwd}_deg'] = float(
             row['terminal_angle_mean_deg']
-        )
-        metrics[f'Theory/Terminal_Angle/M{fwd}_median_deg'] = float(
-            row.get('terminal_angle_median_deg', row['terminal_angle_mean_deg'])
-        )
-        metrics[f'Theory/Terminal_Angle/M{fwd}_p25_deg'] = float(
-            row.get('terminal_angle_p25_deg', row['terminal_angle_mean_deg'])
-        )
-        metrics[f'Theory/Terminal_Angle/M{fwd}_p75_deg'] = float(
-            row.get('terminal_angle_p75_deg', row['terminal_angle_mean_deg'])
         )
         metrics[f'Theory/Path_Curvature/shared/M{fwd}_deg'] = float(
             row['curvature_mean_deg']
@@ -334,14 +331,8 @@ def summarize_theory_metrics(
             metrics[f'Theory/NN_Manifold/Improvement/M{fwd}_deg'] = float(
                 row['nn_angle_improvement_mean_deg']
             )
-            metrics[f'Theory/NN_Manifold/ImprovementMedian/M{fwd}_deg'] = float(
-                row.get(
-                    'nn_angle_improvement_median_deg',
-                    row['nn_angle_improvement_mean_deg'],
-                )
-            )
-            metrics[f'Theory/NN_Manifold/ImprovedMass/M{fwd}'] = float(
-                row.get('nn_improved_mass', 0.0)
+            metrics[f'Theory/NN_Manifold/Improved_Mass/M{fwd}'] = float(
+                row['nn_improved_mass']
             )
 
     for row in prior_independent_rows:

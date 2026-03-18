@@ -38,6 +38,75 @@ def sigma_max_from_angle(angle_deg: float) -> float:
     return float(np.tan(np.deg2rad(angle_deg)))
 
 
+def _metric_suffix(value: float) -> str:
+    if float(value).is_integer():
+        return f'{int(value):02d}'
+    return str(value).replace('.', 'p')
+
+
+def _normalize_rows(arr: np.ndarray) -> np.ndarray:
+    norms = np.linalg.norm(arr, axis=1, keepdims=True)
+    return arr / np.clip(norms, 1e-8, None)
+
+
+def _summarize_array(prefix: str, values: np.ndarray) -> dict[str, float]:
+    return {
+        f'{prefix}_mean_deg': float(values.mean()),
+        f'{prefix}_std_deg': float(values.std()),
+        f'{prefix}_median_deg': float(np.median(values)),
+        f'{prefix}_p25_deg': float(np.percentile(values, 25.0)),
+        f'{prefix}_p75_deg': float(np.percentile(values, 75.0)),
+    }
+
+
+def _nearest_neighbor_angles_deg(
+    queries: np.ndarray,
+    bank: np.ndarray,
+    *,
+    chunk_size: int = 1024,
+) -> np.ndarray:
+    if queries.size == 0 or bank.size == 0:
+        return np.empty((0,), dtype=np.float32)
+
+    queries = _normalize_rows(np.asarray(queries, dtype=np.float32))
+    bank = _normalize_rows(np.asarray(bank, dtype=np.float32))
+    out = []
+    for start in range(0, queries.shape[0], chunk_size):
+        chunk = queries[start : start + chunk_size]
+        dots = chunk @ bank.T
+        max_dots = np.clip(dots.max(axis=1), -1.0, 1.0)
+        out.append(np.rad2deg(np.arccos(max_dots)).astype(np.float32))
+    return np.concatenate(out, axis=0)
+
+
+@torch.no_grad()
+def build_train_latent_bank(
+    model,
+    *,
+    loader,
+    device: torch.device,
+    num_data_samples: int,
+) -> np.ndarray:
+    local_rows = []
+    for batch in loader:
+        imgs = batch[0].to(device, non_blocking=True)
+        labels = batch[1].to(device, non_blocking=True)
+        y = labels if model.num_classes > 0 else None
+        z_clean = model.encoder(imgs, y)
+        v = model.spherify(z_clean, sampling=False)
+        local_rows.append(v.flatten(1).float().cpu().numpy())
+
+    local_bank = (
+        np.concatenate(local_rows, axis=0)
+        if local_rows
+        else np.empty((0, 0), dtype=np.float32)
+    )
+    bank = gather_numpy(local_bank)
+    if num_data_samples > 0 and bank.shape[0] > num_data_samples:
+        bank = bank[:num_data_samples]
+    return _normalize_rows(bank.astype(np.float32, copy=False))
+
+
 def make_fixed_noise(
     model,
     *,
@@ -75,6 +144,7 @@ def probe_prior(
     use_sampling_scheduler: bool,
     cache_sampling_noise: bool,
     seed: int,
+    train_latent_bank: np.ndarray | None = None,
 ) -> list[dict]:
     rows = []
     world_size = dist.get_world_size() if dist.is_initialized() else 1
@@ -90,6 +160,8 @@ def probe_prior(
         terminal_angles = []
         curvatures = []
         path_lengths = []
+        initial_latents = []
+        terminal_latents = []
         with torch.random.fork_rng(devices=rng_devices):
             torch.manual_seed(seed + 1000 * local_rank + fwd)
             for _ in range(num_batches):
@@ -104,8 +176,10 @@ def probe_prior(
                     cache_sampling_noise=cache_sampling_noise,
                 )
                 step_angles = step_angles_deg(zs)
+                initial_latents.append(zs[0].flatten(1).cpu().numpy())
                 terminal = step_angles[-1].flatten().cpu().numpy()
                 terminal_angles.append(terminal)
+                terminal_latents.append(zs[-1].flatten(1).cpu().numpy())
                 curvatures.append(ambient_curvature_deg(zs).flatten().cpu().numpy())
                 path_lengths.append(
                     np.stack(
@@ -113,22 +187,45 @@ def probe_prior(
                     ).sum(axis=1)
                 )
 
+        initial_latents = gather_numpy(np.concatenate(initial_latents))
         terminal_angles = gather_numpy(np.concatenate(terminal_angles))
+        terminal_latents = gather_numpy(np.concatenate(terminal_latents))
         curvatures = gather_numpy(np.concatenate(curvatures))
         path_lengths = gather_numpy(np.concatenate(path_lengths))
+        terminal_summary = _summarize_array('terminal_angle', terminal_angles)
+
+        nn_before = None
+        nn_after = None
+        nn_improvement = None
+        nn_summary: dict[str, float] = {}
+        nn_improved_mass = None
+        if train_latent_bank is not None and train_latent_bank.size > 0:
+            nn_before = _nearest_neighbor_angles_deg(initial_latents, train_latent_bank)
+            nn_after = _nearest_neighbor_angles_deg(terminal_latents, train_latent_bank)
+            nn_improvement = nn_before - nn_after
+            nn_summary.update(_summarize_array('nn_angle_before', nn_before))
+            nn_summary.update(_summarize_array('nn_angle_after', nn_after))
+            nn_summary.update(_summarize_array('nn_angle_improvement', nn_improvement))
+            nn_improved_mass = float((nn_improvement > 0.0).mean())
+
         for tau in taus_deg:
-            rows.append(
-                {
-                    'forward_steps': int(fwd),
-                    'tau_deg': float(tau),
-                    'terminal_angle_mean_deg': float(terminal_angles.mean()),
-                    'terminal_angle_std_deg': float(terminal_angles.std()),
-                    'capture_mass': float((terminal_angles <= tau).mean()),
-                    'curvature_mean_deg': float(curvatures.mean()),
-                    'path_length_mean_deg': float(path_lengths.mean()),
-                    'cache_sampling_noise': bool(cache_sampling_noise),
-                }
-            )
+            row = {
+                'mode': 'prior',
+                'forward_steps': int(fwd),
+                'tau_deg': float(tau),
+                'terminal_capture_mass': float((terminal_angles <= tau).mean()),
+                'curvature_mean_deg': float(curvatures.mean()),
+                'path_length_mean_deg': float(path_lengths.mean()),
+                'cache_sampling_noise': bool(cache_sampling_noise),
+                **terminal_summary,
+            }
+            if nn_after is not None and nn_before is not None and nn_improvement is not None:
+                row.update(nn_summary)
+                row['capture_mass'] = float((nn_after <= tau).mean())
+                row['nn_improved_mass'] = nn_improved_mass
+            else:
+                row['capture_mass'] = 0.0
+            rows.append(row)
     return rows
 
 
@@ -201,6 +298,16 @@ def summarize_theory_metrics(
     tau = _closest(available_taus, target_tau_deg)
 
     for row in prior_shared_rows:
+        fwd = int(row['forward_steps'])
+        tau_suffix = _metric_suffix(float(row['tau_deg']))
+        metrics[f'Theory/Terminal_CDF/M{fwd}_tau{tau_suffix}_deg'] = float(
+            row.get('terminal_capture_mass', row['capture_mass'])
+        )
+        metrics[f'Theory/NN_Manifold/Capture/M{fwd}_tau{tau_suffix}_deg'] = float(
+            row['capture_mass']
+        )
+
+    for row in prior_shared_rows:
         if float(row['tau_deg']) != tau:
             continue
         fwd = int(row['forward_steps'])
@@ -214,6 +321,19 @@ def summarize_theory_metrics(
         metrics[f'Theory/Path_Length/shared/M{fwd}_deg'] = float(
             row['path_length_mean_deg']
         )
+        if 'nn_angle_before_mean_deg' in row:
+            metrics[f'Theory/NN_Manifold/Before/M{fwd}_deg'] = float(
+                row['nn_angle_before_mean_deg']
+            )
+            metrics[f'Theory/NN_Manifold/After/M{fwd}_deg'] = float(
+                row['nn_angle_after_mean_deg']
+            )
+            metrics[f'Theory/NN_Manifold/Improvement/M{fwd}_deg'] = float(
+                row['nn_angle_improvement_mean_deg']
+            )
+            metrics[f'Theory/NN_Manifold/Improved_Mass/M{fwd}'] = float(
+                row['nn_improved_mass']
+            )
 
     for row in prior_independent_rows:
         if float(row['tau_deg']) != tau:
@@ -281,6 +401,12 @@ def run_theory_probe(
     use_sampling_scheduler: bool,
     seed: int,
 ) -> tuple[dict[str, float], dict]:
+    train_latent_bank = build_train_latent_bank(
+        model,
+        loader=loader,
+        device=device,
+        num_data_samples=num_data_samples,
+    )
     prior_shared_rows = probe_prior(
         model,
         batch_size=batch_size_per_rank,
@@ -293,6 +419,7 @@ def run_theory_probe(
         use_sampling_scheduler=use_sampling_scheduler,
         cache_sampling_noise=True,
         seed=seed,
+        train_latent_bank=train_latent_bank,
     )
     prior_independent_rows = probe_prior(
         model,
@@ -306,6 +433,7 @@ def run_theory_probe(
         use_sampling_scheduler=use_sampling_scheduler,
         cache_sampling_noise=False,
         seed=seed,
+        train_latent_bank=train_latent_bank,
     )
     contraction_rows = probe_contraction(
         model,
