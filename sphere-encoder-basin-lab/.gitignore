@@ -11,8 +11,8 @@ dist/
 *.egg-info/
 plots/
 outputs/
-# Workspace: keep the research summary, ignore everything else
-workspace/*
+# Workspace: keep the research summary, ignore everything else (recursively)
+workspace/**
 !workspace/research_summary/
 !workspace/research_summary/**
 
