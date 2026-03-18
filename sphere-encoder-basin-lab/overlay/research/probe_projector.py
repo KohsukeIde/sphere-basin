@@ -37,6 +37,62 @@ def gather_numpy(local_arr: np.ndarray) -> np.ndarray:
     return np.concatenate(gather_list, axis=0)
 
 
+def _normalize_rows(arr: np.ndarray) -> np.ndarray:
+    norms = np.linalg.norm(arr, axis=1, keepdims=True)
+    return arr / np.clip(norms, 1e-8, None)
+
+
+def _summarize_array(prefix: str, values: np.ndarray) -> dict[str, float]:
+    return {
+        f'{prefix}_mean_deg': float(values.mean()),
+        f'{prefix}_std_deg': float(values.std()),
+        f'{prefix}_median_deg': float(np.median(values)),
+        f'{prefix}_p25_deg': float(np.percentile(values, 25.0)),
+        f'{prefix}_p75_deg': float(np.percentile(values, 75.0)),
+    }
+
+
+def _nearest_neighbor_angles_deg(
+    queries: np.ndarray,
+    bank: np.ndarray,
+    *,
+    chunk_size: int = 1024,
+) -> np.ndarray:
+    if queries.size == 0 or bank.size == 0:
+        return np.empty((0,), dtype=np.float32)
+
+    queries = _normalize_rows(np.asarray(queries, dtype=np.float32))
+    bank = _normalize_rows(np.asarray(bank, dtype=np.float32))
+    out = []
+    for start in range(0, queries.shape[0], chunk_size):
+        chunk = queries[start : start + chunk_size]
+        dots = chunk @ bank.T
+        max_dots = np.clip(dots.max(axis=1), -1.0, 1.0)
+        out.append(np.rad2deg(np.arccos(max_dots)).astype(np.float32))
+    return np.concatenate(out, axis=0)
+
+
+@torch.no_grad()
+def build_train_latent_bank(model, loader, device, num_data_samples: int) -> np.ndarray:
+    local_rows = []
+    for batch in loader:
+        imgs, labels = batch[0].to(device), batch[1].to(device)
+        y = labels if model.num_classes > 0 else None
+        z_clean = model.encoder(imgs, y)
+        v = model.spherify(z_clean, sampling=False)
+        local_rows.append(v.flatten(1).float().cpu().numpy())
+
+    local_bank = (
+        np.concatenate(local_rows, axis=0)
+        if local_rows
+        else np.empty((0, 0), dtype=np.float32)
+    )
+    bank = gather_numpy(local_bank)
+    if num_data_samples > 0 and bank.shape[0] > num_data_samples:
+        bank = bank[:num_data_samples]
+    return _normalize_rows(bank.astype(np.float32, copy=False))
+
+
 parser = argparse.ArgumentParser(description='Probe basin capture and contraction metrics.')
 parser.add_argument('--dev_dir', type=str, default='workspace')
 parser.add_argument('--job_dir', type=str, required=True)
@@ -45,7 +101,7 @@ parser.add_argument('--batch_size_per_rank', type=int, default=64)
 parser.add_argument('--num_prior_samples', type=int, default=4096)
 parser.add_argument('--num_data_samples', type=int, default=4096)
 parser.add_argument('--forward_steps', type=int, nargs='+', default=[1, 4])
-parser.add_argument('--taus_deg', type=float, nargs='+', default=[1.0, 2.0, 5.0])
+parser.add_argument('--taus_deg', type=float, nargs='+', default=[5.0, 10.0, 20.0, 30.0, 45.0, 60.0])
 parser.add_argument('--contraction_noise_scalers', type=float, nargs='+', default=[0.25, 0.5, 0.75, 1.0])
 parser.add_argument('--cfg', type=float, default=1.0)
 parser.add_argument('--cfg_position', type=str, default='combo')
@@ -58,7 +114,7 @@ cli_args = parser.parse_args()
 
 
 @torch.no_grad()
-def probe_prior(model, args, device, ddp_world_size):
+def probe_prior(model, args, device, ddp_world_size, train_latent_bank: np.ndarray | None = None):
     rows = []
     total = args.num_prior_samples
     batch = args.batch_size_per_rank
@@ -68,6 +124,8 @@ def probe_prior(model, args, device, ddp_world_size):
         terminal_angles = []
         curvatures = []
         path_lengths = []
+        initial_latents = []
+        terminal_latents = []
         for _ in range(num_batches):
             zs, _ = sample_latent_trajectory(
                 model=model,
@@ -80,28 +138,54 @@ def probe_prior(model, args, device, ddp_world_size):
                 cache_sampling_noise=args.cache_sampling_noise,
             )
             step_angles = step_angles_deg(zs)
+            initial_latents.append(zs[0].flatten(1).cpu().numpy())
             terminal = step_angles[-1].flatten().cpu().numpy()
             terminal_angles.append(terminal)
+            terminal_latents.append(zs[-1].flatten(1).cpu().numpy())
             curvatures.append(ambient_curvature_deg(zs).flatten().cpu().numpy())
             path_lengths.append(np.stack([sa.flatten().cpu().numpy() for sa in step_angles], axis=1).sum(axis=1))
+        initial_latents = gather_numpy(np.concatenate(initial_latents))
         terminal_angles = gather_numpy(np.concatenate(terminal_angles))
+        terminal_latents = gather_numpy(np.concatenate(terminal_latents))
         curvatures = gather_numpy(np.concatenate(curvatures))
         path_lengths = gather_numpy(np.concatenate(path_lengths))
+        terminal_summary = _summarize_array('terminal_angle', terminal_angles)
+
+        nn_before = None
+        nn_after = None
+        nn_improvement = None
+        nn_summary: dict[str, float] = {}
+        nn_improved_mass = None
+        if train_latent_bank is not None and train_latent_bank.size > 0:
+            nn_before = _nearest_neighbor_angles_deg(initial_latents, train_latent_bank)
+            nn_after = _nearest_neighbor_angles_deg(terminal_latents, train_latent_bank)
+            nn_improvement = nn_before - nn_after
+            nn_summary.update(_summarize_array('nn_angle_before', nn_before))
+            nn_summary.update(_summarize_array('nn_angle_after', nn_after))
+            nn_summary.update(_summarize_array('nn_angle_improvement', nn_improvement))
+            nn_improved_mass = float((nn_improvement > 0.0).mean())
+
         for tau in args.taus_deg:
-            rows.append({
+            row = {
                 'mode': 'prior',
                 'forward_steps': fwd,
                 'tau_deg': tau,
-                'terminal_angle_mean_deg': float(terminal_angles.mean()),
-                'terminal_angle_std_deg': float(terminal_angles.std()),
-                'capture_mass': float((terminal_angles <= tau).mean()),
+                'terminal_capture_mass': float((terminal_angles <= tau).mean()),
                 'curvature_mean_deg': float(curvatures.mean()),
                 'path_length_mean_deg': float(path_lengths.mean()),
                 'cfg_position': args.cfg_position,
                 'cache_sampling_noise': bool(args.cache_sampling_noise),
                 'use_sampling_scheduler': bool(args.use_sampling_scheduler),
                 'use_ema': bool(args.use_ema_model),
-            })
+                **terminal_summary,
+            }
+            if nn_after is not None and nn_before is not None and nn_improvement is not None:
+                row.update(nn_summary)
+                row['capture_mass'] = float((nn_after <= tau).mean())
+                row['nn_improved_mass'] = nn_improved_mass
+            else:
+                row['capture_mass'] = 0.0
+            rows.append(row)
     return rows
 
 
@@ -165,7 +249,19 @@ def main(cli_args) -> None:
         batch_size_per_rank=cli_args.batch_size_per_rank,
         num_workers=cli_args.num_workers,
     )
-    prior_rows = probe_prior(model, args=cli_args, device=device, ddp_world_size=ddp_world_size)
+    train_latent_bank = build_train_latent_bank(
+        model,
+        loader=loader,
+        device=device,
+        num_data_samples=cli_args.num_data_samples,
+    )
+    prior_rows = probe_prior(
+        model,
+        args=cli_args,
+        device=device,
+        ddp_world_size=ddp_world_size,
+        train_latent_bank=train_latent_bank,
+    )
     contraction_rows = probe_contraction(model, args=cli_args, loader=loader, device=device)
     if ddp_rank == 0:
         out_dir = osp.join(exp_dir, 'research')

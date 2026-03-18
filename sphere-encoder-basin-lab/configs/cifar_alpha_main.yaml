@@ -41,9 +41,9 @@ train:
   probe_num_prior_samples: 4096
   probe_num_data_samples: 4096
   probe_forward_steps: [1, 4]
-  probe_taus_deg: [2.0]
+  probe_taus_deg: [5.0, 10.0, 20.0, 30.0, 45.0, 60.0]
   probe_contraction_noise_scalers: [0.25, 0.5, 0.75, 1.0]
-  probe_target_tau_deg: 2.0
+  probe_target_tau_deg: 30.0
   probe_target_noise_scaler: 1.0
   recon_eval_interval: 50
   recon_num_samples: 2048
@@ -69,4 +69,4 @@ analysis:
   contraction_noise_scalers: [0.25, 0.5, 0.75, 1.0]
   rm_folder_after_eval: true
   plot_forward_steps: 4
-  plot_tau_deg: 2.0
+  plot_tau_deg: 30.0
