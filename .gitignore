@@ -1,0 +1,37 @@
+# Never commit datasets / large artifacts
+sphere-encoder-basin-lab/workspace/datasets/
+**/datasets/
+
+# Python virtualenvs
+**/.venv/
+**/venv/
+
+# Common Python artifacts
+**/__pycache__/
+**/*.py[cod]
+**/.ipynb_checkpoints/
+
+# Experiment trackers / logs
+**/wandb/
+**/mlruns/
+**/logs/
+
+# Model/checkpoint artifacts (keep broad but not overly destructive)
+**/*.pt
+**/*.pth
+**/*.ckpt
+**/*.npz
+**/*.npy
+**/*.h5
+**/*.pkl
+**/*.pickle
+**/*.tar
+**/*.zip
+
+# OS / editor
+**/.DS_Store
+**/.idea/
+**/.vscode/
+
+# Keep internal backup out of repo
+.git-backup/

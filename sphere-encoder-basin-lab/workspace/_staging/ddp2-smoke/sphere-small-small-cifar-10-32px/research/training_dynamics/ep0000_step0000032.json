@@ -1,0 +1,9 @@
+{
+  "epoch": 0,
+  "step": 32,
+  "visualization_path": "/home/cvrt/Desktop/dev/sphere-encoder-basin-lab/workspace/_staging/ddp2-smoke/sphere-small-small-cifar-10-32px/vis/imgs_ep0000_ema=False_cfg=1.0-combo_steps=2_sched=False.png",
+  "reconstruction": {
+    "Eval/Recon_MSE": 0.06359376758337021,
+    "Eval/Recon_L1": 0.21129663288593292
+  }
+}

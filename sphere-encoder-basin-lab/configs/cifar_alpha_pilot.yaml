@@ -1,0 +1,70 @@
+experiment:
+  name: cifar10_alpha_pilot
+  dist_mode: local
+  dev_dir: workspace
+  tag: pilot
+  skip_existing: true
+  gpu_groups:
+    - [0, 1]
+train:
+  dataset_name: cifar-10
+  image_size: 32
+  warmup_epochs: 5
+  epochs: 200
+  compression_ratio: 1.5
+  vit_enc_model_size: small
+  vit_dec_model_size: small
+  vit_enc_latent_mlp_mixer_depth: 2
+  vit_dec_latent_mlp_mixer_depth: 2
+  affine_latent_mlp_mixer: true
+  pixel_head_type: conv
+  compile_model: false
+  ckpt_save_interval: 25
+  vis_interval: 10
+  out_dir: experiments
+  lat_con_loss_weight: 0.1
+  pix_recon_dist_loss_weight: 1.0
+  pix_recon_perc_loss_weight: 1.0
+  pix_con_dist_loss_weight: 0.5
+  pix_con_perc_loss_weight: 0.5
+  batch_size: 64
+  batch_size_per_rank: 32
+  num_workers: 8
+  use_wandb: true
+  wandb_mode: online
+  wandb_project: sphere-encoder-basin-lab
+  wandb_group: cifar10_alpha_pilot
+  fixed_vis_batch_size: 16
+  probe_interval: 25
+  probe_batch_size_per_rank: 32
+  probe_num_prior_samples: 2048
+  probe_num_data_samples: 2048
+  probe_forward_steps: [1, 4]
+  probe_taus_deg: [2.0]
+  probe_contraction_noise_scalers: [0.25, 0.5, 0.75, 1.0]
+  probe_target_tau_deg: 2.0
+  probe_target_noise_scaler: 1.0
+  recon_eval_interval: 25
+  recon_num_samples: 1024
+  light_eval_interval: 25
+  light_eval_num_samples: 1280
+  light_eval_batch_size_per_rank: 32
+  light_eval_forward_steps: [1, 4]
+  light_eval_num_snapshot_samples: 64
+sweep:
+  alpha_values: [80, 83, 85, 87]
+analysis:
+  gpu_groups:
+    - [0, 1]
+  eval_forward_steps: [1, 4]
+  report_fid: [rfid, gfid]
+  num_eval_samples: 5000
+  eval_batch_size_per_rank: 32
+  probe_forward_steps: [1, 4]
+  num_prior_samples: 2048
+  num_data_samples: 2048
+  probe_batch_size_per_rank: 32
+  contraction_noise_scalers: [0.25, 0.5, 0.75, 1.0]
+  rm_folder_after_eval: true
+  plot_forward_steps: 4
+  plot_tau_deg: 2.0

@@ -1,0 +1,18 @@
+
+ckpt: ep0000, time: 2026-03-17 19:42:23
+-----
+| task_mode      | use_ema   | seed_sampling   | use_sampling_scheduler   | cache_sampling_noise   | fid_stats_used_from   |   image_size |   num_imgs |     fid |   isc_mean |     isc_std |   forward_steps |   cfg | cfg_position   |
+|:---------------|:----------|:----------------|:-------------------------|:-----------------------|:----------------------|-------------:|-----------:|--------:|-----------:|------------:|----------------:|------:|:---------------|
+| reconstruction | False     | False           | False                    | False                  | extr                  |           32 |         80 | 497.319 |          1 | 7.02862e-07 |               1 |     1 | combo          |
+
+ckpt: ep0000, time: 2026-03-17 19:48:16
+-----
+| task_mode      | use_ema   | seed_sampling   | use_sampling_scheduler   | cache_sampling_noise   | fid_stats_used_from   |   image_size |   num_imgs |     fid |   isc_mean |     isc_std |   forward_steps |   cfg | cfg_position   |
+|:---------------|:----------|:----------------|:-------------------------|:-----------------------|:----------------------|-------------:|-----------:|--------:|-----------:|------------:|----------------:|------:|:---------------|
+| reconstruction | False     | False           | False                    | False                  | extr                  |           32 |         80 | 497.319 |          1 | 7.02862e-07 |               1 |     1 | combo          |
+
+ckpt: ep0000, time: 2026-03-17 19:54:58
+-----
+| task_mode      | use_ema   | seed_sampling   | use_sampling_scheduler   | cache_sampling_noise   | fid_stats_used_from   |   image_size |   num_imgs |     fid |   isc_mean |     isc_std |   forward_steps |   cfg | cfg_position   |
+|:---------------|:----------|:----------------|:-------------------------|:-----------------------|:----------------------|-------------:|-----------:|--------:|-----------:|------------:|----------------:|------:|:---------------|
+| reconstruction | False     | False           | False                    | False                  | extr                  |           32 |         80 | 497.319 |          1 | 7.02862e-07 |               1 |     1 | combo          |

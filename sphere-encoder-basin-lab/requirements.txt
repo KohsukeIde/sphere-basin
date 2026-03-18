@@ -1,0 +1,13 @@
+pyyaml>=6.0
+pandas>=2.0
+matplotlib>=3.7
+numpy>=1.24
+fvcore>=0.1.5
+tqdm>=4.66
+wandb>=0.17
+tabulate>=0.9
+huggingface_hub>=0.30
+rich>=13.7
+requests>=2.31
+einops>=0.8
+torch-fidelity @ git+https://github.com/LTH14/torch-fidelity.git

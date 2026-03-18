@@ -1,0 +1,121 @@
+{
+  "epoch": 0,
+  "step": 781,
+  "visualization_path": "/home/cvrt/Desktop/dev/sphere-encoder-basin-lab/workspace/_staging/a80-pilot/sphere-small-small-cifar-10-32px/vis/imgs_ep0000_ema=False_cfg=1.0-combo_steps=2_sched=False.png",
+  "theory": {
+    "prior_shared_rows": [
+      {
+        "forward_steps": 1,
+        "tau_deg": 2.0,
+        "terminal_angle_mean_deg": 89.97586059570312,
+        "terminal_angle_std_deg": 1.2699369192123413,
+        "capture_mass": 0.0,
+        "curvature_mean_deg": 0.0,
+        "path_length_mean_deg": 89.97586059570312,
+        "cache_sampling_noise": true
+      },
+      {
+        "forward_steps": 4,
+        "tau_deg": 2.0,
+        "terminal_angle_mean_deg": 80.01951599121094,
+        "terminal_angle_std_deg": 1.223070502281189,
+        "capture_mass": 0.0,
+        "curvature_mean_deg": 72.16993713378906,
+        "path_length_mean_deg": 170.08599853515625,
+        "cache_sampling_noise": true
+      }
+    ],
+    "prior_independent_rows": [
+      {
+        "forward_steps": 1,
+        "tau_deg": 2.0,
+        "terminal_angle_mean_deg": 89.97586059570312,
+        "terminal_angle_std_deg": 1.2699368000030518,
+        "capture_mass": 0.0,
+        "curvature_mean_deg": 0.0,
+        "path_length_mean_deg": 89.97586059570312,
+        "cache_sampling_noise": false
+      },
+      {
+        "forward_steps": 4,
+        "tau_deg": 2.0,
+        "terminal_angle_mean_deg": 79.97830200195312,
+        "terminal_angle_std_deg": 1.2190638780593872,
+        "capture_mass": 0.0,
+        "curvature_mean_deg": 120.76214599609375,
+        "path_length_mean_deg": 346.60540771484375,
+        "cache_sampling_noise": false
+      }
+    ],
+    "contraction_rows": [
+      {
+        "noise_scaler": 0.25,
+        "tau_deg": 2.0,
+        "kappa_mean": 0.26324233412742615,
+        "kappa_std": 0.09721773117780685,
+        "angle_in_mean_deg": 54.79402542114258,
+        "angle_out_mean_deg": 14.418278694152832,
+        "capture_mass": 0.0
+      },
+      {
+        "noise_scaler": 0.5,
+        "tau_deg": 2.0,
+        "kappa_mean": 0.20556685328483582,
+        "kappa_std": 0.07585499435663223,
+        "angle_in_mean_deg": 70.53018188476562,
+        "angle_out_mean_deg": 14.498918533325195,
+        "capture_mass": 0.0
+      },
+      {
+        "noise_scaler": 0.75,
+        "tau_deg": 2.0,
+        "kappa_mean": 0.1892416924238205,
+        "kappa_std": 0.07014854997396469,
+        "angle_in_mean_deg": 76.82056427001953,
+        "angle_out_mean_deg": 14.533231735229492,
+        "capture_mass": 0.0
+      },
+      {
+        "noise_scaler": 1.0,
+        "tau_deg": 2.0,
+        "kappa_mean": 0.18191233277320862,
+        "kappa_std": 0.06733619421720505,
+        "angle_in_mean_deg": 79.99159240722656,
+        "angle_out_mean_deg": 14.550844192504883,
+        "capture_mass": 0.0
+      }
+    ]
+  },
+  "reconstruction": {
+    "Eval/Recon_MSE": 0.06334705650806427,
+    "Eval/Recon_L1": 0.21108587086200714
+  },
+  "generation": {
+    "snapshots": {
+      "1": "/home/cvrt/Desktop/dev/sphere-encoder-basin-lab/workspace/_staging/a80-pilot/sphere-small-small-cifar-10-32px/research/light_eval/ep0000_step0000781_fwd01/snapshot.png",
+      "4": "/home/cvrt/Desktop/dev/sphere-encoder-basin-lab/workspace/_staging/a80-pilot/sphere-small-small-cifar-10-32px/research/light_eval/ep0000_step0000781_fwd04/snapshot.png"
+    },
+    "runs": [
+      {
+        "forward_steps": 1,
+        "save_dir": "/home/cvrt/Desktop/dev/sphere-encoder-basin-lab/workspace/_staging/a80-pilot/sphere-small-small-cifar-10-32px/research/light_eval/ep0000_step0000781_fwd01",
+        "snapshot_path": "/home/cvrt/Desktop/dev/sphere-encoder-basin-lab/workspace/_staging/a80-pilot/sphere-small-small-cifar-10-32px/research/light_eval/ep0000_step0000781_fwd01/snapshot.png",
+        "metrics": {
+          "fid": 476.7029476963745,
+          "isc_mean": 1.0037562301049547,
+          "isc_std": 0.00015113885725488079
+        }
+      },
+      {
+        "forward_steps": 4,
+        "save_dir": "/home/cvrt/Desktop/dev/sphere-encoder-basin-lab/workspace/_staging/a80-pilot/sphere-small-small-cifar-10-32px/research/light_eval/ep0000_step0000781_fwd04",
+        "snapshot_path": "/home/cvrt/Desktop/dev/sphere-encoder-basin-lab/workspace/_staging/a80-pilot/sphere-small-small-cifar-10-32px/research/light_eval/ep0000_step0000781_fwd04/snapshot.png",
+        "metrics": {
+          "fid": 473.6515214838495,
+          "isc_mean": 1.0032027816217313,
+          "isc_std": 0.0001231390436731887
+        }
+      }
+    ]
+  }
+}

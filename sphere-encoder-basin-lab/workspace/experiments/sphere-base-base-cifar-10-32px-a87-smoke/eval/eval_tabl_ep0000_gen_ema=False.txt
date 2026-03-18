@@ -1,0 +1,36 @@
+
+ckpt: ep0000, time: 2026-03-17 19:43:52
+-----
+| task_mode   | use_ema   | seed_sampling   | use_sampling_scheduler   | cache_sampling_noise   | fid_stats_used_from   |   image_size |   num_imgs |     fid |   isc_mean |     isc_std |   forward_steps |   cfg | cfg_position   |
+|:------------|:----------|:----------------|:-------------------------|:-----------------------|:----------------------|-------------:|-----------:|--------:|-----------:|------------:|----------------:|------:|:---------------|
+| generation  | False     | False           | False                    | False                  | extr                  |           32 |         80 | 497.319 |          1 | 7.02862e-07 |               1 |     1 | combo          |
+
+ckpt: ep0000, time: 2026-03-17 19:43:57
+-----
+| task_mode   | use_ema   | seed_sampling   | use_sampling_scheduler   | cache_sampling_noise   | fid_stats_used_from   |   image_size |   num_imgs |     fid |   isc_mean |     isc_std |   forward_steps |   cfg | cfg_position   |
+|:------------|:----------|:----------------|:-------------------------|:-----------------------|:----------------------|-------------:|-----------:|--------:|-----------:|------------:|----------------:|------:|:---------------|
+| generation  | False     | False           | False                    | False                  | extr                  |           32 |         80 | 497.319 |          1 | 7.02862e-07 |               4 |     1 | combo          |
+
+ckpt: ep0000, time: 2026-03-17 19:49:45
+-----
+| task_mode   | use_ema   | seed_sampling   | use_sampling_scheduler   | cache_sampling_noise   | fid_stats_used_from   |   image_size |   num_imgs |     fid |   isc_mean |     isc_std |   forward_steps |   cfg | cfg_position   |
+|:------------|:----------|:----------------|:-------------------------|:-----------------------|:----------------------|-------------:|-----------:|--------:|-----------:|------------:|----------------:|------:|:---------------|
+| generation  | False     | False           | False                    | False                  | extr                  |           32 |         80 | 497.319 |          1 | 7.02862e-07 |               1 |     1 | combo          |
+
+ckpt: ep0000, time: 2026-03-17 19:49:49
+-----
+| task_mode   | use_ema   | seed_sampling   | use_sampling_scheduler   | cache_sampling_noise   | fid_stats_used_from   |   image_size |   num_imgs |     fid |   isc_mean |     isc_std |   forward_steps |   cfg | cfg_position   |
+|:------------|:----------|:----------------|:-------------------------|:-----------------------|:----------------------|-------------:|-----------:|--------:|-----------:|------------:|----------------:|------:|:---------------|
+| generation  | False     | False           | False                    | False                  | extr                  |           32 |         80 | 497.319 |          1 | 7.02862e-07 |               4 |     1 | combo          |
+
+ckpt: ep0000, time: 2026-03-17 19:55:44
+-----
+| task_mode   | use_ema   | seed_sampling   | use_sampling_scheduler   | cache_sampling_noise   | fid_stats_used_from   |   image_size |   num_imgs |     fid |   isc_mean |     isc_std |   forward_steps |   cfg | cfg_position   |
+|:------------|:----------|:----------------|:-------------------------|:-----------------------|:----------------------|-------------:|-----------:|--------:|-----------:|------------:|----------------:|------:|:---------------|
+| generation  | False     | False           | False                    | False                  | extr                  |           32 |         80 | 497.319 |          1 | 7.02862e-07 |               1 |     1 | combo          |
+
+ckpt: ep0000, time: 2026-03-17 19:55:48
+-----
+| task_mode   | use_ema   | seed_sampling   | use_sampling_scheduler   | cache_sampling_noise   | fid_stats_used_from   |   image_size |   num_imgs |     fid |   isc_mean |     isc_std |   forward_steps |   cfg | cfg_position   |
+|:------------|:----------|:----------------|:-------------------------|:-----------------------|:----------------------|-------------:|-----------:|--------:|-----------:|------------:|----------------:|------:|:---------------|
+| generation  | False     | False           | False                    | False                  | extr                  |           32 |         80 | 497.319 |          1 | 7.02862e-07 |               4 |     1 | combo          |
