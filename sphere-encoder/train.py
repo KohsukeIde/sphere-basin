@@ -8,6 +8,7 @@ import datetime
 import glob
 import json
 import argparse
+import numbers
 import os
 import os.path as osp
 import time
@@ -258,6 +259,48 @@ def should_run_epoch_interval(epoch: int, interval: int) -> bool:
 def maybe_log_wandb(payload: dict, *, step: int, use_wandb: bool) -> None:
     if use_wandb and payload:
         wandb.log(payload, step=step)
+
+
+def reduce_scalar_metrics(
+    metrics: dict,
+    *,
+    device: torch.device,
+    ddp_world_size: int,
+    skip_keys: set[str] | None = None,
+) -> dict:
+    skip_keys = skip_keys or set()
+    numeric_keys = []
+    numeric_values = []
+
+    for key, value in metrics.items():
+        if key in skip_keys:
+            continue
+        if isinstance(value, torch.Tensor):
+            if value.numel() != 1:
+                continue
+            numeric_keys.append(key)
+            numeric_values.append(float(value.detach().item()))
+        elif isinstance(value, numbers.Real) and not isinstance(value, bool):
+            numeric_keys.append(key)
+            numeric_values.append(float(value))
+
+    reduced_values = {}
+    if numeric_keys:
+        tensor = torch.tensor(numeric_values, device=device, dtype=torch.float64)
+        if ddp_world_size > 1:
+            dist.all_reduce(tensor, op=dist.ReduceOp.SUM)
+            tensor /= ddp_world_size
+        reduced_values = dict(zip(numeric_keys, tensor.tolist()))
+
+    reduced = {}
+    for key, value in metrics.items():
+        if key in reduced_values:
+            reduced[key] = float(reduced_values[key])
+        elif isinstance(value, torch.Tensor) and value.numel() == 1:
+            reduced[key] = float(value.detach().item())
+        else:
+            reduced[key] = value
+    return reduced
 
 
 def main(args):
@@ -829,27 +872,9 @@ def main(args):
             t0 = t1
             global_step += 1
 
-            if (
-                local_step == 0 or (local_step + 1) % args.log_interval == 0
-            ) and ddp_rank0:
-                lossf = loss.item()
-                log_str = (
-                    f"epoch {epoch:4d} | "
-                    f"iter {local_step:7d} [/{len(train_loader)}] | "
-                    f"step {global_step:5d} [/{total_steps}]: "
-                    f"lr {lr:.2e}, "
-                    f"loss {lossf:.5f}, "
-                    f"time {dt*1000:.2f}ms, "
-                    f"data {dd*1000:.2f}ms"
-                )
-                for k, v in loss_cls.log_dict.items():
-                    log_str += f", {k} {v:.5f}"
-
-                if args.grad_clip > 0:
-                    log_str += f", grad_norm {grad_norm:.5f}"
-
+            if local_step == 0 or (local_step + 1) % args.log_interval == 0:
                 log_dict = {
-                    "loss": lossf,
+                    "loss": loss.item(),
                     "lr": lr,
                     "epoch": epoch,
                     "step": global_step,
@@ -859,22 +884,52 @@ def main(args):
                 if args.grad_clip > 0:
                     log_dict["grad_norm"] = grad_norm
 
-                logger.info(log_str)
+                log_dict = reduce_scalar_metrics(
+                    log_dict,
+                    device=device,
+                    ddp_world_size=ddp_world_size,
+                    skip_keys={"epoch", "step"},
+                )
+
+                if not ddp_rank0:
+                    continue
+
+                lossf = float(log_dict["loss"])
+                log_str = (
+                    f"epoch {epoch:4d} | "
+                    f"iter {local_step:7d} [/{len(train_loader)}] | "
+                    f"step {global_step:5d} [/{total_steps}]: "
+                    f"lr {float(log_dict['lr']):.2e}, "
+                    f"loss {lossf:.5f}, "
+                    f"time {dt*1000:.2f}ms, "
+                    f"data {dd*1000:.2f}ms"
+                )
+                for k in loss_cls.log_dict:
+                    if k in log_dict:
+                        log_str += f", {k} {float(log_dict[k]):.5f}"
+                for k in model_without_ddp.log_dict:
+                    if k in log_dict:
+                        log_str += f", {k} {float(log_dict[k]):.5f}"
+
+                if args.grad_clip > 0 and "grad_norm" in log_dict:
+                    log_str += f", grad_norm {float(log_dict['grad_norm']):.5f}"
 
                 wandb_log_dict = dict(log_dict)
                 wandb_log_dict["Loss/Total"] = float(lossf)
-                if "lat_con_loss" in loss_cls.log_dict:
+                if "lat_con_loss" in log_dict:
                     wandb_log_dict["Loss/Latent_Consistency"] = float(
-                        loss_cls.log_dict["lat_con_loss"]
+                        log_dict["lat_con_loss"]
                     )
                 if (
-                    "pix_con_dist_loss" in loss_cls.log_dict
-                    or "pix_con_perc_loss" in loss_cls.log_dict
+                    "pix_con_dist_loss" in log_dict
+                    or "pix_con_perc_loss" in log_dict
                 ):
                     wandb_log_dict["Loss/Pixel_Consistency"] = float(
-                        loss_cls.log_dict.get("pix_con_dist_loss", 0.0)
-                        + loss_cls.log_dict.get("pix_con_perc_loss", 0.0)
+                        float(log_dict.get("pix_con_dist_loss", 0.0))
+                        + float(log_dict.get("pix_con_perc_loss", 0.0))
                     )
+
+                logger.info(log_str)
 
                 if wandb_active:
                     maybe_log_wandb(

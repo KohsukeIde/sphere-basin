@@ -104,8 +104,11 @@ def _build_repo_cmd(
     gpu_group: str | None = None,
 ) -> list[str]:
     if dist_mode == 'local':
+        python_exe = sys.executable
         return [
-            'torchrun',
+            python_exe,
+            '-m',
+            'torch.distributed.run',
             '--standalone',
             '--nnodes',
             '1',
