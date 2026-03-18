@@ -11,17 +11,9 @@ dist/
 *.egg-info/
 plots/
 outputs/
-# Workspace: keep research_summary and selected _staging text results, ignore everything else
-workspace/**
-!workspace/research_summary/
-!workspace/research_summary/**
-
-# Allow only text-like artifacts from _staging
-!workspace/_staging/
-!workspace/_staging/**/*.json
-!workspace/_staging/**/*.jsonl
-!workspace/_staging/**/*.txt
-!workspace/_staging/**/*.csv
+# Workspace: ignore only heavy experiment areas
+workspace/experiments/
+workspace/_failed/
 
 # Still ignore heavy/binary artifacts under _staging
 workspace/_staging/**/*.png

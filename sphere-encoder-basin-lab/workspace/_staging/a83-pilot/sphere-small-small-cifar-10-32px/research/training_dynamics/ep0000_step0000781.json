@@ -1,0 +1,501 @@
+{
+  "epoch": 0,
+  "step": 781,
+  "visualization_path": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/_staging/a83-pilot/sphere-small-small-cifar-10-32px/vis/imgs_ep0000_ema=False_cfg=1.0-combo_steps=2_sched=False.png",
+  "theory": {
+    "prior_shared_rows": [
+      {
+        "forward_steps": 1,
+        "tau_deg": 5.0,
+        "terminal_angle_mean_deg": 83.414306640625,
+        "terminal_angle_std_deg": 1.1317648887634277,
+        "capture_mass": 0.0,
+        "curvature_mean_deg": 0.0,
+        "path_length_mean_deg": 83.414306640625,
+        "cache_sampling_noise": true
+      },
+      {
+        "forward_steps": 1,
+        "tau_deg": 10.0,
+        "terminal_angle_mean_deg": 83.414306640625,
+        "terminal_angle_std_deg": 1.1317648887634277,
+        "capture_mass": 0.0,
+        "curvature_mean_deg": 0.0,
+        "path_length_mean_deg": 83.414306640625,
+        "cache_sampling_noise": true
+      },
+      {
+        "forward_steps": 1,
+        "tau_deg": 20.0,
+        "terminal_angle_mean_deg": 83.414306640625,
+        "terminal_angle_std_deg": 1.1317648887634277,
+        "capture_mass": 0.0,
+        "curvature_mean_deg": 0.0,
+        "path_length_mean_deg": 83.414306640625,
+        "cache_sampling_noise": true
+      },
+      {
+        "forward_steps": 1,
+        "tau_deg": 30.0,
+        "terminal_angle_mean_deg": 83.414306640625,
+        "terminal_angle_std_deg": 1.1317648887634277,
+        "capture_mass": 0.0,
+        "curvature_mean_deg": 0.0,
+        "path_length_mean_deg": 83.414306640625,
+        "cache_sampling_noise": true
+      },
+      {
+        "forward_steps": 1,
+        "tau_deg": 45.0,
+        "terminal_angle_mean_deg": 83.414306640625,
+        "terminal_angle_std_deg": 1.1317648887634277,
+        "capture_mass": 0.0,
+        "curvature_mean_deg": 0.0,
+        "path_length_mean_deg": 83.414306640625,
+        "cache_sampling_noise": true
+      },
+      {
+        "forward_steps": 1,
+        "tau_deg": 60.0,
+        "terminal_angle_mean_deg": 83.414306640625,
+        "terminal_angle_std_deg": 1.1317648887634277,
+        "capture_mass": 0.0,
+        "curvature_mean_deg": 0.0,
+        "path_length_mean_deg": 83.414306640625,
+        "cache_sampling_noise": true
+      },
+      {
+        "forward_steps": 4,
+        "tau_deg": 5.0,
+        "terminal_angle_mean_deg": 77.6451416015625,
+        "terminal_angle_std_deg": 1.1487315893173218,
+        "capture_mass": 0.0,
+        "curvature_mean_deg": 69.04639434814453,
+        "path_length_mean_deg": 173.69735717773438,
+        "cache_sampling_noise": true
+      },
+      {
+        "forward_steps": 4,
+        "tau_deg": 10.0,
+        "terminal_angle_mean_deg": 77.6451416015625,
+        "terminal_angle_std_deg": 1.1487315893173218,
+        "capture_mass": 0.0,
+        "curvature_mean_deg": 69.04639434814453,
+        "path_length_mean_deg": 173.69735717773438,
+        "cache_sampling_noise": true
+      },
+      {
+        "forward_steps": 4,
+        "tau_deg": 20.0,
+        "terminal_angle_mean_deg": 77.6451416015625,
+        "terminal_angle_std_deg": 1.1487315893173218,
+        "capture_mass": 0.0,
+        "curvature_mean_deg": 69.04639434814453,
+        "path_length_mean_deg": 173.69735717773438,
+        "cache_sampling_noise": true
+      },
+      {
+        "forward_steps": 4,
+        "tau_deg": 30.0,
+        "terminal_angle_mean_deg": 77.6451416015625,
+        "terminal_angle_std_deg": 1.1487315893173218,
+        "capture_mass": 0.0,
+        "curvature_mean_deg": 69.04639434814453,
+        "path_length_mean_deg": 173.69735717773438,
+        "cache_sampling_noise": true
+      },
+      {
+        "forward_steps": 4,
+        "tau_deg": 45.0,
+        "terminal_angle_mean_deg": 77.6451416015625,
+        "terminal_angle_std_deg": 1.1487315893173218,
+        "capture_mass": 0.0,
+        "curvature_mean_deg": 69.04639434814453,
+        "path_length_mean_deg": 173.69735717773438,
+        "cache_sampling_noise": true
+      },
+      {
+        "forward_steps": 4,
+        "tau_deg": 60.0,
+        "terminal_angle_mean_deg": 77.6451416015625,
+        "terminal_angle_std_deg": 1.1487315893173218,
+        "capture_mass": 0.0,
+        "curvature_mean_deg": 69.04639434814453,
+        "path_length_mean_deg": 173.69735717773438,
+        "cache_sampling_noise": true
+      }
+    ],
+    "prior_independent_rows": [
+      {
+        "forward_steps": 1,
+        "tau_deg": 5.0,
+        "terminal_angle_mean_deg": 83.414306640625,
+        "terminal_angle_std_deg": 1.1317648887634277,
+        "capture_mass": 0.0,
+        "curvature_mean_deg": 0.0,
+        "path_length_mean_deg": 83.414306640625,
+        "cache_sampling_noise": false
+      },
+      {
+        "forward_steps": 1,
+        "tau_deg": 10.0,
+        "terminal_angle_mean_deg": 83.414306640625,
+        "terminal_angle_std_deg": 1.1317648887634277,
+        "capture_mass": 0.0,
+        "curvature_mean_deg": 0.0,
+        "path_length_mean_deg": 83.414306640625,
+        "cache_sampling_noise": false
+      },
+      {
+        "forward_steps": 1,
+        "tau_deg": 20.0,
+        "terminal_angle_mean_deg": 83.414306640625,
+        "terminal_angle_std_deg": 1.1317648887634277,
+        "capture_mass": 0.0,
+        "curvature_mean_deg": 0.0,
+        "path_length_mean_deg": 83.414306640625,
+        "cache_sampling_noise": false
+      },
+      {
+        "forward_steps": 1,
+        "tau_deg": 30.0,
+        "terminal_angle_mean_deg": 83.414306640625,
+        "terminal_angle_std_deg": 1.1317648887634277,
+        "capture_mass": 0.0,
+        "curvature_mean_deg": 0.0,
+        "path_length_mean_deg": 83.414306640625,
+        "cache_sampling_noise": false
+      },
+      {
+        "forward_steps": 1,
+        "tau_deg": 45.0,
+        "terminal_angle_mean_deg": 83.414306640625,
+        "terminal_angle_std_deg": 1.1317648887634277,
+        "capture_mass": 0.0,
+        "curvature_mean_deg": 0.0,
+        "path_length_mean_deg": 83.414306640625,
+        "cache_sampling_noise": false
+      },
+      {
+        "forward_steps": 1,
+        "tau_deg": 60.0,
+        "terminal_angle_mean_deg": 83.414306640625,
+        "terminal_angle_std_deg": 1.1317648887634277,
+        "capture_mass": 0.0,
+        "curvature_mean_deg": 0.0,
+        "path_length_mean_deg": 83.414306640625,
+        "cache_sampling_noise": false
+      },
+      {
+        "forward_steps": 4,
+        "tau_deg": 5.0,
+        "terminal_angle_mean_deg": 80.19456481933594,
+        "terminal_angle_std_deg": 1.0436335802078247,
+        "capture_mass": 0.0,
+        "curvature_mean_deg": 120.05183410644531,
+        "path_length_mean_deg": 347.0510559082031,
+        "cache_sampling_noise": false
+      },
+      {
+        "forward_steps": 4,
+        "tau_deg": 10.0,
+        "terminal_angle_mean_deg": 80.19456481933594,
+        "terminal_angle_std_deg": 1.0436335802078247,
+        "capture_mass": 0.0,
+        "curvature_mean_deg": 120.05183410644531,
+        "path_length_mean_deg": 347.0510559082031,
+        "cache_sampling_noise": false
+      },
+      {
+        "forward_steps": 4,
+        "tau_deg": 20.0,
+        "terminal_angle_mean_deg": 80.19456481933594,
+        "terminal_angle_std_deg": 1.0436335802078247,
+        "capture_mass": 0.0,
+        "curvature_mean_deg": 120.05183410644531,
+        "path_length_mean_deg": 347.0510559082031,
+        "cache_sampling_noise": false
+      },
+      {
+        "forward_steps": 4,
+        "tau_deg": 30.0,
+        "terminal_angle_mean_deg": 80.19456481933594,
+        "terminal_angle_std_deg": 1.0436335802078247,
+        "capture_mass": 0.0,
+        "curvature_mean_deg": 120.05183410644531,
+        "path_length_mean_deg": 347.0510559082031,
+        "cache_sampling_noise": false
+      },
+      {
+        "forward_steps": 4,
+        "tau_deg": 45.0,
+        "terminal_angle_mean_deg": 80.19456481933594,
+        "terminal_angle_std_deg": 1.0436335802078247,
+        "capture_mass": 0.0,
+        "curvature_mean_deg": 120.05183410644531,
+        "path_length_mean_deg": 347.0510559082031,
+        "cache_sampling_noise": false
+      },
+      {
+        "forward_steps": 4,
+        "tau_deg": 60.0,
+        "terminal_angle_mean_deg": 80.19456481933594,
+        "terminal_angle_std_deg": 1.0436335802078247,
+        "capture_mass": 0.0,
+        "curvature_mean_deg": 120.05183410644531,
+        "path_length_mean_deg": 347.0510559082031,
+        "cache_sampling_noise": false
+      }
+    ],
+    "contraction_rows": [
+      {
+        "noise_scaler": 0.25,
+        "tau_deg": 5.0,
+        "kappa_mean": 0.4061342477798462,
+        "kappa_std": 0.11117580533027649,
+        "angle_in_mean_deg": 63.84567642211914,
+        "angle_out_mean_deg": 25.933876037597656,
+        "capture_mass": 0.0
+      },
+      {
+        "noise_scaler": 0.25,
+        "tau_deg": 10.0,
+        "kappa_mean": 0.4061342477798462,
+        "kappa_std": 0.11117580533027649,
+        "angle_in_mean_deg": 63.84567642211914,
+        "angle_out_mean_deg": 25.933876037597656,
+        "capture_mass": 0.0048828125
+      },
+      {
+        "noise_scaler": 0.25,
+        "tau_deg": 20.0,
+        "kappa_mean": 0.4061342477798462,
+        "kappa_std": 0.11117580533027649,
+        "angle_in_mean_deg": 63.84567642211914,
+        "angle_out_mean_deg": 25.933876037597656,
+        "capture_mass": 0.20556640625
+      },
+      {
+        "noise_scaler": 0.25,
+        "tau_deg": 30.0,
+        "kappa_mean": 0.4061342477798462,
+        "kappa_std": 0.11117580533027649,
+        "angle_in_mean_deg": 63.84567642211914,
+        "angle_out_mean_deg": 25.933876037597656,
+        "capture_mass": 0.72607421875
+      },
+      {
+        "noise_scaler": 0.25,
+        "tau_deg": 45.0,
+        "kappa_mean": 0.4061342477798462,
+        "kappa_std": 0.11117580533027649,
+        "angle_in_mean_deg": 63.84567642211914,
+        "angle_out_mean_deg": 25.933876037597656,
+        "capture_mass": 0.99365234375
+      },
+      {
+        "noise_scaler": 0.25,
+        "tau_deg": 60.0,
+        "kappa_mean": 0.4061342477798462,
+        "kappa_std": 0.11117580533027649,
+        "angle_in_mean_deg": 63.84567642211914,
+        "angle_out_mean_deg": 25.933876037597656,
+        "capture_mass": 1.0
+      },
+      {
+        "noise_scaler": 0.5,
+        "tau_deg": 5.0,
+        "kappa_mean": 0.44430261850357056,
+        "kappa_std": 0.0968073159456253,
+        "angle_in_mean_deg": 76.20088958740234,
+        "angle_out_mean_deg": 33.87269592285156,
+        "capture_mass": 0.0
+      },
+      {
+        "noise_scaler": 0.5,
+        "tau_deg": 10.0,
+        "kappa_mean": 0.44430261850357056,
+        "kappa_std": 0.0968073159456253,
+        "angle_in_mean_deg": 76.20088958740234,
+        "angle_out_mean_deg": 33.87269592285156,
+        "capture_mass": 0.0
+      },
+      {
+        "noise_scaler": 0.5,
+        "tau_deg": 20.0,
+        "kappa_mean": 0.44430261850357056,
+        "kappa_std": 0.0968073159456253,
+        "angle_in_mean_deg": 76.20088958740234,
+        "angle_out_mean_deg": 33.87269592285156,
+        "capture_mass": 0.02294921875
+      },
+      {
+        "noise_scaler": 0.5,
+        "tau_deg": 30.0,
+        "kappa_mean": 0.44430261850357056,
+        "kappa_std": 0.0968073159456253,
+        "angle_in_mean_deg": 76.20088958740234,
+        "angle_out_mean_deg": 33.87269592285156,
+        "capture_mass": 0.32421875
+      },
+      {
+        "noise_scaler": 0.5,
+        "tau_deg": 45.0,
+        "kappa_mean": 0.44430261850357056,
+        "kappa_std": 0.0968073159456253,
+        "angle_in_mean_deg": 76.20088958740234,
+        "angle_out_mean_deg": 33.87269592285156,
+        "capture_mass": 0.921875
+      },
+      {
+        "noise_scaler": 0.5,
+        "tau_deg": 60.0,
+        "kappa_mean": 0.44430261850357056,
+        "kappa_std": 0.0968073159456253,
+        "angle_in_mean_deg": 76.20088958740234,
+        "angle_out_mean_deg": 33.87269592285156,
+        "capture_mass": 0.99951171875
+      },
+      {
+        "noise_scaler": 0.75,
+        "tau_deg": 5.0,
+        "kappa_mean": 0.5182515978813171,
+        "kappa_std": 0.10804034024477005,
+        "angle_in_mean_deg": 80.72000122070312,
+        "angle_out_mean_deg": 41.86792755126953,
+        "capture_mass": 0.0
+      },
+      {
+        "noise_scaler": 0.75,
+        "tau_deg": 10.0,
+        "kappa_mean": 0.5182515978813171,
+        "kappa_std": 0.10804034024477005,
+        "angle_in_mean_deg": 80.72000122070312,
+        "angle_out_mean_deg": 41.86792755126953,
+        "capture_mass": 0.0
+      },
+      {
+        "noise_scaler": 0.75,
+        "tau_deg": 20.0,
+        "kappa_mean": 0.5182515978813171,
+        "kappa_std": 0.10804034024477005,
+        "angle_in_mean_deg": 80.72000122070312,
+        "angle_out_mean_deg": 41.86792755126953,
+        "capture_mass": 0.0
+      },
+      {
+        "noise_scaler": 0.75,
+        "tau_deg": 30.0,
+        "kappa_mean": 0.5182515978813171,
+        "kappa_std": 0.10804034024477005,
+        "angle_in_mean_deg": 80.72000122070312,
+        "angle_out_mean_deg": 41.86792755126953,
+        "capture_mass": 0.08154296875
+      },
+      {
+        "noise_scaler": 0.75,
+        "tau_deg": 45.0,
+        "kappa_mean": 0.5182515978813171,
+        "kappa_std": 0.10804034024477005,
+        "angle_in_mean_deg": 80.72000122070312,
+        "angle_out_mean_deg": 41.86792755126953,
+        "capture_mass": 0.65478515625
+      },
+      {
+        "noise_scaler": 0.75,
+        "tau_deg": 60.0,
+        "kappa_mean": 0.5182515978813171,
+        "kappa_std": 0.10804034024477005,
+        "angle_in_mean_deg": 80.72000122070312,
+        "angle_out_mean_deg": 41.86792755126953,
+        "capture_mass": 0.970703125
+      },
+      {
+        "noise_scaler": 1.0,
+        "tau_deg": 5.0,
+        "kappa_mean": 0.5827223062515259,
+        "kappa_std": 0.12234774976968765,
+        "angle_in_mean_deg": 82.99464416503906,
+        "angle_out_mean_deg": 48.414825439453125,
+        "capture_mass": 0.0
+      },
+      {
+        "noise_scaler": 1.0,
+        "tau_deg": 10.0,
+        "kappa_mean": 0.5827223062515259,
+        "kappa_std": 0.12234774976968765,
+        "angle_in_mean_deg": 82.99464416503906,
+        "angle_out_mean_deg": 48.414825439453125,
+        "capture_mass": 0.0
+      },
+      {
+        "noise_scaler": 1.0,
+        "tau_deg": 20.0,
+        "kappa_mean": 0.5827223062515259,
+        "kappa_std": 0.12234774976968765,
+        "angle_in_mean_deg": 82.99464416503906,
+        "angle_out_mean_deg": 48.414825439453125,
+        "capture_mass": 0.00048828125
+      },
+      {
+        "noise_scaler": 1.0,
+        "tau_deg": 30.0,
+        "kappa_mean": 0.5827223062515259,
+        "kappa_std": 0.12234774976968765,
+        "angle_in_mean_deg": 82.99464416503906,
+        "angle_out_mean_deg": 48.414825439453125,
+        "capture_mass": 0.0263671875
+      },
+      {
+        "noise_scaler": 1.0,
+        "tau_deg": 45.0,
+        "kappa_mean": 0.5827223062515259,
+        "kappa_std": 0.12234774976968765,
+        "angle_in_mean_deg": 82.99464416503906,
+        "angle_out_mean_deg": 48.414825439453125,
+        "capture_mass": 0.39501953125
+      },
+      {
+        "noise_scaler": 1.0,
+        "tau_deg": 60.0,
+        "kappa_mean": 0.5827223062515259,
+        "kappa_std": 0.12234774976968765,
+        "angle_in_mean_deg": 82.99464416503906,
+        "angle_out_mean_deg": 48.414825439453125,
+        "capture_mass": 0.859375
+      }
+    ]
+  },
+  "reconstruction": {
+    "Eval/Recon_MSE": 0.06421145796775818,
+    "Eval/Recon_L1": 0.2099241018295288
+  },
+  "generation": {
+    "snapshots": {
+      "1": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/_staging/a83-pilot/sphere-small-small-cifar-10-32px/research/light_eval/ep0000_step0000781_fwd01/snapshot.png",
+      "4": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/_staging/a83-pilot/sphere-small-small-cifar-10-32px/research/light_eval/ep0000_step0000781_fwd04/snapshot.png"
+    },
+    "runs": [
+      {
+        "forward_steps": 1,
+        "save_dir": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/_staging/a83-pilot/sphere-small-small-cifar-10-32px/research/light_eval/ep0000_step0000781_fwd01",
+        "snapshot_path": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/_staging/a83-pilot/sphere-small-small-cifar-10-32px/research/light_eval/ep0000_step0000781_fwd01/snapshot.png",
+        "metrics": {
+          "fid": 466.70346316671305,
+          "isc_mean": 1.086026532731792,
+          "isc_std": 0.005921325496174076
+        }
+      },
+      {
+        "forward_steps": 4,
+        "save_dir": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/_staging/a83-pilot/sphere-small-small-cifar-10-32px/research/light_eval/ep0000_step0000781_fwd04",
+        "snapshot_path": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/_staging/a83-pilot/sphere-small-small-cifar-10-32px/research/light_eval/ep0000_step0000781_fwd04/snapshot.png",
+        "metrics": {
+          "fid": 423.57647673374413,
+          "isc_mean": 1.1580916121791809,
+          "isc_std": 0.014898832441729978
+        }
+      }
+    ]
+  }
+}

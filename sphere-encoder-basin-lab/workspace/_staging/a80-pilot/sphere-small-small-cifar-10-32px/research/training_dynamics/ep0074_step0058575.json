@@ -1,0 +1,121 @@
+{
+  "epoch": 74,
+  "step": 58575,
+  "visualization_path": null,
+  "theory": {
+    "prior_shared_rows": [
+      {
+        "forward_steps": 1,
+        "tau_deg": 2.0,
+        "terminal_angle_mean_deg": 64.06430053710938,
+        "terminal_angle_std_deg": 2.5215728282928467,
+        "capture_mass": 0.0,
+        "curvature_mean_deg": 0.0,
+        "path_length_mean_deg": 64.06430053710938,
+        "cache_sampling_noise": true
+      },
+      {
+        "forward_steps": 4,
+        "tau_deg": 2.0,
+        "terminal_angle_mean_deg": 55.67146682739258,
+        "terminal_angle_std_deg": 3.2013285160064697,
+        "capture_mass": 0.0,
+        "curvature_mean_deg": 72.59776306152344,
+        "path_length_mean_deg": 153.78134155273438,
+        "cache_sampling_noise": true
+      }
+    ],
+    "prior_independent_rows": [
+      {
+        "forward_steps": 1,
+        "tau_deg": 2.0,
+        "terminal_angle_mean_deg": 64.06430053710938,
+        "terminal_angle_std_deg": 2.5215728282928467,
+        "capture_mass": 0.0,
+        "curvature_mean_deg": 0.0,
+        "path_length_mean_deg": 64.06430053710938,
+        "cache_sampling_noise": false
+      },
+      {
+        "forward_steps": 4,
+        "tau_deg": 2.0,
+        "terminal_angle_mean_deg": 61.27810287475586,
+        "terminal_angle_std_deg": 3.2072601318359375,
+        "capture_mass": 0.0,
+        "curvature_mean_deg": 116.88046264648438,
+        "path_length_mean_deg": 317.31951904296875,
+        "cache_sampling_noise": false
+      }
+    ],
+    "contraction_rows": [
+      {
+        "noise_scaler": 0.25,
+        "tau_deg": 2.0,
+        "kappa_mean": 0.580483078956604,
+        "kappa_std": 0.07552644610404968,
+        "angle_in_mean_deg": 54.819889068603516,
+        "angle_out_mean_deg": 31.824337005615234,
+        "capture_mass": 0.0
+      },
+      {
+        "noise_scaler": 0.5,
+        "tau_deg": 2.0,
+        "kappa_mean": 0.6600580215454102,
+        "kappa_std": 0.08059186488389969,
+        "angle_in_mean_deg": 70.49259948730469,
+        "angle_out_mean_deg": 46.54039001464844,
+        "capture_mass": 0.0
+      },
+      {
+        "noise_scaler": 0.75,
+        "tau_deg": 2.0,
+        "kappa_mean": 0.7298473119735718,
+        "kappa_std": 0.08119641989469528,
+        "angle_in_mean_deg": 76.75493621826172,
+        "angle_out_mean_deg": 56.03649139404297,
+        "capture_mass": 0.0
+      },
+      {
+        "noise_scaler": 1.0,
+        "tau_deg": 2.0,
+        "kappa_mean": 0.7802032232284546,
+        "kappa_std": 0.07723081111907959,
+        "angle_in_mean_deg": 80.0312271118164,
+        "angle_out_mean_deg": 62.468544006347656,
+        "capture_mass": 0.0
+      }
+    ]
+  },
+  "reconstruction": {
+    "Eval/Recon_MSE": 0.00039888560422696173,
+    "Eval/Recon_L1": 0.014848272316157818
+  },
+  "generation": {
+    "snapshots": {
+      "1": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/_staging/a80-pilot/sphere-small-small-cifar-10-32px/research/light_eval/ep0074_step0058575_fwd01/snapshot.png",
+      "4": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/_staging/a80-pilot/sphere-small-small-cifar-10-32px/research/light_eval/ep0074_step0058575_fwd04/snapshot.png"
+    },
+    "runs": [
+      {
+        "forward_steps": 1,
+        "save_dir": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/_staging/a80-pilot/sphere-small-small-cifar-10-32px/research/light_eval/ep0074_step0058575_fwd01",
+        "snapshot_path": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/_staging/a80-pilot/sphere-small-small-cifar-10-32px/research/light_eval/ep0074_step0058575_fwd01/snapshot.png",
+        "metrics": {
+          "fid": 52.838946072264775,
+          "isc_mean": 6.507053754440472,
+          "isc_std": 0.44936504502767244
+        }
+      },
+      {
+        "forward_steps": 4,
+        "save_dir": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/_staging/a80-pilot/sphere-small-small-cifar-10-32px/research/light_eval/ep0074_step0058575_fwd04",
+        "snapshot_path": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/_staging/a80-pilot/sphere-small-small-cifar-10-32px/research/light_eval/ep0074_step0058575_fwd04/snapshot.png",
+        "metrics": {
+          "fid": 50.06932373648988,
+          "isc_mean": 7.0776464249676865,
+          "isc_std": 0.4003922488386817
+        }
+      }
+    ]
+  }
+}
