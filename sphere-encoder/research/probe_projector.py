@@ -118,6 +118,7 @@ parser.add_argument('--cache_sampling_noise', type=str2bool, default=False)
 parser.add_argument('--use_ema_model', type=str2bool, default=False)
 parser.add_argument('--compile_model', type=str2bool, default=False)
 parser.add_argument('--num_workers', type=int, default=4)
+parser.add_argument('--seed', type=int, default=0)
 cli_args = parser.parse_args()
 
 
@@ -128,49 +129,64 @@ def probe_prior(model, args, device, ddp_world_size, train_latent_bank: np.ndarr
     batch = args.batch_size_per_rank
     assert total % (ddp_world_size * batch) == 0, 'num_prior_samples must divide world_size*batch'
     num_batches = total // (ddp_world_size * batch)
+    rng_devices = [device] if device.type == 'cuda' else []
+    local_rank = dist.get_rank() if dist.is_initialized() else 0
     for fwd in args.forward_steps:
         terminal_angles = []
         curvatures = []
         path_lengths = []
         initial_latents = []
+        preterminal_latents = []
         terminal_latents = []
-        for _ in range(num_batches):
-            zs, _ = sample_latent_trajectory(
-                model=model,
-                batch_size=batch,
-                device=device,
-                forward_steps=fwd,
-                cfg=args.cfg,
-                cfg_position=args.cfg_position,
-                use_sampling_scheduler=args.use_sampling_scheduler,
-                cache_sampling_noise=args.cache_sampling_noise,
-            )
-            step_angles = step_angles_deg(zs)
-            initial_latents.append(zs[0].flatten(1).cpu().numpy())
-            terminal = step_angles[-1].flatten().cpu().numpy()
-            terminal_angles.append(terminal)
-            terminal_latents.append(zs[-1].flatten(1).cpu().numpy())
-            curvatures.append(ambient_curvature_deg(zs).flatten().cpu().numpy())
-            path_lengths.append(np.stack([sa.flatten().cpu().numpy() for sa in step_angles], axis=1).sum(axis=1))
+        with torch.random.fork_rng(devices=rng_devices):
+            torch.manual_seed(args.seed + 1000 * local_rank + fwd)
+            for _ in range(num_batches):
+                zs, _ = sample_latent_trajectory(
+                    model=model,
+                    batch_size=batch,
+                    device=device,
+                    forward_steps=fwd,
+                    cfg=args.cfg,
+                    cfg_position=args.cfg_position,
+                    use_sampling_scheduler=args.use_sampling_scheduler,
+                    cache_sampling_noise=args.cache_sampling_noise,
+                )
+                step_angles = step_angles_deg(zs)
+                initial_latents.append(zs[0].flatten(1).cpu().numpy())
+                terminal = step_angles[-1].flatten().cpu().numpy()
+                terminal_angles.append(terminal)
+                preterminal_latents.append(zs[-2].flatten(1).cpu().numpy())
+                terminal_latents.append(zs[-1].flatten(1).cpu().numpy())
+                curvatures.append(ambient_curvature_deg(zs).flatten().cpu().numpy())
+                path_lengths.append(np.stack([sa.flatten().cpu().numpy() for sa in step_angles], axis=1).sum(axis=1))
         initial_latents = gather_numpy(np.concatenate(initial_latents))
         terminal_angles = gather_numpy(np.concatenate(terminal_angles))
+        preterminal_latents = gather_numpy(np.concatenate(preterminal_latents))
         terminal_latents = gather_numpy(np.concatenate(terminal_latents))
         curvatures = gather_numpy(np.concatenate(curvatures))
         path_lengths = gather_numpy(np.concatenate(path_lengths))
         terminal_summary = _summarize_array('terminal_angle', terminal_angles)
 
         nn_before = None
+        nn_preterminal = None
         nn_after = None
+        nn_preterminal_improvement = None
         nn_improvement = None
         nn_summary: dict[str, float] = {}
         nn_improved_mass = None
+        nn_preterminal_improved_mass = None
         if train_latent_bank is not None and train_latent_bank.size > 0:
             nn_before = _nearest_neighbor_angles_deg(initial_latents, train_latent_bank)
+            nn_preterminal = _nearest_neighbor_angles_deg(preterminal_latents, train_latent_bank)
             nn_after = _nearest_neighbor_angles_deg(terminal_latents, train_latent_bank)
+            nn_preterminal_improvement = nn_before - nn_preterminal
             nn_improvement = nn_before - nn_after
             nn_summary.update(_summarize_array('nn_angle_before', nn_before))
+            nn_summary.update(_summarize_array('nn_angle_preterminal', nn_preterminal))
             nn_summary.update(_summarize_array('nn_angle_after', nn_after))
+            nn_summary.update(_summarize_array('nn_angle_preterminal_improvement', nn_preterminal_improvement))
             nn_summary.update(_summarize_array('nn_angle_improvement', nn_improvement))
+            nn_preterminal_improved_mass = float((nn_preterminal_improvement > 0.0).mean())
             nn_improved_mass = float((nn_improvement > 0.0).mean())
 
         for tau in args.taus_deg:
@@ -187,11 +203,20 @@ def probe_prior(model, args, device, ddp_world_size, train_latent_bank: np.ndarr
                 'use_ema': bool(args.use_ema_model),
                 **terminal_summary,
             }
-            if nn_after is not None and nn_before is not None and nn_improvement is not None:
+            if (
+                nn_after is not None
+                and nn_preterminal is not None
+                and nn_before is not None
+                and nn_improvement is not None
+                and nn_preterminal_improvement is not None
+            ):
                 row.update(nn_summary)
+                row['preterminal_capture_mass'] = float((nn_preterminal <= tau).mean())
                 row['capture_mass'] = float((nn_after <= tau).mean())
+                row['nn_preterminal_improved_mass'] = nn_preterminal_improved_mass
                 row['nn_improved_mass'] = nn_improved_mass
             else:
+                row['preterminal_capture_mass'] = 0.0
                 row['capture_mass'] = 0.0
             rows.append(row)
     return rows
@@ -279,7 +304,8 @@ def main(cli_args) -> None:
             f'_cfg={cli_args.cfg}-{cli_args.cfg_position}'
             f'_sched={cli_args.use_sampling_scheduler}'
             f'_cache={cli_args.cache_sampling_noise}'
-            f'_ema={cli_args.use_ema_model}.json'
+            f'_ema={cli_args.use_ema_model}'
+            f'_seed={cli_args.seed}.json'
         )
         payload = {
             'meta': {
@@ -288,6 +314,8 @@ def main(cli_args) -> None:
                 'probe_mode': 'posthoc',
                 'cfg': cli_args.cfg,
                 'cfg_position': cli_args.cfg_position,
+                'taus_deg': [float(tau) for tau in cli_args.taus_deg],
+                'seed': int(cli_args.seed),
                 'cache_sampling_noise': bool(cli_args.cache_sampling_noise),
                 'noise_mode': _noise_mode_name(bool(cli_args.cache_sampling_noise)),
                 'use_sampling_scheduler': bool(cli_args.use_sampling_scheduler),

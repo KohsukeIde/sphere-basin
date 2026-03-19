@@ -73,7 +73,7 @@ def _job_meta(job_dir: str, job_path: Path) -> dict[str, Any]:
     }
 
 
-def _probe_path(
+def _probe_path_candidates(
     job_path: Path,
     *,
     ckpt_epoch: str,
@@ -82,18 +82,20 @@ def _probe_path(
     use_sampling_scheduler: bool,
     cache_sampling_noise: bool,
     use_ema_model: bool,
-) -> Path:
-    return (
-        job_path
-        / 'research'
-        / (
-            f'probe_ckpt={ckpt_epoch}'
-            f'_cfg={cfg}-{cfg_position}'
-            f'_sched={use_sampling_scheduler}'
-            f'_cache={cache_sampling_noise}'
-            f'_ema={use_ema_model}.json'
-        )
+    seed: int | None,
+) -> list[Path]:
+    base = (
+        f'probe_ckpt={ckpt_epoch}'
+        f'_cfg={cfg}-{cfg_position}'
+        f'_sched={use_sampling_scheduler}'
+        f'_cache={cache_sampling_noise}'
+        f'_ema={use_ema_model}'
     )
+    paths: list[Path] = []
+    if seed is not None:
+        paths.append(job_path / 'research' / f'{base}_seed={seed}.json')
+    paths.append(job_path / 'research' / f'{base}.json')
+    return paths
 
 
 def _build_expected_targets(cfg: dict[str, Any], workspace_root: Path) -> list[dict[str, Any]]:
@@ -109,7 +111,7 @@ def _build_expected_targets(cfg: dict[str, Any], workspace_root: Path) -> list[d
             train_epoch = _epoch_number(ckpt_epoch)
             train_row = training_rows.get(train_epoch, {})
             for regime in probe_cfg['regimes']:
-                probe_path = _probe_path(
+                probe_paths = _probe_path_candidates(
                     job_path,
                     ckpt_epoch=ckpt_epoch,
                     cfg=float(probe_cfg.get('cfg', 1.0)),
@@ -117,7 +119,13 @@ def _build_expected_targets(cfg: dict[str, Any], workspace_root: Path) -> list[d
                     use_sampling_scheduler=bool(regime['use_sampling_scheduler']),
                     cache_sampling_noise=bool(regime['cache_sampling_noise']),
                     use_ema_model=bool(probe_cfg.get('use_ema_model', False)),
+                    seed=(
+                        None
+                        if probe_cfg.get('seed') is None
+                        else int(probe_cfg.get('seed', 0))
+                    ),
                 )
+                probe_path = next((path for path in probe_paths if path.exists()), probe_paths[0])
                 targets.append(
                     {
                         **meta,
@@ -130,6 +138,7 @@ def _build_expected_targets(cfg: dict[str, Any], workspace_root: Path) -> list[d
                         'cache_sampling_noise': bool(regime['cache_sampling_noise']),
                         'use_sampling_scheduler': bool(regime['use_sampling_scheduler']),
                         'use_ema': bool(probe_cfg.get('use_ema_model', False)),
+                        'probe_seed': probe_cfg.get('seed'),
                         'probe_path': probe_path,
                     }
                 )
@@ -208,6 +217,13 @@ def build_tables(cfg: dict[str, Any], workspace_root: Path) -> tuple[pd.DataFram
                 **merged,
                 'nn_capture_mass': merged.get('capture_mass'),
                 'terminal_cdf_mass': merged.get('terminal_capture_mass'),
+                'nn_terminal_capture_mass': merged.get('capture_mass'),
+                'nn_preterminal_capture_mass': merged.get('preterminal_capture_mass'),
+                'nn_terminal_angle_mean_deg': merged.get('nn_angle_after_mean_deg'),
+                'nn_terminal_angle_improvement_mean_deg': merged.get('nn_angle_improvement_mean_deg'),
+                'nn_preterminal_angle_mean_deg': merged.get('nn_angle_preterminal_mean_deg'),
+                'nn_preterminal_angle_improvement_mean_deg': merged.get('nn_angle_preterminal_improvement_mean_deg'),
+                'nn_preterminal_improved_mass': merged.get('nn_preterminal_improved_mass'),
                 'target_contraction_noise_scaler': target_noise_scaler,
             }
             master_row = _merge_train_metrics(master_row, target['train_row'], int(row['forward_steps']))

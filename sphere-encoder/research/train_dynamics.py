@@ -161,6 +161,7 @@ def probe_prior(
         curvatures = []
         path_lengths = []
         initial_latents = []
+        preterminal_latents = []
         terminal_latents = []
         with torch.random.fork_rng(devices=rng_devices):
             torch.manual_seed(seed + 1000 * local_rank + fwd)
@@ -179,6 +180,7 @@ def probe_prior(
                 initial_latents.append(zs[0].flatten(1).cpu().numpy())
                 terminal = step_angles[-1].flatten().cpu().numpy()
                 terminal_angles.append(terminal)
+                preterminal_latents.append(zs[-2].flatten(1).cpu().numpy())
                 terminal_latents.append(zs[-1].flatten(1).cpu().numpy())
                 curvatures.append(ambient_curvature_deg(zs).flatten().cpu().numpy())
                 path_lengths.append(
@@ -189,23 +191,41 @@ def probe_prior(
 
         initial_latents = gather_numpy(np.concatenate(initial_latents))
         terminal_angles = gather_numpy(np.concatenate(terminal_angles))
+        preterminal_latents = gather_numpy(np.concatenate(preterminal_latents))
         terminal_latents = gather_numpy(np.concatenate(terminal_latents))
         curvatures = gather_numpy(np.concatenate(curvatures))
         path_lengths = gather_numpy(np.concatenate(path_lengths))
         terminal_summary = _summarize_array('terminal_angle', terminal_angles)
 
         nn_before = None
+        nn_preterminal = None
         nn_after = None
+        nn_preterminal_improvement = None
         nn_improvement = None
         nn_summary: dict[str, float] = {}
         nn_improved_mass = None
+        nn_preterminal_improved_mass = None
         if train_latent_bank is not None and train_latent_bank.size > 0:
             nn_before = _nearest_neighbor_angles_deg(initial_latents, train_latent_bank)
+            nn_preterminal = _nearest_neighbor_angles_deg(
+                preterminal_latents, train_latent_bank
+            )
             nn_after = _nearest_neighbor_angles_deg(terminal_latents, train_latent_bank)
+            nn_preterminal_improvement = nn_before - nn_preterminal
             nn_improvement = nn_before - nn_after
             nn_summary.update(_summarize_array('nn_angle_before', nn_before))
+            nn_summary.update(_summarize_array('nn_angle_preterminal', nn_preterminal))
             nn_summary.update(_summarize_array('nn_angle_after', nn_after))
+            nn_summary.update(
+                _summarize_array(
+                    'nn_angle_preterminal_improvement',
+                    nn_preterminal_improvement,
+                )
+            )
             nn_summary.update(_summarize_array('nn_angle_improvement', nn_improvement))
+            nn_preterminal_improved_mass = float(
+                (nn_preterminal_improvement > 0.0).mean()
+            )
             nn_improved_mass = float((nn_improvement > 0.0).mean())
 
         for tau in taus_deg:
@@ -219,11 +239,20 @@ def probe_prior(
                 'cache_sampling_noise': bool(cache_sampling_noise),
                 **terminal_summary,
             }
-            if nn_after is not None and nn_before is not None and nn_improvement is not None:
+            if (
+                nn_after is not None
+                and nn_preterminal is not None
+                and nn_before is not None
+                and nn_improvement is not None
+                and nn_preterminal_improvement is not None
+            ):
                 row.update(nn_summary)
+                row['preterminal_capture_mass'] = float((nn_preterminal <= tau).mean())
                 row['capture_mass'] = float((nn_after <= tau).mean())
+                row['nn_preterminal_improved_mass'] = nn_preterminal_improved_mass
                 row['nn_improved_mass'] = nn_improved_mass
             else:
+                row['preterminal_capture_mass'] = 0.0
                 row['capture_mass'] = 0.0
             rows.append(row)
     return rows
@@ -306,6 +335,9 @@ def summarize_theory_metrics(
         metrics[f'Theory/NN_Manifold/Capture/M{fwd}_tau{tau_suffix}_deg'] = float(
             row['capture_mass']
         )
+        metrics[
+            f'Theory/NN_Manifold/Preterminal_Capture/M{fwd}_tau{tau_suffix}_deg'
+        ] = float(row.get('preterminal_capture_mass', 0.0))
 
     for row in prior_shared_rows:
         if float(row['tau_deg']) != tau:
@@ -325,11 +357,20 @@ def summarize_theory_metrics(
             metrics[f'Theory/NN_Manifold/Before/M{fwd}_deg'] = float(
                 row['nn_angle_before_mean_deg']
             )
+            metrics[f'Theory/NN_Manifold/Preterminal/M{fwd}_deg'] = float(
+                row['nn_angle_preterminal_mean_deg']
+            )
             metrics[f'Theory/NN_Manifold/After/M{fwd}_deg'] = float(
                 row['nn_angle_after_mean_deg']
             )
+            metrics[
+                f'Theory/NN_Manifold/Preterminal_Improvement/M{fwd}_deg'
+            ] = float(row['nn_angle_preterminal_improvement_mean_deg'])
             metrics[f'Theory/NN_Manifold/Improvement/M{fwd}_deg'] = float(
                 row['nn_angle_improvement_mean_deg']
+            )
+            metrics[f'Theory/NN_Manifold/Preterminal_Improved_Mass/M{fwd}'] = float(
+                row['nn_preterminal_improved_mass']
             )
             metrics[f'Theory/NN_Manifold/Improved_Mass/M{fwd}'] = float(
                 row['nn_improved_mass']

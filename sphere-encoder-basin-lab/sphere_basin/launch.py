@@ -533,10 +533,14 @@ def _run_probe(
     num_data_samples: int,
     batch_size_per_rank: int,
     contraction_noise_scalers: list[float],
+    cfg: float,
+    cfg_position: str,
+    taus_deg: list[float],
     use_sampling_scheduler: bool,
     cache_sampling_noise: bool,
     use_ema_model: bool,
     num_workers: int,
+    seed: int,
     ckpt_fname: str | None,
     dry_run: bool,
     gpu_group: str | None,
@@ -558,6 +562,12 @@ def _run_probe(
             str(batch_size_per_rank),
             '--contraction_noise_scalers',
             *[str(x) for x in contraction_noise_scalers],
+            '--cfg',
+            str(cfg),
+            '--cfg_position',
+            cfg_position,
+            '--taus_deg',
+            *[str(x) for x in taus_deg],
             '--use_sampling_scheduler',
             _bool_to_str(use_sampling_scheduler),
             '--cache_sampling_noise',
@@ -566,6 +576,8 @@ def _run_probe(
             _bool_to_str(use_ema_model),
             '--num_workers',
             str(num_workers),
+            '--seed',
+            str(seed),
             *([] if ckpt_fname is None else ['--ckpt_fname', ckpt_fname]),
         ],
         dist_mode=dist_mode,
@@ -626,10 +638,14 @@ def _run_analysis_job(
         num_data_samples=int(analysis.get('num_data_samples', 4096)),
         batch_size_per_rank=int(analysis.get('probe_batch_size_per_rank', 64)),
         contraction_noise_scalers=list(analysis.get('contraction_noise_scalers', [0.25, 0.5, 0.75, 1.0])),
+        cfg=float(analysis.get('probe_cfg', analysis.get('cfg_min', 1.0))),
+        cfg_position=str(analysis.get('cfg_position', 'combo')),
+        taus_deg=list(analysis.get('probe_taus_deg', [5.0, 10.0, 20.0, 30.0, 45.0, 60.0])),
         use_sampling_scheduler=bool(analysis.get('use_sampling_scheduler', False)),
         cache_sampling_noise=bool(analysis.get('cache_sampling_noise', False)),
         use_ema_model=bool(analysis.get('use_ema_model', False)),
         num_workers=int(analysis.get('num_workers', 4)),
+        seed=int(analysis.get('probe_seed', 0)),
         ckpt_fname=analysis.get('ckpt_fname'),
         dry_run=dry_run,
         gpu_group=gpu_group,
@@ -741,10 +757,14 @@ def cmd_probe(args: argparse.Namespace) -> None:
         num_data_samples=args.num_data_samples,
         batch_size_per_rank=args.batch_size_per_rank,
         contraction_noise_scalers=args.contraction_noise_scalers,
+        cfg=args.cfg,
+        cfg_position=args.cfg_position,
+        taus_deg=args.taus_deg,
         use_sampling_scheduler=args.use_sampling_scheduler,
         cache_sampling_noise=args.cache_sampling_noise,
         use_ema_model=args.use_ema_model,
         num_workers=args.num_workers,
+        seed=args.seed,
         ckpt_fname=args.ckpt_fname,
         dry_run=args.dry_run,
         gpu_group=_format_gpu_group(args.gpu_group),
@@ -842,10 +862,14 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument('--num-data-samples', type=int, default=4096)
     p.add_argument('--batch-size-per-rank', type=int, default=64)
     p.add_argument('--contraction-noise-scalers', type=float, nargs='+', default=[0.25, 0.5, 0.75, 1.0])
+    p.add_argument('--cfg', type=float, default=1.0)
+    p.add_argument('--cfg-position', type=str, default='combo')
+    p.add_argument('--taus-deg', type=float, nargs='+', default=[5.0, 10.0, 20.0, 30.0, 45.0, 60.0])
     p.add_argument('--use-sampling-scheduler', action='store_true')
     p.add_argument('--cache-sampling-noise', action='store_true')
     p.add_argument('--use-ema-model', action='store_true')
     p.add_argument('--num-workers', type=int, default=4)
+    p.add_argument('--seed', type=int, default=0)
     p.add_argument('--ckpt-fname', type=str, default=None)
     p.add_argument('--dry-run', action='store_true')
     p.set_defaults(func=cmd_probe)

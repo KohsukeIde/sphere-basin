@@ -28,7 +28,9 @@ def _probe_output_path(
     use_sampling_scheduler: bool,
     cache_sampling_noise: bool,
     use_ema_model: bool,
+    seed: int | None,
 ) -> Path:
+    suffix = '' if seed is None else f'_seed={seed}'
     return (
         job_path
         / 'research'
@@ -37,7 +39,8 @@ def _probe_output_path(
             f'_cfg={cfg}-{cfg_position}'
             f'_sched={use_sampling_scheduler}'
             f'_cache={cache_sampling_noise}'
-            f'_ema={use_ema_model}.json'
+            f'_ema={use_ema_model}'
+            f'{suffix}.json'
         )
     )
 
@@ -75,6 +78,11 @@ def _build_tasks(cfg: dict[str, Any], workspace_root: Path) -> list[dict[str, An
                             use_sampling_scheduler=use_sampling_scheduler,
                             cache_sampling_noise=cache_sampling_noise,
                             use_ema_model=bool(probe_cfg.get('use_ema_model', False)),
+                            seed=(
+                                None
+                                if probe_cfg.get('seed') is None
+                                else int(probe_cfg.get('seed', 0))
+                            ),
                         ),
                         'probe_cfg': probe_cfg,
                     }
@@ -124,10 +132,14 @@ def _run_task(
         num_data_samples=int(probe_cfg.get('num_data_samples', 4096)),
         batch_size_per_rank=int(probe_cfg.get('batch_size_per_rank', 64)),
         contraction_noise_scalers=list(probe_cfg.get('contraction_noise_scalers', [0.25, 0.5, 0.75, 1.0])),
+        cfg=float(probe_cfg.get('cfg', 1.0)),
+        cfg_position=str(probe_cfg.get('cfg_position', 'combo')),
+        taus_deg=list(probe_cfg.get('taus_deg', [5.0, 10.0, 20.0, 30.0, 45.0, 60.0])),
         use_sampling_scheduler=bool(task['use_sampling_scheduler']),
         cache_sampling_noise=bool(task['cache_sampling_noise']),
         use_ema_model=bool(probe_cfg.get('use_ema_model', False)),
         num_workers=int(probe_cfg.get('num_workers', 4)),
+        seed=int(probe_cfg.get('seed', 0)),
         ckpt_fname=str(task['ckpt_fname']),
         dry_run=dry_run,
         gpu_group=gpu_group,

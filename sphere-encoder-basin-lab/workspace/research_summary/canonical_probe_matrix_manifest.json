@@ -1,28 +1,28 @@
 {
-  "config_path": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/research_summary/canonical_probe_matrix_sphere-small-small-cifar-10-32px-a83-pilot-ep0049.yaml",
+  "config_path": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/configs/canonical_probe_matrix.yaml",
   "sphere_repo": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder",
   "workspace_root": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace",
-  "task_count": 16,
+  "task_count": 14,
   "results": [
     {
       "job_dir": "sphere-small-small-cifar-10-32px-a80-pilot",
       "ckpt_epoch": "ep0024",
-      "regime_name": "shared-fixed",
-      "cache_sampling_noise": true,
+      "regime_name": "independent-fixed",
+      "cache_sampling_noise": false,
       "use_sampling_scheduler": false,
-      "state": "completed",
-      "expected_probe_path": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/experiments/sphere-small-small-cifar-10-32px-a80-pilot/research/probe_ckpt=ep0024_cfg=1.0-combo_sched=False_cache=True_ema=False.json",
-      "probe_file": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/experiments/sphere-small-small-cifar-10-32px-a80-pilot/research/probe_ckpt=ep0024_cfg=1.0-combo_sched=False_cache=True_ema=False.json"
+      "state": "dry_run",
+      "expected_probe_path": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/experiments/sphere-small-small-cifar-10-32px-a80-pilot/research/probe_ckpt=ep0024_cfg=1.0-combo_sched=False_cache=False_ema=False_seed=0.json",
+      "probe_file": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/experiments/sphere-small-small-cifar-10-32px-a80-pilot/research/probe_ckpt=ep0024_cfg=1.0-combo_sched=False_cache=False_ema=False_seed=0.json"
     },
     {
       "job_dir": "sphere-small-small-cifar-10-32px-a80-pilot",
       "ckpt_epoch": "ep0024",
-      "regime_name": "independent-fixed",
-      "cache_sampling_noise": false,
+      "regime_name": "shared-fixed",
+      "cache_sampling_noise": true,
       "use_sampling_scheduler": false,
-      "state": "completed",
-      "expected_probe_path": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/experiments/sphere-small-small-cifar-10-32px-a80-pilot/research/probe_ckpt=ep0024_cfg=1.0-combo_sched=False_cache=False_ema=False.json",
-      "probe_file": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/experiments/sphere-small-small-cifar-10-32px-a80-pilot/research/probe_ckpt=ep0024_cfg=1.0-combo_sched=False_cache=False_ema=False.json"
+      "state": "dry_run",
+      "expected_probe_path": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/experiments/sphere-small-small-cifar-10-32px-a80-pilot/research/probe_ckpt=ep0024_cfg=1.0-combo_sched=False_cache=True_ema=False_seed=0.json",
+      "probe_file": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/experiments/sphere-small-small-cifar-10-32px-a80-pilot/research/probe_ckpt=ep0024_cfg=1.0-combo_sched=False_cache=True_ema=False_seed=0.json"
     },
     {
       "job_dir": "sphere-small-small-cifar-10-32px-a80-pilot",
@@ -30,9 +30,9 @@
       "regime_name": "independent-fixed",
       "cache_sampling_noise": false,
       "use_sampling_scheduler": false,
-      "state": "completed",
-      "expected_probe_path": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/experiments/sphere-small-small-cifar-10-32px-a80-pilot/research/probe_ckpt=ep0049_cfg=1.0-combo_sched=False_cache=False_ema=False.json",
-      "probe_file": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/experiments/sphere-small-small-cifar-10-32px-a80-pilot/research/probe_ckpt=ep0049_cfg=1.0-combo_sched=False_cache=False_ema=False.json"
+      "state": "dry_run",
+      "expected_probe_path": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/experiments/sphere-small-small-cifar-10-32px-a80-pilot/research/probe_ckpt=ep0049_cfg=1.0-combo_sched=False_cache=False_ema=False_seed=0.json",
+      "probe_file": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/experiments/sphere-small-small-cifar-10-32px-a80-pilot/research/probe_ckpt=ep0049_cfg=1.0-combo_sched=False_cache=False_ema=False_seed=0.json"
     },
     {
       "job_dir": "sphere-small-small-cifar-10-32px-a80-pilot",
@@ -40,9 +40,9 @@
       "regime_name": "shared-fixed",
       "cache_sampling_noise": true,
       "use_sampling_scheduler": false,
-      "state": "completed",
-      "expected_probe_path": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/experiments/sphere-small-small-cifar-10-32px-a80-pilot/research/probe_ckpt=ep0049_cfg=1.0-combo_sched=False_cache=True_ema=False.json",
-      "probe_file": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/experiments/sphere-small-small-cifar-10-32px-a80-pilot/research/probe_ckpt=ep0049_cfg=1.0-combo_sched=False_cache=True_ema=False.json"
+      "state": "dry_run",
+      "expected_probe_path": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/experiments/sphere-small-small-cifar-10-32px-a80-pilot/research/probe_ckpt=ep0049_cfg=1.0-combo_sched=False_cache=True_ema=False_seed=0.json",
+      "probe_file": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/experiments/sphere-small-small-cifar-10-32px-a80-pilot/research/probe_ckpt=ep0049_cfg=1.0-combo_sched=False_cache=True_ema=False_seed=0.json"
     },
     {
       "job_dir": "sphere-small-small-cifar-10-32px-a80-pilot",
@@ -50,9 +50,9 @@
       "regime_name": "independent-fixed",
       "cache_sampling_noise": false,
       "use_sampling_scheduler": false,
-      "state": "completed",
-      "expected_probe_path": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/experiments/sphere-small-small-cifar-10-32px-a80-pilot/research/probe_ckpt=ep0074_cfg=1.0-combo_sched=False_cache=False_ema=False.json",
-      "probe_file": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/experiments/sphere-small-small-cifar-10-32px-a80-pilot/research/probe_ckpt=ep0074_cfg=1.0-combo_sched=False_cache=False_ema=False.json"
+      "state": "dry_run",
+      "expected_probe_path": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/experiments/sphere-small-small-cifar-10-32px-a80-pilot/research/probe_ckpt=ep0074_cfg=1.0-combo_sched=False_cache=False_ema=False_seed=0.json",
+      "probe_file": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/experiments/sphere-small-small-cifar-10-32px-a80-pilot/research/probe_ckpt=ep0074_cfg=1.0-combo_sched=False_cache=False_ema=False_seed=0.json"
     },
     {
       "job_dir": "sphere-small-small-cifar-10-32px-a80-pilot",
@@ -60,9 +60,9 @@
       "regime_name": "shared-fixed",
       "cache_sampling_noise": true,
       "use_sampling_scheduler": false,
-      "state": "completed",
-      "expected_probe_path": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/experiments/sphere-small-small-cifar-10-32px-a80-pilot/research/probe_ckpt=ep0074_cfg=1.0-combo_sched=False_cache=True_ema=False.json",
-      "probe_file": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/experiments/sphere-small-small-cifar-10-32px-a80-pilot/research/probe_ckpt=ep0074_cfg=1.0-combo_sched=False_cache=True_ema=False.json"
+      "state": "dry_run",
+      "expected_probe_path": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/experiments/sphere-small-small-cifar-10-32px-a80-pilot/research/probe_ckpt=ep0074_cfg=1.0-combo_sched=False_cache=True_ema=False_seed=0.json",
+      "probe_file": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/experiments/sphere-small-small-cifar-10-32px-a80-pilot/research/probe_ckpt=ep0074_cfg=1.0-combo_sched=False_cache=True_ema=False_seed=0.json"
     },
     {
       "job_dir": "sphere-small-small-cifar-10-32px-a80-pilot",
@@ -70,9 +70,9 @@
       "regime_name": "independent-fixed",
       "cache_sampling_noise": false,
       "use_sampling_scheduler": false,
-      "state": "completed",
-      "expected_probe_path": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/experiments/sphere-small-small-cifar-10-32px-a80-pilot/research/probe_ckpt=ep0099_cfg=1.0-combo_sched=False_cache=False_ema=False.json",
-      "probe_file": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/experiments/sphere-small-small-cifar-10-32px-a80-pilot/research/probe_ckpt=ep0099_cfg=1.0-combo_sched=False_cache=False_ema=False.json"
+      "state": "dry_run",
+      "expected_probe_path": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/experiments/sphere-small-small-cifar-10-32px-a80-pilot/research/probe_ckpt=ep0099_cfg=1.0-combo_sched=False_cache=False_ema=False_seed=0.json",
+      "probe_file": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/experiments/sphere-small-small-cifar-10-32px-a80-pilot/research/probe_ckpt=ep0099_cfg=1.0-combo_sched=False_cache=False_ema=False_seed=0.json"
     },
     {
       "job_dir": "sphere-small-small-cifar-10-32px-a80-pilot",
@@ -80,9 +80,9 @@
       "regime_name": "shared-fixed",
       "cache_sampling_noise": true,
       "use_sampling_scheduler": false,
-      "state": "completed",
-      "expected_probe_path": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/experiments/sphere-small-small-cifar-10-32px-a80-pilot/research/probe_ckpt=ep0099_cfg=1.0-combo_sched=False_cache=True_ema=False.json",
-      "probe_file": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/experiments/sphere-small-small-cifar-10-32px-a80-pilot/research/probe_ckpt=ep0099_cfg=1.0-combo_sched=False_cache=True_ema=False.json"
+      "state": "dry_run",
+      "expected_probe_path": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/experiments/sphere-small-small-cifar-10-32px-a80-pilot/research/probe_ckpt=ep0099_cfg=1.0-combo_sched=False_cache=True_ema=False_seed=0.json",
+      "probe_file": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/experiments/sphere-small-small-cifar-10-32px-a80-pilot/research/probe_ckpt=ep0099_cfg=1.0-combo_sched=False_cache=True_ema=False_seed=0.json"
     },
     {
       "job_dir": "sphere-small-small-cifar-10-32px-a80-pilot",
@@ -90,9 +90,9 @@
       "regime_name": "independent-fixed",
       "cache_sampling_noise": false,
       "use_sampling_scheduler": false,
-      "state": "completed",
-      "expected_probe_path": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/experiments/sphere-small-small-cifar-10-32px-a80-pilot/research/probe_ckpt=ep0124_cfg=1.0-combo_sched=False_cache=False_ema=False.json",
-      "probe_file": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/experiments/sphere-small-small-cifar-10-32px-a80-pilot/research/probe_ckpt=ep0124_cfg=1.0-combo_sched=False_cache=False_ema=False.json"
+      "state": "dry_run",
+      "expected_probe_path": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/experiments/sphere-small-small-cifar-10-32px-a80-pilot/research/probe_ckpt=ep0124_cfg=1.0-combo_sched=False_cache=False_ema=False_seed=0.json",
+      "probe_file": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/experiments/sphere-small-small-cifar-10-32px-a80-pilot/research/probe_ckpt=ep0124_cfg=1.0-combo_sched=False_cache=False_ema=False_seed=0.json"
     },
     {
       "job_dir": "sphere-small-small-cifar-10-32px-a80-pilot",
@@ -100,9 +100,9 @@
       "regime_name": "shared-fixed",
       "cache_sampling_noise": true,
       "use_sampling_scheduler": false,
-      "state": "completed",
-      "expected_probe_path": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/experiments/sphere-small-small-cifar-10-32px-a80-pilot/research/probe_ckpt=ep0124_cfg=1.0-combo_sched=False_cache=True_ema=False.json",
-      "probe_file": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/experiments/sphere-small-small-cifar-10-32px-a80-pilot/research/probe_ckpt=ep0124_cfg=1.0-combo_sched=False_cache=True_ema=False.json"
+      "state": "dry_run",
+      "expected_probe_path": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/experiments/sphere-small-small-cifar-10-32px-a80-pilot/research/probe_ckpt=ep0124_cfg=1.0-combo_sched=False_cache=True_ema=False_seed=0.json",
+      "probe_file": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/experiments/sphere-small-small-cifar-10-32px-a80-pilot/research/probe_ckpt=ep0124_cfg=1.0-combo_sched=False_cache=True_ema=False_seed=0.json"
     },
     {
       "job_dir": "sphere-small-small-cifar-10-32px-a83-pilot",
@@ -110,9 +110,9 @@
       "regime_name": "independent-fixed",
       "cache_sampling_noise": false,
       "use_sampling_scheduler": false,
-      "state": "completed",
-      "expected_probe_path": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/experiments/sphere-small-small-cifar-10-32px-a83-pilot/research/probe_ckpt=ep0024_cfg=1.0-combo_sched=False_cache=False_ema=False.json",
-      "probe_file": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/experiments/sphere-small-small-cifar-10-32px-a83-pilot/research/probe_ckpt=ep0024_cfg=1.0-combo_sched=False_cache=False_ema=False.json"
+      "state": "dry_run",
+      "expected_probe_path": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/experiments/sphere-small-small-cifar-10-32px-a83-pilot/research/probe_ckpt=ep0024_cfg=1.0-combo_sched=False_cache=False_ema=False_seed=0.json",
+      "probe_file": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/experiments/sphere-small-small-cifar-10-32px-a83-pilot/research/probe_ckpt=ep0024_cfg=1.0-combo_sched=False_cache=False_ema=False_seed=0.json"
     },
     {
       "job_dir": "sphere-small-small-cifar-10-32px-a83-pilot",
@@ -120,29 +120,9 @@
       "regime_name": "shared-fixed",
       "cache_sampling_noise": true,
       "use_sampling_scheduler": false,
-      "state": "completed",
-      "expected_probe_path": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/experiments/sphere-small-small-cifar-10-32px-a83-pilot/research/probe_ckpt=ep0024_cfg=1.0-combo_sched=False_cache=True_ema=False.json",
-      "probe_file": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/experiments/sphere-small-small-cifar-10-32px-a83-pilot/research/probe_ckpt=ep0024_cfg=1.0-combo_sched=False_cache=True_ema=False.json"
-    },
-    {
-      "job_dir": "sphere-small-small-cifar-10-32px-a83-pilot",
-      "ckpt_epoch": "ep0049",
-      "regime_name": "independent-fixed",
-      "cache_sampling_noise": false,
-      "use_sampling_scheduler": false,
-      "state": "completed",
-      "expected_probe_path": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/experiments/sphere-small-small-cifar-10-32px-a83-pilot/research/probe_ckpt=ep0049_cfg=1.0-combo_sched=False_cache=False_ema=False.json",
-      "probe_file": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/experiments/sphere-small-small-cifar-10-32px-a83-pilot/research/probe_ckpt=ep0049_cfg=1.0-combo_sched=False_cache=False_ema=False.json"
-    },
-    {
-      "job_dir": "sphere-small-small-cifar-10-32px-a83-pilot",
-      "ckpt_epoch": "ep0049",
-      "regime_name": "shared-fixed",
-      "cache_sampling_noise": true,
-      "use_sampling_scheduler": false,
-      "state": "completed",
-      "expected_probe_path": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/experiments/sphere-small-small-cifar-10-32px-a83-pilot/research/probe_ckpt=ep0049_cfg=1.0-combo_sched=False_cache=True_ema=False.json",
-      "probe_file": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/experiments/sphere-small-small-cifar-10-32px-a83-pilot/research/probe_ckpt=ep0049_cfg=1.0-combo_sched=False_cache=True_ema=False.json"
+      "state": "dry_run",
+      "expected_probe_path": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/experiments/sphere-small-small-cifar-10-32px-a83-pilot/research/probe_ckpt=ep0024_cfg=1.0-combo_sched=False_cache=True_ema=False_seed=0.json",
+      "probe_file": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/experiments/sphere-small-small-cifar-10-32px-a83-pilot/research/probe_ckpt=ep0024_cfg=1.0-combo_sched=False_cache=True_ema=False_seed=0.json"
     },
     {
       "job_dir": "sphere-small-small-cifar-10-32px-a85-pilot",
@@ -150,9 +130,9 @@
       "regime_name": "independent-fixed",
       "cache_sampling_noise": false,
       "use_sampling_scheduler": false,
-      "state": "completed",
-      "expected_probe_path": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/experiments/sphere-small-small-cifar-10-32px-a85-pilot/research/probe_ckpt=ep0024_cfg=1.0-combo_sched=False_cache=False_ema=False.json",
-      "probe_file": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/experiments/sphere-small-small-cifar-10-32px-a85-pilot/research/probe_ckpt=ep0024_cfg=1.0-combo_sched=False_cache=False_ema=False.json"
+      "state": "dry_run",
+      "expected_probe_path": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/experiments/sphere-small-small-cifar-10-32px-a85-pilot/research/probe_ckpt=ep0024_cfg=1.0-combo_sched=False_cache=False_ema=False_seed=0.json",
+      "probe_file": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/experiments/sphere-small-small-cifar-10-32px-a85-pilot/research/probe_ckpt=ep0024_cfg=1.0-combo_sched=False_cache=False_ema=False_seed=0.json"
     },
     {
       "job_dir": "sphere-small-small-cifar-10-32px-a85-pilot",
@@ -160,9 +140,9 @@
       "regime_name": "shared-fixed",
       "cache_sampling_noise": true,
       "use_sampling_scheduler": false,
-      "state": "completed",
-      "expected_probe_path": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/experiments/sphere-small-small-cifar-10-32px-a85-pilot/research/probe_ckpt=ep0024_cfg=1.0-combo_sched=False_cache=True_ema=False.json",
-      "probe_file": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/experiments/sphere-small-small-cifar-10-32px-a85-pilot/research/probe_ckpt=ep0024_cfg=1.0-combo_sched=False_cache=True_ema=False.json"
+      "state": "dry_run",
+      "expected_probe_path": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/experiments/sphere-small-small-cifar-10-32px-a85-pilot/research/probe_ckpt=ep0024_cfg=1.0-combo_sched=False_cache=True_ema=False_seed=0.json",
+      "probe_file": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/experiments/sphere-small-small-cifar-10-32px-a85-pilot/research/probe_ckpt=ep0024_cfg=1.0-combo_sched=False_cache=True_ema=False_seed=0.json"
     }
   ]
 }
