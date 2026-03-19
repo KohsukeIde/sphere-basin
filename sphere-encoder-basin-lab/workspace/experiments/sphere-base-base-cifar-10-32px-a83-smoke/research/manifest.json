@@ -1,7 +1,0 @@
-{
-  "sweep_name": "cifar10_alpha_smoke",
-  "tag": "smoke",
-  "alpha": 83,
-  "variant": "full",
-  "job_dir": "sphere-base-base-cifar-10-32px-a83-smoke"
-}

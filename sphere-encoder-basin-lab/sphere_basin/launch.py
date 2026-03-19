@@ -4,6 +4,7 @@ import argparse
 import json
 import os
 import shlex
+import socket
 import subprocess
 import sys
 from concurrent.futures import FIRST_COMPLETED, ThreadPoolExecutor, wait
@@ -104,12 +105,17 @@ def _build_repo_cmd(
     gpu_group: str | None = None,
 ) -> list[str]:
     if dist_mode == 'local':
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+            sock.bind(('', 0))
+            master_port = str(sock.getsockname()[1])
         python_exe = sys.executable
         return [
             python_exe,
             '-m',
             'torch.distributed.run',
             '--standalone',
+            '--master_port',
+            master_port,
             '--nnodes',
             '1',
             '--nproc_per_node',

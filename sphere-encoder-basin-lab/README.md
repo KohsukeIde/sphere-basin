@@ -95,6 +95,19 @@ python3 -m sphere_basin.plot_phase_diagram \
   --csv "./workspace/research_summary/summary_generation.csv"
 ```
 
+Canonical post-hoc reprobe for the current pilot checkpoints:
+
+```bash
+bash scripts/run_canonical_probe_matrix.sh \
+  --config configs/canonical_probe_matrix.yaml \
+  --force
+
+bash scripts/build_canonical_master.sh \
+  --config configs/canonical_probe_matrix.yaml
+```
+
+This writes `canonical_master.csv` and `canonical_phase.csv` under `./workspace/research_summary/`.
+
 For a fast end-to-end sanity check before the real pilot:
 
 ```bash

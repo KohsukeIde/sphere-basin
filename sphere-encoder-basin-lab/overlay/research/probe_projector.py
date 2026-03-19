@@ -72,6 +72,14 @@ def _nearest_neighbor_angles_deg(
     return np.concatenate(out, axis=0)
 
 
+def _noise_mode_name(cache_sampling_noise: bool) -> str:
+    return 'shared' if cache_sampling_noise else 'independent'
+
+
+def _schedule_mode_name(use_sampling_scheduler: bool) -> str:
+    return 'decay' if use_sampling_scheduler else 'fixed'
+
+
 @torch.no_grad()
 def build_train_latent_bank(model, loader, device, num_data_samples: int) -> np.ndarray:
     local_rows = []
@@ -277,10 +285,19 @@ def main(cli_args) -> None:
             'meta': {
                 'job_dir': cli_args.job_dir,
                 'ckpt_epoch': ckpt_epoch,
+                'probe_mode': 'posthoc',
                 'cfg': cli_args.cfg,
                 'cfg_position': cli_args.cfg_position,
                 'cache_sampling_noise': bool(cli_args.cache_sampling_noise),
+                'noise_mode': _noise_mode_name(bool(cli_args.cache_sampling_noise)),
                 'use_sampling_scheduler': bool(cli_args.use_sampling_scheduler),
+                'schedule_mode': _schedule_mode_name(
+                    bool(cli_args.use_sampling_scheduler)
+                ),
+                'regime_name': (
+                    f"{_noise_mode_name(bool(cli_args.cache_sampling_noise))}-"
+                    f"{_schedule_mode_name(bool(cli_args.use_sampling_scheduler))}"
+                ),
                 'use_ema': bool(cli_args.use_ema_model),
             },
             'prior_rows': prior_rows,
