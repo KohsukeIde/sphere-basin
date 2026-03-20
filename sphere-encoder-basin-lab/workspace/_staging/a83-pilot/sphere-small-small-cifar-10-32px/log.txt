@@ -3353,3 +3353,1208 @@ I20260319 12:25:42 sphere.utils utils.py:102] grid saved to the image: /home/cvr
 I20260319 12:25:42 research.train_dynamics train_dynamics.py:690] saved training dynamics payload to /home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/_staging/a83-pilot/sphere-small-small-cifar-10-32px/research/training_dynamics/ep0049_step0039050.json
 I20260319 12:25:42 __main__ train.py:1087] saved training dynamics payload: /home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/_staging/a83-pilot/sphere-small-small-cifar-10-32px/research/training_dynamics/ep0049_step0039050.json
 I20260319 12:25:44 sphere.utils utils.py:312] checkpoint saved to /home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/_staging/a83-pilot/sphere-small-small-cifar-10-32px/ckpt/ep0049.pth
+I20260319 23:04:11 __main__ train.py:355] logging to /home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/_staging/a83-pilot/sphere-small-small-cifar-10-32px
+W20260319 23:04:18 py.warnings warnings.py:110] /home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/.venv/lib/python3.12/site-packages/torchvision/datasets/cifar.py:83: VisibleDeprecationWarning: dtype(): align should be passed as Python or NumPy boolean but got `align=0`. Did you mean to pass a tuple to create a subarray type? (Deprecated NumPy 2.4)
+  entry = pickle.load(f, encoding="latin1")
+
+I20260319 23:04:18 sphere.loader loader.py:276] number of samples in train dataset: 50000
+I20260319 23:04:19 sphere.loader loader.py:311] number of samples in test dataset: 10000
+I20260319 23:04:19 __main__ train.py:498] training dataset: Dataset CIFAR10
+    Number of datapoints: 50000
+    Root location: /home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/datasets/cifar-10
+    Split: Train
+    StandardTransform
+Transform: Compose(
+               Resize(size=32, interpolation=nearest, max_size=None, antialias=True)
+               CenterCrop(size=(32, 32))
+               RandomHorizontalFlip(p=0.5)
+               ToTensor()
+               Normalize(mean=(0.5, 0.5, 0.5), std=(0.5, 0.5, 0.5))
+           )
+W20260319 23:04:19 py.warnings warnings.py:110] /home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/.venv/lib/python3.12/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+
+W20260319 23:04:19 py.warnings warnings.py:110] /home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/.venv/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=VGG16_Weights.IMAGENET1K_V1`. You can also use `weights=VGG16_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+
+I20260319 23:04:20 sphere.lpips lpips.py:147] loaded pretrained LPIPS loss from /home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/pretrained/lpips/vgg.pth
+I20260319 23:04:21 sphere.lpips lpips.py:209] loss weights - lpips: 1.0, convnext: 0.1
+I20260319 23:04:21 __main__ train.py:541] ReconstructionLoss(
+  (perceptual_loss): PerceptualLoss(
+    (lpips): LPIPS(
+      (scaling_layer): ScalingLayer()
+      (net): vgg16(
+        (slice1): Sequential(
+          (0): Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): ReLU(inplace=True)
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (3): ReLU(inplace=True)
+        )
+        (slice2): Sequential(
+          (4): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+          (5): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (6): ReLU(inplace=True)
+          (7): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (8): ReLU(inplace=True)
+        )
+        (slice3): Sequential(
+          (9): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+          (10): Conv2d(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (11): ReLU(inplace=True)
+          (12): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (13): ReLU(inplace=True)
+          (14): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (15): ReLU(inplace=True)
+        )
+        (slice4): Sequential(
+          (16): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+          (17): Conv2d(256, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (18): ReLU(inplace=True)
+          (19): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (20): ReLU(inplace=True)
+          (21): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (22): ReLU(inplace=True)
+        )
+        (slice5): Sequential(
+          (23): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+          (24): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (25): ReLU(inplace=True)
+          (26): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (27): ReLU(inplace=True)
+          (28): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (29): ReLU(inplace=True)
+        )
+      )
+      (lin0): NetLinLayer(
+        (model): Sequential(
+          (0): Dropout(p=0.5, inplace=False)
+          (1): Conv2d(64, 1, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (lin1): NetLinLayer(
+        (model): Sequential(
+          (0): Dropout(p=0.5, inplace=False)
+          (1): Conv2d(128, 1, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (lin2): NetLinLayer(
+        (model): Sequential(
+          (0): Dropout(p=0.5, inplace=False)
+          (1): Conv2d(256, 1, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (lin3): NetLinLayer(
+        (model): Sequential(
+          (0): Dropout(p=0.5, inplace=False)
+          (1): Conv2d(512, 1, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (lin4): NetLinLayer(
+        (model): Sequential(
+          (0): Dropout(p=0.5, inplace=False)
+          (1): Conv2d(512, 1, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+    )
+    (convnext): ConvNeXt(
+      (features): Sequential(
+        (0): Conv2dNormActivation(
+          (0): Conv2d(3, 96, kernel_size=(4, 4), stride=(4, 4))
+          (1): LayerNorm2d((96,), eps=1e-06, elementwise_affine=True)
+        )
+        (1): Sequential(
+          (0): CNBlock(
+            (block): Sequential(
+              (0): Conv2d(96, 96, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3), groups=96)
+              (1): Permute()
+              (2): LayerNorm((96,), eps=1e-06, elementwise_affine=True)
+              (3): Linear(in_features=96, out_features=384, bias=True)
+              (4): GELU(approximate='none')
+              (5): Linear(in_features=384, out_features=96, bias=True)
+              (6): Permute()
+            )
+            (stochastic_depth): StochasticDepth(p=0.0, mode=row)
+          )
+          (1): CNBlock(
+            (block): Sequential(
+              (0): Conv2d(96, 96, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3), groups=96)
+              (1): Permute()
+              (2): LayerNorm((96,), eps=1e-06, elementwise_affine=True)
+              (3): Linear(in_features=96, out_features=384, bias=True)
+              (4): GELU(approximate='none')
+              (5): Linear(in_features=384, out_features=96, bias=True)
+              (6): Permute()
+            )
+            (stochastic_depth): StochasticDepth(p=0.011428571428571429, mode=row)
+          )
+          (2): CNBlock(
+            (block): Sequential(
+              (0): Conv2d(96, 96, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3), groups=96)
+              (1): Permute()
+              (2): LayerNorm((96,), eps=1e-06, elementwise_affine=True)
+              (3): Linear(in_features=96, out_features=384, bias=True)
+              (4): GELU(approximate='none')
+              (5): Linear(in_features=384, out_features=96, bias=True)
+              (6): Permute()
+            )
+            (stochastic_depth): StochasticDepth(p=0.022857142857142857, mode=row)
+          )
+        )
+        (2): Sequential(
+          (0): LayerNorm2d((96,), eps=1e-06, elementwise_affine=True)
+          (1): Conv2d(96, 192, kernel_size=(2, 2), stride=(2, 2))
+        )
+        (3): Sequential(
+          (0): CNBlock(
+            (block): Sequential(
+              (0): Conv2d(192, 192, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3), groups=192)
+              (1): Permute()
+              (2): LayerNorm((192,), eps=1e-06, elementwise_affine=True)
+              (3): Linear(in_features=192, out_features=768, bias=True)
+              (4): GELU(approximate='none')
+              (5): Linear(in_features=768, out_features=192, bias=True)
+              (6): Permute()
+            )
+            (stochastic_depth): StochasticDepth(p=0.03428571428571429, mode=row)
+          )
+          (1): CNBlock(
+            (block): Sequential(
+              (0): Conv2d(192, 192, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3), groups=192)
+              (1): Permute()
+              (2): LayerNorm((192,), eps=1e-06, elementwise_affine=True)
+              (3): Linear(in_features=192, out_features=768, bias=True)
+              (4): GELU(approximate='none')
+              (5): Linear(in_features=768, out_features=192, bias=True)
+              (6): Permute()
+            )
+            (stochastic_depth): StochasticDepth(p=0.045714285714285714, mode=row)
+          )
+          (2): CNBlock(
+            (block): Sequential(
+              (0): Conv2d(192, 192, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3), groups=192)
+              (1): Permute()
+              (2): LayerNorm((192,), eps=1e-06, elementwise_affine=True)
+              (3): Linear(in_features=192, out_features=768, bias=True)
+              (4): GELU(approximate='none')
+              (5): Linear(in_features=768, out_features=192, bias=True)
+              (6): Permute()
+            )
+            (stochastic_depth): StochasticDepth(p=0.05714285714285714, mode=row)
+          )
+        )
+        (4): Sequential(
+          (0): LayerNorm2d((192,), eps=1e-06, elementwise_affine=True)
+          (1): Conv2d(192, 384, kernel_size=(2, 2), stride=(2, 2))
+        )
+        (5): Sequential(
+          (0): CNBlock(
+            (block): Sequential(
+              (0): Conv2d(384, 384, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3), groups=384)
+              (1): Permute()
+              (2): LayerNorm((384,), eps=1e-06, elementwise_affine=True)
+              (3): Linear(in_features=384, out_features=1536, bias=True)
+              (4): GELU(approximate='none')
+              (5): Linear(in_features=1536, out_features=384, bias=True)
+              (6): Permute()
+            )
+            (stochastic_depth): StochasticDepth(p=0.06857142857142857, mode=row)
+          )
+          (1): CNBlock(
+            (block): Sequential(
+              (0): Conv2d(384, 384, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3), groups=384)
+              (1): Permute()
+              (2): LayerNorm((384,), eps=1e-06, elementwise_affine=True)
+              (3): Linear(in_features=384, out_features=1536, bias=True)
+              (4): GELU(approximate='none')
+              (5): Linear(in_features=1536, out_features=384, bias=True)
+              (6): Permute()
+            )
+            (stochastic_depth): StochasticDepth(p=0.08, mode=row)
+          )
+          (2): CNBlock(
+            (block): Sequential(
+              (0): Conv2d(384, 384, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3), groups=384)
+              (1): Permute()
+              (2): LayerNorm((384,), eps=1e-06, elementwise_affine=True)
+              (3): Linear(in_features=384, out_features=1536, bias=True)
+              (4): GELU(approximate='none')
+              (5): Linear(in_features=1536, out_features=384, bias=True)
+              (6): Permute()
+            )
+            (stochastic_depth): StochasticDepth(p=0.09142857142857143, mode=row)
+          )
+          (3): CNBlock(
+            (block): Sequential(
+              (0): Conv2d(384, 384, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3), groups=384)
+              (1): Permute()
+              (2): LayerNorm((384,), eps=1e-06, elementwise_affine=True)
+              (3): Linear(in_features=384, out_features=1536, bias=True)
+              (4): GELU(approximate='none')
+              (5): Linear(in_features=1536, out_features=384, bias=True)
+              (6): Permute()
+            )
+            (stochastic_depth): StochasticDepth(p=0.10285714285714286, mode=row)
+          )
+          (4): CNBlock(
+            (block): Sequential(
+              (0): Conv2d(384, 384, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3), groups=384)
+              (1): Permute()
+              (2): LayerNorm((384,), eps=1e-06, elementwise_affine=True)
+              (3): Linear(in_features=384, out_features=1536, bias=True)
+              (4): GELU(approximate='none')
+              (5): Linear(in_features=1536, out_features=384, bias=True)
+              (6): Permute()
+            )
+            (stochastic_depth): StochasticDepth(p=0.11428571428571428, mode=row)
+          )
+          (5): CNBlock(
+            (block): Sequential(
+              (0): Conv2d(384, 384, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3), groups=384)
+              (1): Permute()
+              (2): LayerNorm((384,), eps=1e-06, elementwise_affine=True)
+              (3): Linear(in_features=384, out_features=1536, bias=True)
+              (4): GELU(approximate='none')
+              (5): Linear(in_features=1536, out_features=384, bias=True)
+              (6): Permute()
+            )
+            (stochastic_depth): StochasticDepth(p=0.12571428571428572, mode=row)
+          )
+          (6): CNBlock(
+            (block): Sequential(
+              (0): Conv2d(384, 384, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3), groups=384)
+              (1): Permute()
+              (2): LayerNorm((384,), eps=1e-06, elementwise_affine=True)
+              (3): Linear(in_features=384, out_features=1536, bias=True)
+              (4): GELU(approximate='none')
+              (5): Linear(in_features=1536, out_features=384, bias=True)
+              (6): Permute()
+            )
+            (stochastic_depth): StochasticDepth(p=0.13714285714285715, mode=row)
+          )
+          (7): CNBlock(
+            (block): Sequential(
+              (0): Conv2d(384, 384, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3), groups=384)
+              (1): Permute()
+              (2): LayerNorm((384,), eps=1e-06, elementwise_affine=True)
+              (3): Linear(in_features=384, out_features=1536, bias=True)
+              (4): GELU(approximate='none')
+              (5): Linear(in_features=1536, out_features=384, bias=True)
+              (6): Permute()
+            )
+            (stochastic_depth): StochasticDepth(p=0.14857142857142858, mode=row)
+          )
+          (8): CNBlock(
+            (block): Sequential(
+              (0): Conv2d(384, 384, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3), groups=384)
+              (1): Permute()
+              (2): LayerNorm((384,), eps=1e-06, elementwise_affine=True)
+              (3): Linear(in_features=384, out_features=1536, bias=True)
+              (4): GELU(approximate='none')
+              (5): Linear(in_features=1536, out_features=384, bias=True)
+              (6): Permute()
+            )
+            (stochastic_depth): StochasticDepth(p=0.16, mode=row)
+          )
+          (9): CNBlock(
+            (block): Sequential(
+              (0): Conv2d(384, 384, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3), groups=384)
+              (1): Permute()
+              (2): LayerNorm((384,), eps=1e-06, elementwise_affine=True)
+              (3): Linear(in_features=384, out_features=1536, bias=True)
+              (4): GELU(approximate='none')
+              (5): Linear(in_features=1536, out_features=384, bias=True)
+              (6): Permute()
+            )
+            (stochastic_depth): StochasticDepth(p=0.17142857142857143, mode=row)
+          )
+          (10): CNBlock(
+            (block): Sequential(
+              (0): Conv2d(384, 384, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3), groups=384)
+              (1): Permute()
+              (2): LayerNorm((384,), eps=1e-06, elementwise_affine=True)
+              (3): Linear(in_features=384, out_features=1536, bias=True)
+              (4): GELU(approximate='none')
+              (5): Linear(in_features=1536, out_features=384, bias=True)
+              (6): Permute()
+            )
+            (stochastic_depth): StochasticDepth(p=0.18285714285714286, mode=row)
+          )
+          (11): CNBlock(
+            (block): Sequential(
+              (0): Conv2d(384, 384, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3), groups=384)
+              (1): Permute()
+              (2): LayerNorm((384,), eps=1e-06, elementwise_affine=True)
+              (3): Linear(in_features=384, out_features=1536, bias=True)
+              (4): GELU(approximate='none')
+              (5): Linear(in_features=1536, out_features=384, bias=True)
+              (6): Permute()
+            )
+            (stochastic_depth): StochasticDepth(p=0.1942857142857143, mode=row)
+          )
+          (12): CNBlock(
+            (block): Sequential(
+              (0): Conv2d(384, 384, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3), groups=384)
+              (1): Permute()
+              (2): LayerNorm((384,), eps=1e-06, elementwise_affine=True)
+              (3): Linear(in_features=384, out_features=1536, bias=True)
+              (4): GELU(approximate='none')
+              (5): Linear(in_features=1536, out_features=384, bias=True)
+              (6): Permute()
+            )
+            (stochastic_depth): StochasticDepth(p=0.2057142857142857, mode=row)
+          )
+          (13): CNBlock(
+            (block): Sequential(
+              (0): Conv2d(384, 384, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3), groups=384)
+              (1): Permute()
+              (2): LayerNorm((384,), eps=1e-06, elementwise_affine=True)
+              (3): Linear(in_features=384, out_features=1536, bias=True)
+              (4): GELU(approximate='none')
+              (5): Linear(in_features=1536, out_features=384, bias=True)
+              (6): Permute()
+            )
+            (stochastic_depth): StochasticDepth(p=0.21714285714285717, mode=row)
+          )
+          (14): CNBlock(
+            (block): Sequential(
+              (0): Conv2d(384, 384, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3), groups=384)
+              (1): Permute()
+              (2): LayerNorm((384,), eps=1e-06, elementwise_affine=True)
+              (3): Linear(in_features=384, out_features=1536, bias=True)
+              (4): GELU(approximate='none')
+              (5): Linear(in_features=1536, out_features=384, bias=True)
+              (6): Permute()
+            )
+            (stochastic_depth): StochasticDepth(p=0.22857142857142856, mode=row)
+          )
+          (15): CNBlock(
+            (block): Sequential(
+              (0): Conv2d(384, 384, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3), groups=384)
+              (1): Permute()
+              (2): LayerNorm((384,), eps=1e-06, elementwise_affine=True)
+              (3): Linear(in_features=384, out_features=1536, bias=True)
+              (4): GELU(approximate='none')
+              (5): Linear(in_features=1536, out_features=384, bias=True)
+              (6): Permute()
+            )
+            (stochastic_depth): StochasticDepth(p=0.24000000000000002, mode=row)
+          )
+          (16): CNBlock(
+            (block): Sequential(
+              (0): Conv2d(384, 384, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3), groups=384)
+              (1): Permute()
+              (2): LayerNorm((384,), eps=1e-06, elementwise_affine=True)
+              (3): Linear(in_features=384, out_features=1536, bias=True)
+              (4): GELU(approximate='none')
+              (5): Linear(in_features=1536, out_features=384, bias=True)
+              (6): Permute()
+            )
+            (stochastic_depth): StochasticDepth(p=0.25142857142857145, mode=row)
+          )
+          (17): CNBlock(
+            (block): Sequential(
+              (0): Conv2d(384, 384, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3), groups=384)
+              (1): Permute()
+              (2): LayerNorm((384,), eps=1e-06, elementwise_affine=True)
+              (3): Linear(in_features=384, out_features=1536, bias=True)
+              (4): GELU(approximate='none')
+              (5): Linear(in_features=1536, out_features=384, bias=True)
+              (6): Permute()
+            )
+            (stochastic_depth): StochasticDepth(p=0.2628571428571429, mode=row)
+          )
+          (18): CNBlock(
+            (block): Sequential(
+              (0): Conv2d(384, 384, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3), groups=384)
+              (1): Permute()
+              (2): LayerNorm((384,), eps=1e-06, elementwise_affine=True)
+              (3): Linear(in_features=384, out_features=1536, bias=True)
+              (4): GELU(approximate='none')
+              (5): Linear(in_features=1536, out_features=384, bias=True)
+              (6): Permute()
+            )
+            (stochastic_depth): StochasticDepth(p=0.2742857142857143, mode=row)
+          )
+          (19): CNBlock(
+            (block): Sequential(
+              (0): Conv2d(384, 384, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3), groups=384)
+              (1): Permute()
+              (2): LayerNorm((384,), eps=1e-06, elementwise_affine=True)
+              (3): Linear(in_features=384, out_features=1536, bias=True)
+              (4): GELU(approximate='none')
+              (5): Linear(in_features=1536, out_features=384, bias=True)
+              (6): Permute()
+            )
+            (stochastic_depth): StochasticDepth(p=0.2857142857142857, mode=row)
+          )
+          (20): CNBlock(
+            (block): Sequential(
+              (0): Conv2d(384, 384, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3), groups=384)
+              (1): Permute()
+              (2): LayerNorm((384,), eps=1e-06, elementwise_affine=True)
+              (3): Linear(in_features=384, out_features=1536, bias=True)
+              (4): GELU(approximate='none')
+              (5): Linear(in_features=1536, out_features=384, bias=True)
+              (6): Permute()
+            )
+            (stochastic_depth): StochasticDepth(p=0.29714285714285715, mode=row)
+          )
+          (21): CNBlock(
+            (block): Sequential(
+              (0): Conv2d(384, 384, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3), groups=384)
+              (1): Permute()
+              (2): LayerNorm((384,), eps=1e-06, elementwise_affine=True)
+              (3): Linear(in_features=384, out_features=1536, bias=True)
+              (4): GELU(approximate='none')
+              (5): Linear(in_features=1536, out_features=384, bias=True)
+              (6): Permute()
+            )
+            (stochastic_depth): StochasticDepth(p=0.3085714285714286, mode=row)
+          )
+          (22): CNBlock(
+            (block): Sequential(
+              (0): Conv2d(384, 384, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3), groups=384)
+              (1): Permute()
+              (2): LayerNorm((384,), eps=1e-06, elementwise_affine=True)
+              (3): Linear(in_features=384, out_features=1536, bias=True)
+              (4): GELU(approximate='none')
+              (5): Linear(in_features=1536, out_features=384, bias=True)
+              (6): Permute()
+            )
+            (stochastic_depth): StochasticDepth(p=0.32, mode=row)
+          )
+          (23): CNBlock(
+            (block): Sequential(
+              (0): Conv2d(384, 384, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3), groups=384)
+              (1): Permute()
+              (2): LayerNorm((384,), eps=1e-06, elementwise_affine=True)
+              (3): Linear(in_features=384, out_features=1536, bias=True)
+              (4): GELU(approximate='none')
+              (5): Linear(in_features=1536, out_features=384, bias=True)
+              (6): Permute()
+            )
+            (stochastic_depth): StochasticDepth(p=0.33142857142857146, mode=row)
+          )
+          (24): CNBlock(
+            (block): Sequential(
+              (0): Conv2d(384, 384, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3), groups=384)
+              (1): Permute()
+              (2): LayerNorm((384,), eps=1e-06, elementwise_affine=True)
+              (3): Linear(in_features=384, out_features=1536, bias=True)
+              (4): GELU(approximate='none')
+              (5): Linear(in_features=1536, out_features=384, bias=True)
+              (6): Permute()
+            )
+            (stochastic_depth): StochasticDepth(p=0.34285714285714286, mode=row)
+          )
+          (25): CNBlock(
+            (block): Sequential(
+              (0): Conv2d(384, 384, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3), groups=384)
+              (1): Permute()
+              (2): LayerNorm((384,), eps=1e-06, elementwise_affine=True)
+              (3): Linear(in_features=384, out_features=1536, bias=True)
+              (4): GELU(approximate='none')
+              (5): Linear(in_features=1536, out_features=384, bias=True)
+              (6): Permute()
+            )
+            (stochastic_depth): StochasticDepth(p=0.3542857142857143, mode=row)
+          )
+          (26): CNBlock(
+            (block): Sequential(
+              (0): Conv2d(384, 384, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3), groups=384)
+              (1): Permute()
+              (2): LayerNorm((384,), eps=1e-06, elementwise_affine=True)
+              (3): Linear(in_features=384, out_features=1536, bias=True)
+              (4): GELU(approximate='none')
+              (5): Linear(in_features=1536, out_features=384, bias=True)
+              (6): Permute()
+            )
+            (stochastic_depth): StochasticDepth(p=0.3657142857142857, mode=row)
+          )
+        )
+        (6): Sequential(
+          (0): LayerNorm2d((384,), eps=1e-06, elementwise_affine=True)
+          (1): Conv2d(384, 768, kernel_size=(2, 2), stride=(2, 2))
+        )
+        (7): Sequential(
+          (0): CNBlock(
+            (block): Sequential(
+              (0): Conv2d(768, 768, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3), groups=768)
+              (1): Permute()
+              (2): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+              (3): Linear(in_features=768, out_features=3072, bias=True)
+              (4): GELU(approximate='none')
+              (5): Linear(in_features=3072, out_features=768, bias=True)
+              (6): Permute()
+            )
+            (stochastic_depth): StochasticDepth(p=0.37714285714285717, mode=row)
+          )
+          (1): CNBlock(
+            (block): Sequential(
+              (0): Conv2d(768, 768, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3), groups=768)
+              (1): Permute()
+              (2): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+              (3): Linear(in_features=768, out_features=3072, bias=True)
+              (4): GELU(approximate='none')
+              (5): Linear(in_features=3072, out_features=768, bias=True)
+              (6): Permute()
+            )
+            (stochastic_depth): StochasticDepth(p=0.3885714285714286, mode=row)
+          )
+          (2): CNBlock(
+            (block): Sequential(
+              (0): Conv2d(768, 768, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3), groups=768)
+              (1): Permute()
+              (2): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+              (3): Linear(in_features=768, out_features=3072, bias=True)
+              (4): GELU(approximate='none')
+              (5): Linear(in_features=3072, out_features=768, bias=True)
+              (6): Permute()
+            )
+            (stochastic_depth): StochasticDepth(p=0.4, mode=row)
+          )
+        )
+      )
+      (avgpool): AdaptiveAvgPool2d(output_size=1)
+      (classifier): Sequential(
+        (0): LayerNorm2d((768,), eps=1e-06, elementwise_affine=True)
+        (1): Flatten(start_dim=1, end_dim=-1)
+        (2): Linear(in_features=768, out_features=1000, bias=True)
+      )
+    )
+  )
+  (lat_con_loss_fn): DistLoss()
+)
+I20260319 23:04:22 __main__ train.py:573] G(
+  (encoder): Transformer(
+    (x_embedder): Sequential(
+      (0): Conv2d(3, 512, kernel_size=(2, 2), stride=(2, 2), bias=False)
+      (1): Conv2d(512, 512, kernel_size=(1, 1), stride=(1, 1))
+      (2): Rearrange('b c h w -> b (h w) c', h=16, w=16)
+      (3): Contiguous()
+    )
+    (y_embedder): LabelEmbedder(
+      (embedding_table): Embedding(11, 512)
+    )
+    (blocks): ModuleList(
+      (0-7): 8 x Block(
+        (norm1): RMSNorm((512,), eps=1e-06, elementwise_affine=True)
+        (norm2): RMSNorm((512,), eps=1e-06, elementwise_affine=True)
+        (attn): Attention(
+          (qkv): Linear(in_features=512, out_features=1536, bias=True)
+          (proj): Linear(in_features=512, out_features=512, bias=True)
+        )
+        (mlp): SwiGLUFFN(
+          (w12): Linear(in_features=512, out_features=2730, bias=True)
+          (w3): Linear(in_features=1365, out_features=512, bias=True)
+        )
+        (adaLN_modulation): Sequential(
+          (0): SiLU()
+          (1): Linear(in_features=512, out_features=3072, bias=True)
+        )
+      )
+    )
+    (ffn): ModulatedLinear(
+      (linear): Linear(in_features=512, out_features=8, bias=True)
+      (norm): RMSNorm((512,), eps=1e-06, elementwise_affine=True)
+      (adaLN_modulation): Sequential(
+        (0): SiLU()
+        (1): Linear(in_features=512, out_features=1024, bias=True)
+      )
+    )
+    (out): MLPMixer(
+      (blocks): ModuleList(
+        (0-1): 2 x MixerBlock(
+          (norm1): RMSNorm((8,), eps=1e-06, elementwise_affine=True)
+          (tok_mixer): TokenMixer(
+            (mix): Sequential(
+              (0): Linear(in_features=256, out_features=256, bias=True)
+              (1): SiLU()
+              (2): Linear(in_features=256, out_features=256, bias=True)
+            )
+          )
+          (norm2): RMSNorm((8,), eps=1e-06, elementwise_affine=True)
+          (chn_mixer): ChannelMixer(
+            (mix): Sequential(
+              (0): Linear(in_features=8, out_features=16, bias=True)
+              (1): SiLU()
+              (2): Linear(in_features=16, out_features=8, bias=True)
+            )
+          )
+        )
+      )
+      (norm): RMSNorm((8,), eps=1e-06, elementwise_affine=True)
+    )
+  )
+  (decoder): Transformer(
+    (x_embedder): Sequential(
+      (0): Linear(in_features=8, out_features=512, bias=True)
+      (1): MLPMixer(
+        (blocks): ModuleList(
+          (0-1): 2 x MixerBlock(
+            (norm1): RMSNorm((512,), eps=1e-06, elementwise_affine=True)
+            (tok_mixer): TokenMixer(
+              (mix): Sequential(
+                (0): Linear(in_features=256, out_features=256, bias=True)
+                (1): SiLU()
+                (2): Linear(in_features=256, out_features=256, bias=True)
+              )
+            )
+            (norm2): RMSNorm((512,), eps=1e-06, elementwise_affine=True)
+            (chn_mixer): ChannelMixer(
+              (mix): Sequential(
+                (0): Linear(in_features=512, out_features=1024, bias=True)
+                (1): SiLU()
+                (2): Linear(in_features=1024, out_features=512, bias=True)
+              )
+            )
+          )
+        )
+        (norm): RMSNorm((512,), eps=1e-06, elementwise_affine=True)
+      )
+    )
+    (y_embedder): LabelEmbedder(
+      (embedding_table): Embedding(11, 512)
+    )
+    (blocks): ModuleList(
+      (0-7): 8 x Block(
+        (norm1): RMSNorm((512,), eps=1e-06, elementwise_affine=True)
+        (norm2): RMSNorm((512,), eps=1e-06, elementwise_affine=True)
+        (attn): Attention(
+          (qkv): Linear(in_features=512, out_features=1536, bias=True)
+          (proj): Linear(in_features=512, out_features=512, bias=True)
+        )
+        (mlp): SwiGLUFFN(
+          (w12): Linear(in_features=512, out_features=2730, bias=True)
+          (w3): Linear(in_features=1365, out_features=512, bias=True)
+        )
+        (adaLN_modulation): Sequential(
+          (0): SiLU()
+          (1): Linear(in_features=512, out_features=3072, bias=True)
+        )
+      )
+    )
+    (ffn): ModulatedLinear(
+      (linear): Linear(in_features=512, out_features=32, bias=True)
+      (norm): RMSNorm((512,), eps=1e-06, elementwise_affine=True)
+      (adaLN_modulation): Sequential(
+        (0): SiLU()
+        (1): Linear(in_features=512, out_features=1024, bias=True)
+      )
+    )
+    (out): Sequential(
+      (0): Rearrange('b (h w) c -> b c h w', h=16, w=16)
+      (1): Contiguous()
+      (2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), padding_mode=reflect)
+      (3): SiLU()
+      (4): ConvTranspose2d(32, 3, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1))
+      (5): Tanh()
+    )
+  )
+)
+I20260319 23:04:22 __main__ train.py:585] auto resume from /home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/_staging/a83-pilot/sphere-small-small-cifar-10-32px/ckpt/ep0049.pth
+I20260319 23:04:22 sphere.utils utils.py:338] loading checkpoint from /home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/_staging/a83-pilot/sphere-small-small-cifar-10-32px/ckpt/ep0049.pth
+W20260319 23:04:23 sphere.utils utils.py:352] missing keys: []
+I20260319 23:04:23 sphere.utils utils.py:355] <All keys matched successfully>
+I20260319 23:04:23 __main__ train.py:630] p.requires_grad: False, param: encoder.pos_embed                                   , torch.Size([1, 256, 512])
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.x_embedder.0.weight                         , decay: False, torch.Size([512, 3, 2, 2])    
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.x_embedder.1.weight                         , decay: False, torch.Size([512, 512, 1, 1])  
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.x_embedder.1.bias                           , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.y_embedder.embedding_table.weight           , decay: False, torch.Size([11, 512])         
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.0.norm1.weight                       , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.0.norm2.weight                       , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.0.attn.qkv.weight                    , decay: True , torch.Size([1536, 512])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.0.attn.qkv.bias                      , decay: False, torch.Size([1536])            
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.0.attn.proj.weight                   , decay: True , torch.Size([512, 512])        
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.0.attn.proj.bias                     , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.0.mlp.w12.weight                     , decay: True , torch.Size([2730, 512])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.0.mlp.w12.bias                       , decay: False, torch.Size([2730])            
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.0.mlp.w3.weight                      , decay: True , torch.Size([512, 1365])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.0.mlp.w3.bias                        , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.0.adaLN_modulation.1.weight          , decay: True , torch.Size([3072, 512])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.0.adaLN_modulation.1.bias            , decay: False, torch.Size([3072])            
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.1.norm1.weight                       , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.1.norm2.weight                       , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.1.attn.qkv.weight                    , decay: True , torch.Size([1536, 512])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.1.attn.qkv.bias                      , decay: False, torch.Size([1536])            
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.1.attn.proj.weight                   , decay: True , torch.Size([512, 512])        
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.1.attn.proj.bias                     , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.1.mlp.w12.weight                     , decay: True , torch.Size([2730, 512])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.1.mlp.w12.bias                       , decay: False, torch.Size([2730])            
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.1.mlp.w3.weight                      , decay: True , torch.Size([512, 1365])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.1.mlp.w3.bias                        , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.1.adaLN_modulation.1.weight          , decay: True , torch.Size([3072, 512])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.1.adaLN_modulation.1.bias            , decay: False, torch.Size([3072])            
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.2.norm1.weight                       , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.2.norm2.weight                       , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.2.attn.qkv.weight                    , decay: True , torch.Size([1536, 512])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.2.attn.qkv.bias                      , decay: False, torch.Size([1536])            
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.2.attn.proj.weight                   , decay: True , torch.Size([512, 512])        
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.2.attn.proj.bias                     , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.2.mlp.w12.weight                     , decay: True , torch.Size([2730, 512])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.2.mlp.w12.bias                       , decay: False, torch.Size([2730])            
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.2.mlp.w3.weight                      , decay: True , torch.Size([512, 1365])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.2.mlp.w3.bias                        , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.2.adaLN_modulation.1.weight          , decay: True , torch.Size([3072, 512])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.2.adaLN_modulation.1.bias            , decay: False, torch.Size([3072])            
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.3.norm1.weight                       , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.3.norm2.weight                       , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.3.attn.qkv.weight                    , decay: True , torch.Size([1536, 512])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.3.attn.qkv.bias                      , decay: False, torch.Size([1536])            
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.3.attn.proj.weight                   , decay: True , torch.Size([512, 512])        
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.3.attn.proj.bias                     , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.3.mlp.w12.weight                     , decay: True , torch.Size([2730, 512])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.3.mlp.w12.bias                       , decay: False, torch.Size([2730])            
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.3.mlp.w3.weight                      , decay: True , torch.Size([512, 1365])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.3.mlp.w3.bias                        , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.3.adaLN_modulation.1.weight          , decay: True , torch.Size([3072, 512])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.3.adaLN_modulation.1.bias            , decay: False, torch.Size([3072])            
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.4.norm1.weight                       , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.4.norm2.weight                       , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.4.attn.qkv.weight                    , decay: True , torch.Size([1536, 512])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.4.attn.qkv.bias                      , decay: False, torch.Size([1536])            
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.4.attn.proj.weight                   , decay: True , torch.Size([512, 512])        
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.4.attn.proj.bias                     , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.4.mlp.w12.weight                     , decay: True , torch.Size([2730, 512])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.4.mlp.w12.bias                       , decay: False, torch.Size([2730])            
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.4.mlp.w3.weight                      , decay: True , torch.Size([512, 1365])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.4.mlp.w3.bias                        , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.4.adaLN_modulation.1.weight          , decay: True , torch.Size([3072, 512])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.4.adaLN_modulation.1.bias            , decay: False, torch.Size([3072])            
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.5.norm1.weight                       , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.5.norm2.weight                       , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.5.attn.qkv.weight                    , decay: True , torch.Size([1536, 512])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.5.attn.qkv.bias                      , decay: False, torch.Size([1536])            
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.5.attn.proj.weight                   , decay: True , torch.Size([512, 512])        
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.5.attn.proj.bias                     , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.5.mlp.w12.weight                     , decay: True , torch.Size([2730, 512])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.5.mlp.w12.bias                       , decay: False, torch.Size([2730])            
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.5.mlp.w3.weight                      , decay: True , torch.Size([512, 1365])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.5.mlp.w3.bias                        , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.5.adaLN_modulation.1.weight          , decay: True , torch.Size([3072, 512])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.5.adaLN_modulation.1.bias            , decay: False, torch.Size([3072])            
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.6.norm1.weight                       , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.6.norm2.weight                       , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.6.attn.qkv.weight                    , decay: True , torch.Size([1536, 512])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.6.attn.qkv.bias                      , decay: False, torch.Size([1536])            
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.6.attn.proj.weight                   , decay: True , torch.Size([512, 512])        
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.6.attn.proj.bias                     , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.6.mlp.w12.weight                     , decay: True , torch.Size([2730, 512])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.6.mlp.w12.bias                       , decay: False, torch.Size([2730])            
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.6.mlp.w3.weight                      , decay: True , torch.Size([512, 1365])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.6.mlp.w3.bias                        , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.6.adaLN_modulation.1.weight          , decay: True , torch.Size([3072, 512])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.6.adaLN_modulation.1.bias            , decay: False, torch.Size([3072])            
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.7.norm1.weight                       , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.7.norm2.weight                       , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.7.attn.qkv.weight                    , decay: True , torch.Size([1536, 512])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.7.attn.qkv.bias                      , decay: False, torch.Size([1536])            
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.7.attn.proj.weight                   , decay: True , torch.Size([512, 512])        
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.7.attn.proj.bias                     , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.7.mlp.w12.weight                     , decay: True , torch.Size([2730, 512])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.7.mlp.w12.bias                       , decay: False, torch.Size([2730])            
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.7.mlp.w3.weight                      , decay: True , torch.Size([512, 1365])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.7.mlp.w3.bias                        , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.7.adaLN_modulation.1.weight          , decay: True , torch.Size([3072, 512])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.blocks.7.adaLN_modulation.1.bias            , decay: False, torch.Size([3072])            
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.ffn.linear.weight                           , decay: True , torch.Size([8, 512])          
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.ffn.linear.bias                             , decay: False, torch.Size([8])               
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.ffn.norm.weight                             , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.ffn.adaLN_modulation.1.weight               , decay: True , torch.Size([1024, 512])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.ffn.adaLN_modulation.1.bias                 , decay: False, torch.Size([1024])            
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.out.blocks.0.alpha1                         , decay: False, torch.Size([1])               
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.out.blocks.0.alpha2                         , decay: False, torch.Size([1])               
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.out.blocks.0.norm1.weight                   , decay: False, torch.Size([8])               
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.out.blocks.0.tok_mixer.mix.0.weight         , decay: True , torch.Size([256, 256])        
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.out.blocks.0.tok_mixer.mix.0.bias           , decay: False, torch.Size([256])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.out.blocks.0.tok_mixer.mix.2.weight         , decay: True , torch.Size([256, 256])        
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.out.blocks.0.tok_mixer.mix.2.bias           , decay: False, torch.Size([256])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.out.blocks.0.norm2.weight                   , decay: False, torch.Size([8])               
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.out.blocks.0.chn_mixer.mix.0.weight         , decay: True , torch.Size([16, 8])           
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.out.blocks.0.chn_mixer.mix.0.bias           , decay: False, torch.Size([16])              
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.out.blocks.0.chn_mixer.mix.2.weight         , decay: True , torch.Size([8, 16])           
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.out.blocks.0.chn_mixer.mix.2.bias           , decay: False, torch.Size([8])               
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.out.blocks.1.alpha1                         , decay: False, torch.Size([1])               
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.out.blocks.1.alpha2                         , decay: False, torch.Size([1])               
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.out.blocks.1.norm1.weight                   , decay: False, torch.Size([8])               
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.out.blocks.1.tok_mixer.mix.0.weight         , decay: True , torch.Size([256, 256])        
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.out.blocks.1.tok_mixer.mix.0.bias           , decay: False, torch.Size([256])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.out.blocks.1.tok_mixer.mix.2.weight         , decay: True , torch.Size([256, 256])        
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.out.blocks.1.tok_mixer.mix.2.bias           , decay: False, torch.Size([256])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.out.blocks.1.norm2.weight                   , decay: False, torch.Size([8])               
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.out.blocks.1.chn_mixer.mix.0.weight         , decay: True , torch.Size([16, 8])           
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.out.blocks.1.chn_mixer.mix.0.bias           , decay: False, torch.Size([16])              
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.out.blocks.1.chn_mixer.mix.2.weight         , decay: True , torch.Size([8, 16])           
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.out.blocks.1.chn_mixer.mix.2.bias           , decay: False, torch.Size([8])               
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: encoder.out.norm.weight                             , decay: False, torch.Size([8])               
+I20260319 23:04:23 __main__ train.py:630] p.requires_grad: False, param: decoder.pos_embed                                   , torch.Size([1, 256, 512])
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.x_embedder.0.weight                         , decay: False, torch.Size([512, 8])          
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.x_embedder.0.bias                           , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.x_embedder.1.blocks.0.alpha1                , decay: False, torch.Size([1])               
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.x_embedder.1.blocks.0.alpha2                , decay: False, torch.Size([1])               
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.x_embedder.1.blocks.0.norm1.weight          , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.x_embedder.1.blocks.0.tok_mixer.mix.0.weight, decay: False, torch.Size([256, 256])        
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.x_embedder.1.blocks.0.tok_mixer.mix.0.bias  , decay: False, torch.Size([256])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.x_embedder.1.blocks.0.tok_mixer.mix.2.weight, decay: False, torch.Size([256, 256])        
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.x_embedder.1.blocks.0.tok_mixer.mix.2.bias  , decay: False, torch.Size([256])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.x_embedder.1.blocks.0.norm2.weight          , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.x_embedder.1.blocks.0.chn_mixer.mix.0.weight, decay: False, torch.Size([1024, 512])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.x_embedder.1.blocks.0.chn_mixer.mix.0.bias  , decay: False, torch.Size([1024])            
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.x_embedder.1.blocks.0.chn_mixer.mix.2.weight, decay: False, torch.Size([512, 1024])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.x_embedder.1.blocks.0.chn_mixer.mix.2.bias  , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.x_embedder.1.blocks.1.alpha1                , decay: False, torch.Size([1])               
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.x_embedder.1.blocks.1.alpha2                , decay: False, torch.Size([1])               
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.x_embedder.1.blocks.1.norm1.weight          , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.x_embedder.1.blocks.1.tok_mixer.mix.0.weight, decay: False, torch.Size([256, 256])        
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.x_embedder.1.blocks.1.tok_mixer.mix.0.bias  , decay: False, torch.Size([256])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.x_embedder.1.blocks.1.tok_mixer.mix.2.weight, decay: False, torch.Size([256, 256])        
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.x_embedder.1.blocks.1.tok_mixer.mix.2.bias  , decay: False, torch.Size([256])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.x_embedder.1.blocks.1.norm2.weight          , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.x_embedder.1.blocks.1.chn_mixer.mix.0.weight, decay: False, torch.Size([1024, 512])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.x_embedder.1.blocks.1.chn_mixer.mix.0.bias  , decay: False, torch.Size([1024])            
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.x_embedder.1.blocks.1.chn_mixer.mix.2.weight, decay: False, torch.Size([512, 1024])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.x_embedder.1.blocks.1.chn_mixer.mix.2.bias  , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.x_embedder.1.norm.weight                    , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.y_embedder.embedding_table.weight           , decay: False, torch.Size([11, 512])         
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.0.norm1.weight                       , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.0.norm2.weight                       , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.0.attn.qkv.weight                    , decay: False, torch.Size([1536, 512])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.0.attn.qkv.bias                      , decay: False, torch.Size([1536])            
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.0.attn.proj.weight                   , decay: False, torch.Size([512, 512])        
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.0.attn.proj.bias                     , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.0.mlp.w12.weight                     , decay: False, torch.Size([2730, 512])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.0.mlp.w12.bias                       , decay: False, torch.Size([2730])            
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.0.mlp.w3.weight                      , decay: False, torch.Size([512, 1365])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.0.mlp.w3.bias                        , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.0.adaLN_modulation.1.weight          , decay: False, torch.Size([3072, 512])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.0.adaLN_modulation.1.bias            , decay: False, torch.Size([3072])            
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.1.norm1.weight                       , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.1.norm2.weight                       , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.1.attn.qkv.weight                    , decay: False, torch.Size([1536, 512])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.1.attn.qkv.bias                      , decay: False, torch.Size([1536])            
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.1.attn.proj.weight                   , decay: False, torch.Size([512, 512])        
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.1.attn.proj.bias                     , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.1.mlp.w12.weight                     , decay: False, torch.Size([2730, 512])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.1.mlp.w12.bias                       , decay: False, torch.Size([2730])            
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.1.mlp.w3.weight                      , decay: False, torch.Size([512, 1365])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.1.mlp.w3.bias                        , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.1.adaLN_modulation.1.weight          , decay: False, torch.Size([3072, 512])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.1.adaLN_modulation.1.bias            , decay: False, torch.Size([3072])            
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.2.norm1.weight                       , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.2.norm2.weight                       , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.2.attn.qkv.weight                    , decay: False, torch.Size([1536, 512])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.2.attn.qkv.bias                      , decay: False, torch.Size([1536])            
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.2.attn.proj.weight                   , decay: False, torch.Size([512, 512])        
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.2.attn.proj.bias                     , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.2.mlp.w12.weight                     , decay: False, torch.Size([2730, 512])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.2.mlp.w12.bias                       , decay: False, torch.Size([2730])            
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.2.mlp.w3.weight                      , decay: False, torch.Size([512, 1365])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.2.mlp.w3.bias                        , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.2.adaLN_modulation.1.weight          , decay: False, torch.Size([3072, 512])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.2.adaLN_modulation.1.bias            , decay: False, torch.Size([3072])            
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.3.norm1.weight                       , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.3.norm2.weight                       , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.3.attn.qkv.weight                    , decay: False, torch.Size([1536, 512])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.3.attn.qkv.bias                      , decay: False, torch.Size([1536])            
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.3.attn.proj.weight                   , decay: False, torch.Size([512, 512])        
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.3.attn.proj.bias                     , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.3.mlp.w12.weight                     , decay: False, torch.Size([2730, 512])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.3.mlp.w12.bias                       , decay: False, torch.Size([2730])            
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.3.mlp.w3.weight                      , decay: False, torch.Size([512, 1365])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.3.mlp.w3.bias                        , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.3.adaLN_modulation.1.weight          , decay: False, torch.Size([3072, 512])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.3.adaLN_modulation.1.bias            , decay: False, torch.Size([3072])            
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.4.norm1.weight                       , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.4.norm2.weight                       , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.4.attn.qkv.weight                    , decay: False, torch.Size([1536, 512])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.4.attn.qkv.bias                      , decay: False, torch.Size([1536])            
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.4.attn.proj.weight                   , decay: False, torch.Size([512, 512])        
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.4.attn.proj.bias                     , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.4.mlp.w12.weight                     , decay: False, torch.Size([2730, 512])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.4.mlp.w12.bias                       , decay: False, torch.Size([2730])            
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.4.mlp.w3.weight                      , decay: False, torch.Size([512, 1365])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.4.mlp.w3.bias                        , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.4.adaLN_modulation.1.weight          , decay: False, torch.Size([3072, 512])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.4.adaLN_modulation.1.bias            , decay: False, torch.Size([3072])            
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.5.norm1.weight                       , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.5.norm2.weight                       , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.5.attn.qkv.weight                    , decay: False, torch.Size([1536, 512])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.5.attn.qkv.bias                      , decay: False, torch.Size([1536])            
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.5.attn.proj.weight                   , decay: False, torch.Size([512, 512])        
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.5.attn.proj.bias                     , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.5.mlp.w12.weight                     , decay: False, torch.Size([2730, 512])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.5.mlp.w12.bias                       , decay: False, torch.Size([2730])            
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.5.mlp.w3.weight                      , decay: False, torch.Size([512, 1365])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.5.mlp.w3.bias                        , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.5.adaLN_modulation.1.weight          , decay: False, torch.Size([3072, 512])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.5.adaLN_modulation.1.bias            , decay: False, torch.Size([3072])            
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.6.norm1.weight                       , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.6.norm2.weight                       , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.6.attn.qkv.weight                    , decay: False, torch.Size([1536, 512])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.6.attn.qkv.bias                      , decay: False, torch.Size([1536])            
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.6.attn.proj.weight                   , decay: False, torch.Size([512, 512])        
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.6.attn.proj.bias                     , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.6.mlp.w12.weight                     , decay: False, torch.Size([2730, 512])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.6.mlp.w12.bias                       , decay: False, torch.Size([2730])            
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.6.mlp.w3.weight                      , decay: False, torch.Size([512, 1365])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.6.mlp.w3.bias                        , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.6.adaLN_modulation.1.weight          , decay: False, torch.Size([3072, 512])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.6.adaLN_modulation.1.bias            , decay: False, torch.Size([3072])            
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.7.norm1.weight                       , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.7.norm2.weight                       , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.7.attn.qkv.weight                    , decay: False, torch.Size([1536, 512])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.7.attn.qkv.bias                      , decay: False, torch.Size([1536])            
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.7.attn.proj.weight                   , decay: False, torch.Size([512, 512])        
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.7.attn.proj.bias                     , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.7.mlp.w12.weight                     , decay: False, torch.Size([2730, 512])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.7.mlp.w12.bias                       , decay: False, torch.Size([2730])            
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.7.mlp.w3.weight                      , decay: False, torch.Size([512, 1365])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.7.mlp.w3.bias                        , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.7.adaLN_modulation.1.weight          , decay: False, torch.Size([3072, 512])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.blocks.7.adaLN_modulation.1.bias            , decay: False, torch.Size([3072])            
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.ffn.linear.weight                           , decay: False, torch.Size([32, 512])         
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.ffn.linear.bias                             , decay: False, torch.Size([32])              
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.ffn.norm.weight                             , decay: False, torch.Size([512])             
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.ffn.adaLN_modulation.1.weight               , decay: False, torch.Size([1024, 512])       
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.ffn.adaLN_modulation.1.bias                 , decay: False, torch.Size([1024])            
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.out.2.weight                                , decay: False, torch.Size([32, 32, 3, 3])    
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.out.2.bias                                  , decay: False, torch.Size([32])              
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.out.4.weight                                , decay: False, torch.Size([32, 3, 4, 4])     
+I20260319 23:04:23 __main__ train.py:663] p.requires_grad: True , param: decoder.out.4.bias                                  , decay: False, torch.Size([3])               
+I20260319 23:04:23 __main__ train.py:703] parameters of model: 79.90M
+I20260319 23:04:23 __main__ train.py:704] parameters to train: 79.64M
+I20260319 23:04:25 sphere.utils utils.py:162] no ema_model to use
+W20260319 23:04:25 py.warnings warnings.py:110] /home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/.venv/lib/python3.12/site-packages/torch/nn/functional.py:2954: UserWarning: Mismatch dtype between input and weight: input dtype = c10::BFloat16, weight dtype = float, Cannot dispatch to fused implementation. (Triggered internally at /pytorch/aten/src/ATen/native/layer_norm.cpp:344.)
+  return torch.rms_norm(input, normalized_shape, weight, eps)
+
+I20260319 23:04:26 sphere.utils utils.py:102] grid saved to the image: /home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/_staging/a83-pilot/sphere-small-small-cifar-10-32px/vis/imgs_ep0049_ema=False_cfg=1.0-combo_steps=2_sched=False.png
+I20260319 23:04:26 __main__ train.py:821] training starts at epoch 49 and global step 38269 🚀
+I20260319 23:04:59 __main__ train.py:932] epoch   49 | iter       0 [/781] | step 38270 [/58575]: lr 2.44e-05, loss 0.27739, time 32917.29ms, data 28685.18ms, total_loss 0.27739, dist_loss 0.00279, perc_loss 0.12247, dist_psnr 25.56107, pix_con_dist_loss 0.00353, pix_con_dist_psnr 21.56133, pix_con_perc_loss 0.10870, lat_con_loss 0.03989, avg_mag_z 45.00867, std_mag_z 0.28133, avg_r_NOISY 0.58203, std_r_NOISY 0.35254, x_std_decoder 1.07812, grad_norm 2.99198
+I20260319 23:05:48 __main__ train.py:932] epoch   49 | iter      99 [/781] | step 38369 [/58575]: lr 2.41e-05, loss 0.28692, time 495.99ms, data 0.11ms, total_loss 0.28692, dist_loss 0.00227, perc_loss 0.11553, dist_psnr 26.46198, pix_con_dist_loss 0.00448, pix_con_dist_psnr 20.48574, pix_con_perc_loss 0.12354, lat_con_loss 0.04110, avg_mag_z 45.05346, std_mag_z 0.42809, avg_r_NOISY 0.56445, std_r_NOISY 0.35449, x_std_decoder 1.07812, grad_norm 3.50034
+I20260319 23:06:35 __main__ train.py:932] epoch   49 | iter     199 [/781] | step 38469 [/58575]: lr 2.39e-05, loss 0.29282, time 464.08ms, data 0.11ms, total_loss 0.29282, dist_loss 0.00295, perc_loss 0.12182, dist_psnr 25.30835, pix_con_dist_loss 0.00479, pix_con_dist_psnr 20.18683, pix_con_perc_loss 0.12159, lat_con_loss 0.04167, avg_mag_z 44.99180, std_mag_z 0.33803, avg_r_NOISY 0.58398, std_r_NOISY 0.35547, x_std_decoder 1.07812, grad_norm 4.22300
+I20260319 23:07:23 __main__ train.py:932] epoch   49 | iter     299 [/781] | step 38569 [/58575]: lr 2.36e-05, loss 0.27956, time 469.14ms, data 0.10ms, total_loss 0.27956, dist_loss 0.00245, perc_loss 0.11478, dist_psnr 26.11478, pix_con_dist_loss 0.00425, pix_con_dist_psnr 20.70861, pix_con_perc_loss 0.11775, lat_con_loss 0.04034, avg_mag_z 45.04090, std_mag_z 0.29603, avg_r_NOISY 0.55664, std_r_NOISY 0.35645, x_std_decoder 1.07812, grad_norm 3.15955
+I20260319 23:08:11 __main__ train.py:932] epoch   49 | iter     399 [/781] | step 38669 [/58575]: lr 2.34e-05, loss 0.25673, time 474.79ms, data 0.12ms, total_loss 0.25673, dist_loss 0.00244, perc_loss 0.11196, dist_psnr 26.15032, pix_con_dist_loss 0.00359, pix_con_dist_psnr 21.44140, pix_con_perc_loss 0.10086, lat_con_loss 0.03788, avg_mag_z 44.96169, std_mag_z 0.27528, avg_r_NOISY 0.53711, std_r_NOISY 0.34277, x_std_decoder 1.07812, grad_norm 3.90572
+I20260319 23:08:57 __main__ train.py:932] epoch   49 | iter     499 [/781] | step 38769 [/58575]: lr 2.31e-05, loss 0.26136, time 479.15ms, data 0.12ms, total_loss 0.26136, dist_loss 0.00250, perc_loss 0.11037, dist_psnr 26.14935, pix_con_dist_loss 0.00367, pix_con_dist_psnr 21.34710, pix_con_perc_loss 0.10715, lat_con_loss 0.03768, avg_mag_z 45.02105, std_mag_z 0.33190, avg_r_NOISY 0.53516, std_r_NOISY 0.33301, x_std_decoder 1.07812, grad_norm 3.85444
+I20260319 23:09:45 __main__ train.py:932] epoch   49 | iter     599 [/781] | step 38869 [/58575]: lr 2.28e-05, loss 0.28755, time 469.24ms, data 0.13ms, total_loss 0.28755, dist_loss 0.00245, perc_loss 0.11683, dist_psnr 26.19697, pix_con_dist_loss 0.00445, pix_con_dist_psnr 20.52945, pix_con_perc_loss 0.12333, lat_con_loss 0.04049, avg_mag_z 45.04438, std_mag_z 0.39486, avg_r_NOISY 0.58008, std_r_NOISY 0.33301, x_std_decoder 1.07812, grad_norm 3.34520
+I20260319 23:10:32 __main__ train.py:932] epoch   49 | iter     699 [/781] | step 38969 [/58575]: lr 2.26e-05, loss 0.26884, time 462.12ms, data 0.11ms, total_loss 0.26884, dist_loss 0.00236, perc_loss 0.11396, dist_psnr 26.27404, pix_con_dist_loss 0.00422, pix_con_dist_psnr 20.74406, pix_con_perc_loss 0.10958, lat_con_loss 0.03873, avg_mag_z 44.97395, std_mag_z 0.26587, avg_r_NOISY 0.55859, std_r_NOISY 0.35352, x_std_decoder 1.07812, grad_norm 4.60215
+I20260319 23:11:10 sphere.utils utils.py:162] no ema_model to use
+I20260319 23:11:11 sphere.utils utils.py:102] grid saved to the image: /home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/_staging/a83-pilot/sphere-small-small-cifar-10-32px/vis/imgs_ep0049_ema=False_cfg=1.0-combo_steps=2_sched=False.png
+I20260319 23:11:12 sphere.utils utils.py:312] checkpoint saved to /home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/_staging/a83-pilot/sphere-small-small-cifar-10-32px/ckpt/ep0049.pth
+I20260319 23:11:44 sphere.utils utils.py:102] grid saved to the image: /home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/_staging/a83-pilot/sphere-small-small-cifar-10-32px/research/light_eval/ep0049_step0039050_fwd01/snapshot.png
+I20260319 23:11:52 sphere.utils utils.py:102] grid saved to the image: /home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/_staging/a83-pilot/sphere-small-small-cifar-10-32px/research/light_eval/ep0049_step0039050_fwd04/snapshot.png
+I20260319 23:11:52 research.train_dynamics train_dynamics.py:731] saved training dynamics payload to /home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/_staging/a83-pilot/sphere-small-small-cifar-10-32px/research/training_dynamics/ep0049_step0039050.json
+I20260319 23:11:52 __main__ train.py:1087] saved training dynamics payload: /home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/_staging/a83-pilot/sphere-small-small-cifar-10-32px/research/training_dynamics/ep0049_step0039050.json
+I20260319 23:11:53 __main__ train.py:932] epoch   50 | iter       0 [/781] | step 39051 [/58575]: lr 2.24e-05, loss 0.28199, time 666.49ms, data 56.29ms, total_loss 0.28199, dist_loss 0.00286, perc_loss 0.12411, dist_psnr 25.45036, pix_con_dist_loss 0.00376, pix_con_dist_psnr 21.24455, pix_con_perc_loss 0.11180, lat_con_loss 0.03947, avg_mag_z 45.04739, std_mag_z 0.30764, avg_r_NOISY 0.56055, std_r_NOISY 0.35254, x_std_decoder 1.07812, grad_norm 3.64941
+I20260319 23:12:39 __main__ train.py:932] epoch   50 | iter      99 [/781] | step 39150 [/58575]: lr 2.21e-05, loss 0.30119, time 465.08ms, data 0.11ms, total_loss 0.30119, dist_loss 0.00309, perc_loss 0.12471, dist_psnr 25.12784, pix_con_dist_loss 0.00419, pix_con_dist_psnr 20.77069, pix_con_perc_loss 0.12569, lat_con_loss 0.04352, avg_mag_z 45.04356, std_mag_z 0.31595, avg_r_NOISY 0.59570, std_r_NOISY 0.35547, x_std_decoder 1.07812, grad_norm 3.65667
+I20260319 23:13:26 __main__ train.py:932] epoch   50 | iter     199 [/781] | step 39250 [/58575]: lr 2.19e-05, loss 0.29793, time 467.31ms, data 0.13ms, total_loss 0.29793, dist_loss 0.00208, perc_loss 0.11524, dist_psnr 26.81615, pix_con_dist_loss 0.00457, pix_con_dist_psnr 20.39526, pix_con_perc_loss 0.13172, lat_con_loss 0.04433, avg_mag_z 44.99040, std_mag_z 0.27713, avg_r_NOISY 0.67969, std_r_NOISY 0.37598, x_std_decoder 1.07812, grad_norm 3.09694
+I20260319 23:14:13 __main__ train.py:932] epoch   50 | iter     299 [/781] | step 39350 [/58575]: lr 2.16e-05, loss 0.26813, time 473.95ms, data 0.10ms, total_loss 0.26813, dist_loss 0.00238, perc_loss 0.10972, dist_psnr 26.27055, pix_con_dist_loss 0.00411, pix_con_dist_psnr 20.85119, pix_con_perc_loss 0.11372, lat_con_loss 0.03820, avg_mag_z 45.01102, std_mag_z 0.31868, avg_r_NOISY 0.55859, std_r_NOISY 0.34180, x_std_decoder 1.07812, grad_norm 3.39427
+I20260319 23:15:00 __main__ train.py:932] epoch   50 | iter     399 [/781] | step 39450 [/58575]: lr 2.14e-05, loss 0.28753, time 458.54ms, data 0.11ms, total_loss 0.28753, dist_loss 0.00252, perc_loss 0.11953, dist_psnr 25.98417, pix_con_dist_loss 0.00486, pix_con_dist_psnr 20.13366, pix_con_perc_loss 0.11860, lat_con_loss 0.04202, avg_mag_z 45.03228, std_mag_z 0.25093, avg_r_NOISY 0.60156, std_r_NOISY 0.37207, x_std_decoder 1.07812, grad_norm 3.12179
+I20260319 23:15:46 __main__ train.py:932] epoch   50 | iter     499 [/781] | step 39550 [/58575]: lr 2.11e-05, loss 0.27690, time 470.38ms, data 0.12ms, total_loss 0.27690, dist_loss 0.00226, perc_loss 0.11019, dist_psnr 26.51859, pix_con_dist_loss 0.00433, pix_con_dist_psnr 20.63173, pix_con_perc_loss 0.11928, lat_con_loss 0.04085, avg_mag_z 44.96363, std_mag_z 0.26432, avg_r_NOISY 0.57812, std_r_NOISY 0.35742, x_std_decoder 1.07812, grad_norm 2.96601
+I20260319 23:16:33 __main__ train.py:932] epoch   50 | iter     599 [/781] | step 39650 [/58575]: lr 2.09e-05, loss 0.28313, time 464.83ms, data 0.10ms, total_loss 0.28313, dist_loss 0.00216, perc_loss 0.11656, dist_psnr 26.69422, pix_con_dist_loss 0.00367, pix_con_dist_psnr 21.35280, pix_con_perc_loss 0.12067, lat_con_loss 0.04007, avg_mag_z 45.03879, std_mag_z 0.35345, avg_r_NOISY 0.58008, std_r_NOISY 0.34277, x_std_decoder 1.07812, grad_norm 3.43531
+I20260319 23:17:19 __main__ train.py:932] epoch   50 | iter     699 [/781] | step 39750 [/58575]: lr 2.06e-05, loss 0.28592, time 467.03ms, data 0.12ms, total_loss 0.28592, dist_loss 0.00234, perc_loss 0.11729, dist_psnr 26.33856, pix_con_dist_loss 0.00409, pix_con_dist_psnr 20.93565, pix_con_perc_loss 0.12146, lat_con_loss 0.04073, avg_mag_z 45.08620, std_mag_z 0.26745, avg_r_NOISY 0.58398, std_r_NOISY 0.36426, x_std_decoder 1.07812, grad_norm 3.42421
+I20260319 23:17:57 __main__ train.py:932] epoch   51 | iter       0 [/781] | step 39832 [/58575]: lr 2.04e-05, loss 0.27764, time 543.20ms, data 19.81ms, total_loss 0.27764, dist_loss 0.00252, perc_loss 0.11280, dist_psnr 25.99215, pix_con_dist_loss 0.00457, pix_con_dist_psnr 20.43351, pix_con_perc_loss 0.11780, lat_con_loss 0.03995, avg_mag_z 45.12169, std_mag_z 0.35646, avg_r_NOISY 0.57031, std_r_NOISY 0.35547, x_std_decoder 1.07812, grad_norm 3.05057
+I20260319 23:18:44 __main__ train.py:932] epoch   51 | iter      99 [/781] | step 39931 [/58575]: lr 2.02e-05, loss 0.28923, time 502.49ms, data 0.24ms, total_loss 0.28923, dist_loss 0.00270, perc_loss 0.13011, dist_psnr 25.68369, pix_con_dist_loss 0.00376, pix_con_dist_psnr 21.28768, pix_con_perc_loss 0.11374, lat_con_loss 0.03892, avg_mag_z 45.01136, std_mag_z 0.37229, avg_r_NOISY 0.52539, std_r_NOISY 0.33496, x_std_decoder 1.07812, grad_norm 3.92598
+I20260319 23:19:32 __main__ train.py:932] epoch   51 | iter     199 [/781] | step 40031 [/58575]: lr 2.00e-05, loss 0.30406, time 472.70ms, data 0.11ms, total_loss 0.30406, dist_loss 0.00260, perc_loss 0.12720, dist_psnr 25.85626, pix_con_dist_loss 0.00416, pix_con_dist_psnr 20.79833, pix_con_perc_loss 0.12791, lat_con_loss 0.04218, avg_mag_z 44.97903, std_mag_z 0.26820, avg_r_NOISY 0.58398, std_r_NOISY 0.37988, x_std_decoder 1.07812, grad_norm 4.23709
+I20260319 23:20:21 __main__ train.py:932] epoch   51 | iter     299 [/781] | step 40131 [/58575]: lr 1.97e-05, loss 0.28926, time 498.83ms, data 0.25ms, total_loss 0.28926, dist_loss 0.00203, perc_loss 0.12146, dist_psnr 26.92469, pix_con_dist_loss 0.00420, pix_con_dist_psnr 20.79177, pix_con_perc_loss 0.12039, lat_con_loss 0.04118, avg_mag_z 44.98108, std_mag_z 0.28116, avg_r_NOISY 0.57617, std_r_NOISY 0.33301, x_std_decoder 1.07812, grad_norm 3.33470
+I20260319 23:21:08 __main__ train.py:932] epoch   51 | iter     399 [/781] | step 40231 [/58575]: lr 1.95e-05, loss 0.27030, time 477.03ms, data 0.23ms, total_loss 0.27030, dist_loss 0.00277, perc_loss 0.11295, dist_psnr 25.59539, pix_con_dist_loss 0.00440, pix_con_dist_psnr 20.64649, pix_con_perc_loss 0.11063, lat_con_loss 0.03955, avg_mag_z 45.03530, std_mag_z 0.27171, avg_r_NOISY 0.56641, std_r_NOISY 0.36914, x_std_decoder 1.07812, grad_norm 3.53607
+I20260319 23:21:57 __main__ train.py:932] epoch   51 | iter     499 [/781] | step 40331 [/58575]: lr 1.92e-05, loss 0.28126, time 507.06ms, data 0.24ms, total_loss 0.28126, dist_loss 0.00230, perc_loss 0.11972, dist_psnr 26.38312, pix_con_dist_loss 0.00400, pix_con_dist_psnr 20.96725, pix_con_perc_loss 0.11551, lat_con_loss 0.03972, avg_mag_z 45.03664, std_mag_z 0.29402, avg_r_NOISY 0.57227, std_r_NOISY 0.35547, x_std_decoder 1.07812, grad_norm 3.41426
+I20260319 23:22:45 __main__ train.py:932] epoch   51 | iter     599 [/781] | step 40431 [/58575]: lr 1.90e-05, loss 0.28764, time 505.78ms, data 0.21ms, total_loss 0.28764, dist_loss 0.00285, perc_loss 0.12594, dist_psnr 25.45358, pix_con_dist_loss 0.00462, pix_con_dist_psnr 20.34385, pix_con_perc_loss 0.11384, lat_con_loss 0.04039, avg_mag_z 45.02525, std_mag_z 0.33219, avg_r_NOISY 0.56250, std_r_NOISY 0.34961, x_std_decoder 1.07812, grad_norm 3.37316
+I20260319 23:23:35 __main__ train.py:932] epoch   51 | iter     699 [/781] | step 40531 [/58575]: lr 1.88e-05, loss 0.28362, time 482.39ms, data 0.11ms, total_loss 0.28362, dist_loss 0.00254, perc_loss 0.11855, dist_psnr 25.95051, pix_con_dist_loss 0.00499, pix_con_dist_psnr 20.04921, pix_con_perc_loss 0.11670, lat_con_loss 0.04083, avg_mag_z 45.08646, std_mag_z 0.35591, avg_r_NOISY 0.59570, std_r_NOISY 0.36621, x_std_decoder 1.07812, grad_norm 3.09052
+I20260319 23:24:14 __main__ train.py:932] epoch   52 | iter       0 [/781] | step 40613 [/58575]: lr 1.86e-05, loss 0.28038, time 569.35ms, data 54.25ms, total_loss 0.28038, dist_loss 0.00235, perc_loss 0.11822, dist_psnr 26.29385, pix_con_dist_loss 0.00393, pix_con_dist_psnr 21.07688, pix_con_perc_loss 0.11606, lat_con_loss 0.03982, avg_mag_z 45.02416, std_mag_z 0.34739, avg_r_NOISY 0.56445, std_r_NOISY 0.35449, x_std_decoder 1.07812, grad_norm 3.68445
+I20260319 23:25:01 __main__ train.py:932] epoch   52 | iter      99 [/781] | step 40712 [/58575]: lr 1.83e-05, loss 0.29961, time 466.70ms, data 0.22ms, total_loss 0.29961, dist_loss 0.00259, perc_loss 0.13366, dist_psnr 25.88181, pix_con_dist_loss 0.00357, pix_con_dist_psnr 21.46657, pix_con_perc_loss 0.11902, lat_con_loss 0.04077, avg_mag_z 44.98464, std_mag_z 0.27079, avg_r_NOISY 0.57422, std_r_NOISY 0.36328, x_std_decoder 1.07812, grad_norm 3.67922
+I20260319 23:25:48 __main__ train.py:932] epoch   52 | iter     199 [/781] | step 40812 [/58575]: lr 1.81e-05, loss 0.27148, time 465.83ms, data 0.11ms, total_loss 0.27148, dist_loss 0.00291, perc_loss 0.11507, dist_psnr 25.39185, pix_con_dist_loss 0.00397, pix_con_dist_psnr 21.01218, pix_con_perc_loss 0.11105, lat_con_loss 0.03847, avg_mag_z 45.01128, std_mag_z 0.32862, avg_r_NOISY 0.50781, std_r_NOISY 0.32422, x_std_decoder 1.07812, grad_norm 3.63249
+I20260319 23:26:35 __main__ train.py:932] epoch   52 | iter     299 [/781] | step 40912 [/58575]: lr 1.79e-05, loss 0.28791, time 468.19ms, data 0.10ms, total_loss 0.28791, dist_loss 0.00290, perc_loss 0.12829, dist_psnr 25.38270, pix_con_dist_loss 0.00351, pix_con_dist_psnr 21.61031, pix_con_perc_loss 0.11274, lat_con_loss 0.04047, avg_mag_z 45.02507, std_mag_z 0.24761, avg_r_NOISY 0.54883, std_r_NOISY 0.34180, x_std_decoder 1.07812, grad_norm 3.94868
+I20260319 23:27:23 __main__ train.py:932] epoch   52 | iter     399 [/781] | step 41012 [/58575]: lr 1.77e-05, loss 0.28407, time 476.37ms, data 0.19ms, total_loss 0.28407, dist_loss 0.00280, perc_loss 0.11558, dist_psnr 25.53703, pix_con_dist_loss 0.00510, pix_con_dist_psnr 19.94440, pix_con_perc_loss 0.11962, lat_con_loss 0.04096, avg_mag_z 45.04421, std_mag_z 0.34999, avg_r_NOISY 0.57422, std_r_NOISY 0.34863, x_std_decoder 1.07812, grad_norm 3.68800
+I20260319 23:28:10 __main__ train.py:932] epoch   52 | iter     499 [/781] | step 41112 [/58575]: lr 1.74e-05, loss 0.26703, time 472.06ms, data 0.12ms, total_loss 0.26703, dist_loss 0.00229, perc_loss 0.10788, dist_psnr 26.45303, pix_con_dist_loss 0.00428, pix_con_dist_psnr 20.74822, pix_con_perc_loss 0.11450, lat_con_loss 0.03808, avg_mag_z 45.04762, std_mag_z 0.29400, avg_r_NOISY 0.53711, std_r_NOISY 0.33105, x_std_decoder 1.07812, grad_norm 4.51011
+I20260319 23:28:58 __main__ train.py:932] epoch   52 | iter     599 [/781] | step 41212 [/58575]: lr 1.72e-05, loss 0.30190, time 465.09ms, data 0.11ms, total_loss 0.30190, dist_loss 0.00270, perc_loss 0.13208, dist_psnr 25.69789, pix_con_dist_loss 0.00473, pix_con_dist_psnr 20.27024, pix_con_perc_loss 0.12040, lat_con_loss 0.04200, avg_mag_z 45.00972, std_mag_z 0.27916, avg_r_NOISY 0.54297, std_r_NOISY 0.33301, x_std_decoder 1.07812, grad_norm 3.36636
+I20260319 23:29:46 __main__ train.py:932] epoch   52 | iter     699 [/781] | step 41312 [/58575]: lr 1.70e-05, loss 0.28072, time 496.51ms, data 0.11ms, total_loss 0.28072, dist_loss 0.00213, perc_loss 0.10854, dist_psnr 26.70920, pix_con_dist_loss 0.00487, pix_con_dist_psnr 20.11855, pix_con_perc_loss 0.12314, lat_con_loss 0.04203, avg_mag_z 44.99698, std_mag_z 0.32820, avg_r_NOISY 0.56641, std_r_NOISY 0.34180, x_std_decoder 1.07812, grad_norm 3.40739
+I20260319 23:30:24 __main__ train.py:932] epoch   53 | iter       0 [/781] | step 41394 [/58575]: lr 1.68e-05, loss 0.28954, time 557.44ms, data 53.64ms, total_loss 0.28954, dist_loss 0.00290, perc_loss 0.12703, dist_psnr 25.38667, pix_con_dist_loss 0.00429, pix_con_dist_psnr 20.71904, pix_con_perc_loss 0.11489, lat_con_loss 0.04043, avg_mag_z 44.99125, std_mag_z 0.30739, avg_r_NOISY 0.55664, std_r_NOISY 0.35059, x_std_decoder 1.07812, grad_norm 3.59095
+I20260319 23:31:11 __main__ train.py:932] epoch   53 | iter      99 [/781] | step 41493 [/58575]: lr 1.66e-05, loss 0.28550, time 471.70ms, data 0.23ms, total_loss 0.28550, dist_loss 0.00235, perc_loss 0.11156, dist_psnr 26.30513, pix_con_dist_loss 0.00512, pix_con_dist_psnr 19.95779, pix_con_perc_loss 0.12406, lat_con_loss 0.04241, avg_mag_z 45.01477, std_mag_z 0.28424, avg_r_NOISY 0.59180, std_r_NOISY 0.37305, x_std_decoder 1.07812, grad_norm 3.16300
+I20260319 23:31:58 __main__ train.py:932] epoch   53 | iter     199 [/781] | step 41593 [/58575]: lr 1.63e-05, loss 0.27663, time 472.24ms, data 0.10ms, total_loss 0.27663, dist_loss 0.00298, perc_loss 0.12485, dist_psnr 25.25709, pix_con_dist_loss 0.00407, pix_con_dist_psnr 21.11041, pix_con_perc_loss 0.10618, lat_con_loss 0.03854, avg_mag_z 45.01022, std_mag_z 0.27727, avg_r_NOISY 0.54395, std_r_NOISY 0.33984, x_std_decoder 1.07812, grad_norm 3.02637
+I20260319 23:32:45 __main__ train.py:932] epoch   53 | iter     299 [/781] | step 41693 [/58575]: lr 1.61e-05, loss 0.29252, time 478.70ms, data 0.10ms, total_loss 0.29252, dist_loss 0.00295, perc_loss 0.11652, dist_psnr 25.36129, pix_con_dist_loss 0.00488, pix_con_dist_psnr 20.10936, pix_con_perc_loss 0.12577, lat_con_loss 0.04241, avg_mag_z 45.02735, std_mag_z 0.31908, avg_r_NOISY 0.63086, std_r_NOISY 0.37598, x_std_decoder 1.07812, grad_norm 2.98460
+I20260319 23:33:32 __main__ train.py:932] epoch   53 | iter     399 [/781] | step 41793 [/58575]: lr 1.59e-05, loss 0.26366, time 476.46ms, data 0.10ms, total_loss 0.26366, dist_loss 0.00268, perc_loss 0.11463, dist_psnr 25.74767, pix_con_dist_loss 0.00325, pix_con_dist_psnr 21.90807, pix_con_perc_loss 0.10566, lat_con_loss 0.03744, avg_mag_z 44.97719, std_mag_z 0.25294, avg_r_NOISY 0.51953, std_r_NOISY 0.33594, x_std_decoder 1.07812, grad_norm 3.67258
+I20260319 23:34:20 __main__ train.py:932] epoch   53 | iter     499 [/781] | step 41893 [/58575]: lr 1.57e-05, loss 0.28963, time 471.46ms, data 0.11ms, total_loss 0.28963, dist_loss 0.00328, perc_loss 0.11828, dist_psnr 24.86853, pix_con_dist_loss 0.00451, pix_con_dist_psnr 20.48046, pix_con_perc_loss 0.12174, lat_con_loss 0.04182, avg_mag_z 45.12397, std_mag_z 0.35624, avg_r_NOISY 0.59961, std_r_NOISY 0.35645, x_std_decoder 1.07812, grad_norm 3.48097
+I20260319 23:35:07 __main__ train.py:932] epoch   53 | iter     599 [/781] | step 41993 [/58575]: lr 1.55e-05, loss 0.27663, time 464.69ms, data 0.09ms, total_loss 0.27663, dist_loss 0.00253, perc_loss 0.11995, dist_psnr 25.97290, pix_con_dist_loss 0.00382, pix_con_dist_psnr 21.32867, pix_con_perc_loss 0.11166, lat_con_loss 0.03866, avg_mag_z 45.12568, std_mag_z 0.33054, avg_r_NOISY 0.55078, std_r_NOISY 0.32422, x_std_decoder 1.07812, grad_norm 4.00716
+I20260319 23:35:54 __main__ train.py:932] epoch   53 | iter     699 [/781] | step 42093 [/58575]: lr 1.53e-05, loss 0.30465, time 471.24ms, data 0.11ms, total_loss 0.30465, dist_loss 0.00276, perc_loss 0.13414, dist_psnr 25.58798, pix_con_dist_loss 0.00424, pix_con_dist_psnr 20.72511, pix_con_perc_loss 0.12142, lat_con_loss 0.04209, avg_mag_z 44.98259, std_mag_z 0.33284, avg_r_NOISY 0.57617, std_r_NOISY 0.35742, x_std_decoder 1.07812, grad_norm 3.83551
+I20260319 23:36:33 __main__ train.py:932] epoch   54 | iter       0 [/781] | step 42175 [/58575]: lr 1.51e-05, loss 0.29674, time 560.76ms, data 47.53ms, total_loss 0.29674, dist_loss 0.00301, perc_loss 0.12952, dist_psnr 25.21129, pix_con_dist_loss 0.00467, pix_con_dist_psnr 20.35879, pix_con_perc_loss 0.11660, lat_con_loss 0.04294, avg_mag_z 45.02016, std_mag_z 0.31828, avg_r_NOISY 0.58008, std_r_NOISY 0.32910, x_std_decoder 1.07812, grad_norm 3.73143
+I20260319 23:37:19 __main__ train.py:932] epoch   54 | iter      99 [/781] | step 42274 [/58575]: lr 1.49e-05, loss 0.27211, time 464.25ms, data 0.09ms, total_loss 0.27211, dist_loss 0.00276, perc_loss 0.11313, dist_psnr 25.60812, pix_con_dist_loss 0.00412, pix_con_dist_psnr 20.87654, pix_con_perc_loss 0.11288, lat_con_loss 0.03923, avg_mag_z 45.05311, std_mag_z 0.38768, avg_r_NOISY 0.54492, std_r_NOISY 0.33789, x_std_decoder 1.07812, grad_norm 3.49367
+I20260319 23:38:06 __main__ train.py:932] epoch   54 | iter     199 [/781] | step 42374 [/58575]: lr 1.47e-05, loss 0.29791, time 467.90ms, data 0.11ms, total_loss 0.29791, dist_loss 0.00235, perc_loss 0.12173, dist_psnr 26.29027, pix_con_dist_loss 0.00412, pix_con_dist_psnr 20.89116, pix_con_perc_loss 0.12710, lat_con_loss 0.04261, avg_mag_z 45.00375, std_mag_z 0.31450, avg_r_NOISY 0.60352, std_r_NOISY 0.37793, x_std_decoder 1.07812, grad_norm 3.38689
+I20260319 23:38:53 __main__ train.py:932] epoch   54 | iter     299 [/781] | step 42474 [/58575]: lr 1.44e-05, loss 0.26187, time 463.37ms, data 0.11ms, total_loss 0.26187, dist_loss 0.00249, perc_loss 0.10863, dist_psnr 26.10873, pix_con_dist_loss 0.00336, pix_con_dist_psnr 21.77433, pix_con_perc_loss 0.10852, lat_con_loss 0.03887, avg_mag_z 45.05295, std_mag_z 0.34945, avg_r_NOISY 0.57422, std_r_NOISY 0.37402, x_std_decoder 1.07812, grad_norm 3.42465
+I20260319 23:39:39 __main__ train.py:932] epoch   54 | iter     399 [/781] | step 42574 [/58575]: lr 1.42e-05, loss 0.27739, time 469.99ms, data 0.25ms, total_loss 0.27739, dist_loss 0.00255, perc_loss 0.11064, dist_psnr 25.94957, pix_con_dist_loss 0.00474, pix_con_dist_psnr 20.22966, pix_con_perc_loss 0.12018, lat_con_loss 0.03928, avg_mag_z 45.04097, std_mag_z 0.29319, avg_r_NOISY 0.55859, std_r_NOISY 0.35645, x_std_decoder 1.07812, grad_norm 2.94746
+I20260319 23:40:26 __main__ train.py:932] epoch   54 | iter     499 [/781] | step 42674 [/58575]: lr 1.40e-05, loss 0.28670, time 470.56ms, data 0.11ms, total_loss 0.28670, dist_loss 0.00259, perc_loss 0.12579, dist_psnr 25.89151, pix_con_dist_loss 0.00366, pix_con_dist_psnr 21.37338, pix_con_perc_loss 0.11550, lat_con_loss 0.03916, avg_mag_z 44.99181, std_mag_z 0.30073, avg_r_NOISY 0.52734, std_r_NOISY 0.33594, x_std_decoder 1.07812, grad_norm 3.39495
+I20260319 23:41:12 __main__ train.py:932] epoch   54 | iter     599 [/781] | step 42774 [/58575]: lr 1.38e-05, loss 0.26774, time 463.45ms, data 0.11ms, total_loss 0.26774, dist_loss 0.00283, perc_loss 0.12023, dist_psnr 25.48625, pix_con_dist_loss 0.00445, pix_con_dist_psnr 20.54433, pix_con_perc_loss 0.10424, lat_con_loss 0.03599, avg_mag_z 44.98729, std_mag_z 0.35963, avg_r_NOISY 0.52148, std_r_NOISY 0.33105, x_std_decoder 1.07812, grad_norm 3.38034
+I20260319 23:41:59 __main__ train.py:932] epoch   54 | iter     699 [/781] | step 42874 [/58575]: lr 1.36e-05, loss 0.29007, time 466.13ms, data 0.10ms, total_loss 0.29007, dist_loss 0.00290, perc_loss 0.12284, dist_psnr 25.37800, pix_con_dist_loss 0.00392, pix_con_dist_psnr 21.07673, pix_con_perc_loss 0.11854, lat_con_loss 0.04188, avg_mag_z 44.99015, std_mag_z 0.30010, avg_r_NOISY 0.56055, std_r_NOISY 0.34863, x_std_decoder 1.07812, grad_norm 3.81803
+I20260319 23:42:37 sphere.utils utils.py:312] checkpoint saved to /home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/_staging/a83-pilot/sphere-small-small-cifar-10-32px/ckpt/ep0054.pth
+I20260319 23:42:38 __main__ train.py:932] epoch   55 | iter       0 [/781] | step 42956 [/58575]: lr 1.34e-05, loss 0.29525, time 536.47ms, data 31.03ms, total_loss 0.29525, dist_loss 0.00229, perc_loss 0.11788, dist_psnr 26.56850, pix_con_dist_loss 0.00537, pix_con_dist_psnr 19.81660, pix_con_perc_loss 0.12724, lat_con_loss 0.04247, avg_mag_z 44.98614, std_mag_z 0.27080, avg_r_NOISY 0.59375, std_r_NOISY 0.36426, x_std_decoder 1.07812, grad_norm 3.16299
+I20260319 23:43:25 __main__ train.py:932] epoch   55 | iter      99 [/781] | step 43055 [/58575]: lr 1.32e-05, loss 0.27530, time 470.06ms, data 0.10ms, total_loss 0.27530, dist_loss 0.00246, perc_loss 0.12357, dist_psnr 26.10108, pix_con_dist_loss 0.00294, pix_con_dist_psnr 22.30622, pix_con_perc_loss 0.10954, lat_con_loss 0.03679, avg_mag_z 45.04008, std_mag_z 0.42661, avg_r_NOISY 0.52344, std_r_NOISY 0.33691, x_std_decoder 1.07812, grad_norm 3.73728
+I20260319 23:44:12 __main__ train.py:932] epoch   55 | iter     199 [/781] | step 43155 [/58575]: lr 1.30e-05, loss 0.26939, time 473.45ms, data 0.23ms, total_loss 0.26939, dist_loss 0.00282, perc_loss 0.12400, dist_psnr 25.49647, pix_con_dist_loss 0.00349, pix_con_dist_psnr 21.56519, pix_con_perc_loss 0.10169, lat_con_loss 0.03739, avg_mag_z 45.00378, std_mag_z 0.42149, avg_r_NOISY 0.51953, std_r_NOISY 0.32031, x_std_decoder 1.07812, grad_norm 3.94931
+I20260319 23:44:59 __main__ train.py:932] epoch   55 | iter     299 [/781] | step 43255 [/58575]: lr 1.28e-05, loss 0.27833, time 469.95ms, data 0.22ms, total_loss 0.27833, dist_loss 0.00242, perc_loss 0.11467, dist_psnr 26.23016, pix_con_dist_loss 0.00388, pix_con_dist_psnr 21.11565, pix_con_perc_loss 0.11771, lat_con_loss 0.03966, avg_mag_z 44.98798, std_mag_z 0.25931, avg_r_NOISY 0.57812, std_r_NOISY 0.35449, x_std_decoder 1.07812, grad_norm 3.48724
+I20260319 23:45:47 __main__ train.py:932] epoch   55 | iter     399 [/781] | step 43355 [/58575]: lr 1.26e-05, loss 0.29098, time 483.90ms, data 0.11ms, total_loss 0.29098, dist_loss 0.00234, perc_loss 0.12145, dist_psnr 26.32062, pix_con_dist_loss 0.00440, pix_con_dist_psnr 20.59443, pix_con_perc_loss 0.12115, lat_con_loss 0.04165, avg_mag_z 44.96111, std_mag_z 0.28047, avg_r_NOISY 0.58203, std_r_NOISY 0.35059, x_std_decoder 1.07812, grad_norm 3.53048
+I20260319 23:46:35 __main__ train.py:932] epoch   55 | iter     499 [/781] | step 43455 [/58575]: lr 1.25e-05, loss 0.28264, time 486.95ms, data 0.10ms, total_loss 0.28264, dist_loss 0.00204, perc_loss 0.10708, dist_psnr 26.96242, pix_con_dist_loss 0.00523, pix_con_dist_psnr 19.82640, pix_con_perc_loss 0.12634, lat_con_loss 0.04194, avg_mag_z 44.98788, std_mag_z 0.26180, avg_r_NOISY 0.58203, std_r_NOISY 0.36035, x_std_decoder 1.07812, grad_norm 4.10340
+I20260319 23:47:23 __main__ train.py:932] epoch   55 | iter     599 [/781] | step 43555 [/58575]: lr 1.23e-05, loss 0.27878, time 471.74ms, data 0.11ms, total_loss 0.27878, dist_loss 0.00258, perc_loss 0.11899, dist_psnr 25.88000, pix_con_dist_loss 0.00391, pix_con_dist_psnr 21.06821, pix_con_perc_loss 0.11308, lat_con_loss 0.04022, avg_mag_z 44.97182, std_mag_z 0.37657, avg_r_NOISY 0.56445, std_r_NOISY 0.35645, x_std_decoder 1.07812, grad_norm 3.47851
+I20260319 23:48:13 __main__ train.py:932] epoch   55 | iter     699 [/781] | step 43655 [/58575]: lr 1.21e-05, loss 0.29743, time 488.58ms, data 0.25ms, total_loss 0.29743, dist_loss 0.00273, perc_loss 0.13156, dist_psnr 25.64811, pix_con_dist_loss 0.00531, pix_con_dist_psnr 19.89136, pix_con_perc_loss 0.11662, lat_con_loss 0.04121, avg_mag_z 45.03930, std_mag_z 0.37794, avg_r_NOISY 0.56836, std_r_NOISY 0.35742, x_std_decoder 1.07812, grad_norm 3.96701
+I20260319 23:48:52 __main__ train.py:932] epoch   56 | iter       0 [/781] | step 43737 [/58575]: lr 1.19e-05, loss 0.28801, time 557.10ms, data 51.24ms, total_loss 0.28801, dist_loss 0.00255, perc_loss 0.12195, dist_psnr 25.92833, pix_con_dist_loss 0.00410, pix_con_dist_psnr 20.86960, pix_con_perc_loss 0.11878, lat_con_loss 0.04062, avg_mag_z 44.93895, std_mag_z 0.28710, avg_r_NOISY 0.59570, std_r_NOISY 0.35645, x_std_decoder 1.07812, grad_norm 3.83095
+I20260319 23:49:39 __main__ train.py:932] epoch   56 | iter      99 [/781] | step 43836 [/58575]: lr 1.17e-05, loss 0.28280, time 475.62ms, data 0.11ms, total_loss 0.28280, dist_loss 0.00247, perc_loss 0.11430, dist_psnr 26.14933, pix_con_dist_loss 0.00404, pix_con_dist_psnr 20.92626, pix_con_perc_loss 0.12049, lat_con_loss 0.04150, avg_mag_z 44.97581, std_mag_z 0.31363, avg_r_NOISY 0.57031, std_r_NOISY 0.34961, x_std_decoder 1.07812, grad_norm 4.07517
+I20260319 23:50:27 __main__ train.py:932] epoch   56 | iter     199 [/781] | step 43936 [/58575]: lr 1.15e-05, loss 0.26332, time 478.06ms, data 0.10ms, total_loss 0.26332, dist_loss 0.00218, perc_loss 0.11535, dist_psnr 26.79255, pix_con_dist_loss 0.00406, pix_con_dist_psnr 20.92309, pix_con_perc_loss 0.10405, lat_con_loss 0.03766, avg_mag_z 44.97688, std_mag_z 0.30720, avg_r_NOISY 0.51953, std_r_NOISY 0.33203, x_std_decoder 1.07812, grad_norm 3.77765
+I20260319 23:51:14 __main__ train.py:932] epoch   56 | iter     299 [/781] | step 44036 [/58575]: lr 1.13e-05, loss 0.28920, time 467.85ms, data 0.21ms, total_loss 0.28920, dist_loss 0.00284, perc_loss 0.11530, dist_psnr 25.46884, pix_con_dist_loss 0.00412, pix_con_dist_psnr 20.84355, pix_con_perc_loss 0.12419, lat_con_loss 0.04275, avg_mag_z 44.99707, std_mag_z 0.28404, avg_r_NOISY 0.58594, std_r_NOISY 0.35254, x_std_decoder 1.07812, grad_norm 3.04104
+I20260319 23:52:01 __main__ train.py:932] epoch   56 | iter     399 [/781] | step 44136 [/58575]: lr 1.12e-05, loss 0.26407, time 472.40ms, data 0.23ms, total_loss 0.26407, dist_loss 0.00244, perc_loss 0.11634, dist_psnr 26.12097, pix_con_dist_loss 0.00335, pix_con_dist_psnr 21.73779, pix_con_perc_loss 0.10325, lat_con_loss 0.03870, avg_mag_z 45.01158, std_mag_z 0.33393, avg_r_NOISY 0.54297, std_r_NOISY 0.35449, x_std_decoder 1.07812, grad_norm 3.49127
+I20260319 23:52:48 __main__ train.py:932] epoch   56 | iter     499 [/781] | step 44236 [/58575]: lr 1.10e-05, loss 0.27220, time 465.08ms, data 0.10ms, total_loss 0.27220, dist_loss 0.00226, perc_loss 0.11395, dist_psnr 26.47012, pix_con_dist_loss 0.00409, pix_con_dist_psnr 20.89836, pix_con_perc_loss 0.11223, lat_con_loss 0.03967, avg_mag_z 44.96618, std_mag_z 0.37054, avg_r_NOISY 0.57422, std_r_NOISY 0.34863, x_std_decoder 1.07812, grad_norm 3.18240
+I20260319 23:53:35 __main__ train.py:932] epoch   56 | iter     599 [/781] | step 44336 [/58575]: lr 1.08e-05, loss 0.28912, time 468.52ms, data 0.10ms, total_loss 0.28912, dist_loss 0.00285, perc_loss 0.12628, dist_psnr 25.44812, pix_con_dist_loss 0.00389, pix_con_dist_psnr 21.10937, pix_con_perc_loss 0.11583, lat_con_loss 0.04027, avg_mag_z 45.06932, std_mag_z 0.36489, avg_r_NOISY 0.55469, std_r_NOISY 0.33887, x_std_decoder 1.07812, grad_norm 4.04434
+I20260319 23:54:23 __main__ train.py:932] epoch   56 | iter     699 [/781] | step 44436 [/58575]: lr 1.06e-05, loss 0.28255, time 482.63ms, data 0.12ms, total_loss 0.28255, dist_loss 0.00265, perc_loss 0.12166, dist_psnr 25.78676, pix_con_dist_loss 0.00413, pix_con_dist_psnr 20.84388, pix_con_perc_loss 0.11382, lat_con_loss 0.04029, avg_mag_z 44.97867, std_mag_z 0.30893, avg_r_NOISY 0.57812, std_r_NOISY 0.35645, x_std_decoder 1.07812, grad_norm 3.39084
+I20260319 23:55:02 __main__ train.py:932] epoch   57 | iter       0 [/781] | step 44518 [/58575]: lr 1.05e-05, loss 0.29769, time 575.08ms, data 37.74ms, total_loss 0.29769, dist_loss 0.00257, perc_loss 0.12664, dist_psnr 25.89639, pix_con_dist_loss 0.00476, pix_con_dist_psnr 20.28818, pix_con_perc_loss 0.12136, lat_con_loss 0.04235, avg_mag_z 45.09119, std_mag_z 0.42276, avg_r_NOISY 0.58398, std_r_NOISY 0.37109, x_std_decoder 1.07812, grad_norm 3.26932
+I20260319 23:55:49 __main__ train.py:932] epoch   57 | iter      99 [/781] | step 44617 [/58575]: lr 1.03e-05, loss 0.30175, time 470.51ms, data 0.12ms, total_loss 0.30175, dist_loss 0.00245, perc_loss 0.12814, dist_psnr 26.13112, pix_con_dist_loss 0.00409, pix_con_dist_psnr 20.88606, pix_con_perc_loss 0.12399, lat_con_loss 0.04308, avg_mag_z 44.99803, std_mag_z 0.33696, avg_r_NOISY 0.60352, std_r_NOISY 0.35156, x_std_decoder 1.07812, grad_norm 3.22823
+I20260319 23:56:37 __main__ train.py:932] epoch   57 | iter     199 [/781] | step 44717 [/58575]: lr 1.01e-05, loss 0.27190, time 490.46ms, data 0.15ms, total_loss 0.27190, dist_loss 0.00238, perc_loss 0.11006, dist_psnr 26.22725, pix_con_dist_loss 0.00427, pix_con_dist_psnr 20.69220, pix_con_perc_loss 0.11637, lat_con_loss 0.03882, avg_mag_z 45.00624, std_mag_z 0.32390, avg_r_NOISY 0.52051, std_r_NOISY 0.32227, x_std_decoder 1.07812, grad_norm 3.62899
+I20260319 23:57:24 __main__ train.py:932] epoch   57 | iter     299 [/781] | step 44817 [/58575]: lr 9.92e-06, loss 0.27108, time 467.86ms, data 0.11ms, total_loss 0.27108, dist_loss 0.00238, perc_loss 0.11048, dist_psnr 26.28030, pix_con_dist_loss 0.00416, pix_con_dist_psnr 20.84055, pix_con_perc_loss 0.11483, lat_con_loss 0.03923, avg_mag_z 44.99906, std_mag_z 0.29979, avg_r_NOISY 0.53906, std_r_NOISY 0.33887, x_std_decoder 1.07812, grad_norm 4.29501
+I20260319 23:58:13 __main__ train.py:932] epoch   57 | iter     399 [/781] | step 44917 [/58575]: lr 9.75e-06, loss 0.28584, time 515.72ms, data 0.24ms, total_loss 0.28584, dist_loss 0.00261, perc_loss 0.11570, dist_psnr 25.89609, pix_con_dist_loss 0.00423, pix_con_dist_psnr 20.74151, pix_con_perc_loss 0.12106, lat_con_loss 0.04224, avg_mag_z 44.98156, std_mag_z 0.21535, avg_r_NOISY 0.57422, std_r_NOISY 0.37012, x_std_decoder 1.07812, grad_norm 3.08387
+I20260319 23:59:01 __main__ train.py:932] epoch   57 | iter     499 [/781] | step 45017 [/58575]: lr 9.57e-06, loss 0.28693, time 493.46ms, data 0.12ms, total_loss 0.28693, dist_loss 0.00321, perc_loss 0.12769, dist_psnr 25.03451, pix_con_dist_loss 0.00391, pix_con_dist_psnr 21.08733, pix_con_perc_loss 0.11399, lat_con_loss 0.03813, avg_mag_z 45.10423, std_mag_z 0.34171, avg_r_NOISY 0.52539, std_r_NOISY 0.33496, x_std_decoder 1.07812, grad_norm 3.06740
+I20260319 23:59:50 __main__ train.py:932] epoch   57 | iter     599 [/781] | step 45117 [/58575]: lr 9.40e-06, loss 0.29423, time 492.23ms, data 0.20ms, total_loss 0.29423, dist_loss 0.00270, perc_loss 0.12345, dist_psnr 25.68981, pix_con_dist_loss 0.00441, pix_con_dist_psnr 20.54791, pix_con_perc_loss 0.12314, lat_con_loss 0.04052, avg_mag_z 45.01903, std_mag_z 0.30411, avg_r_NOISY 0.56836, std_r_NOISY 0.35156, x_std_decoder 1.07812, grad_norm 3.26635
+I20260320 00:00:38 __main__ train.py:932] epoch   57 | iter     699 [/781] | step 45217 [/58575]: lr 9.23e-06, loss 0.26451, time 478.02ms, data 0.12ms, total_loss 0.26451, dist_loss 0.00265, perc_loss 0.11608, dist_psnr 25.78835, pix_con_dist_loss 0.00395, pix_con_dist_psnr 21.07141, pix_con_perc_loss 0.10457, lat_con_loss 0.03726, avg_mag_z 45.12697, std_mag_z 0.37539, avg_r_NOISY 0.53711, std_r_NOISY 0.33301, x_std_decoder 1.07812, grad_norm 3.64845
+I20260320 00:01:17 __main__ train.py:932] epoch   58 | iter       0 [/781] | step 45299 [/58575]: lr 9.09e-06, loss 0.27003, time 572.37ms, data 35.53ms, total_loss 0.27003, dist_loss 0.00234, perc_loss 0.11043, dist_psnr 26.35115, pix_con_dist_loss 0.00402, pix_con_dist_psnr 20.95739, pix_con_perc_loss 0.11404, lat_con_loss 0.03919, avg_mag_z 44.93215, std_mag_z 0.31410, avg_r_NOISY 0.54883, std_r_NOISY 0.35645, x_std_decoder 1.07812, grad_norm 3.10785
+I20260320 00:02:06 __main__ train.py:932] epoch   58 | iter      99 [/781] | step 45398 [/58575]: lr 8.93e-06, loss 0.29339, time 502.35ms, data 0.24ms, total_loss 0.29339, dist_loss 0.00253, perc_loss 0.12453, dist_psnr 25.97372, pix_con_dist_loss 0.00402, pix_con_dist_psnr 20.96384, pix_con_perc_loss 0.11979, lat_con_loss 0.04253, avg_mag_z 44.98719, std_mag_z 0.30671, avg_r_NOISY 0.59570, std_r_NOISY 0.35938, x_std_decoder 1.07812, grad_norm 2.69367
+I20260320 00:02:54 __main__ train.py:932] epoch   58 | iter     199 [/781] | step 45498 [/58575]: lr 8.76e-06, loss 0.28198, time 479.32ms, data 0.11ms, total_loss 0.28198, dist_loss 0.00247, perc_loss 0.11530, dist_psnr 26.10944, pix_con_dist_loss 0.00442, pix_con_dist_psnr 20.54393, pix_con_perc_loss 0.11870, lat_con_loss 0.04108, avg_mag_z 44.93008, std_mag_z 0.27241, avg_r_NOISY 0.53711, std_r_NOISY 0.34082, x_std_decoder 1.07812, grad_norm 3.53390
+I20260320 00:03:41 __main__ train.py:932] epoch   58 | iter     299 [/781] | step 45598 [/58575]: lr 8.60e-06, loss 0.25807, time 463.51ms, data 0.20ms, total_loss 0.25807, dist_loss 0.00245, perc_loss 0.10792, dist_psnr 26.13339, pix_con_dist_loss 0.00386, pix_con_dist_psnr 21.13264, pix_con_perc_loss 0.10673, lat_con_loss 0.03712, avg_mag_z 44.96000, std_mag_z 0.36858, avg_r_NOISY 0.53711, std_r_NOISY 0.35645, x_std_decoder 1.07812, grad_norm 2.91205
+I20260320 00:04:28 __main__ train.py:932] epoch   58 | iter     399 [/781] | step 45698 [/58575]: lr 8.44e-06, loss 0.27880, time 466.08ms, data 0.24ms, total_loss 0.27880, dist_loss 0.00326, perc_loss 0.12230, dist_psnr 24.90411, pix_con_dist_loss 0.00440, pix_con_dist_psnr 20.63850, pix_con_perc_loss 0.11006, lat_con_loss 0.03877, avg_mag_z 44.97164, std_mag_z 0.33875, avg_r_NOISY 0.54688, std_r_NOISY 0.36035, x_std_decoder 1.07812, grad_norm 3.55825
+I20260320 00:05:16 __main__ train.py:932] epoch   58 | iter     499 [/781] | step 45798 [/58575]: lr 8.28e-06, loss 0.28543, time 475.65ms, data 0.11ms, total_loss 0.28543, dist_loss 0.00268, perc_loss 0.12571, dist_psnr 25.79347, pix_con_dist_loss 0.00351, pix_con_dist_psnr 21.57604, pix_con_perc_loss 0.11314, lat_con_loss 0.04041, avg_mag_z 44.99519, std_mag_z 0.22733, avg_r_NOISY 0.56641, std_r_NOISY 0.34277, x_std_decoder 1.07812, grad_norm 2.98416
+I20260320 00:06:03 __main__ train.py:932] epoch   58 | iter     599 [/781] | step 45898 [/58575]: lr 8.12e-06, loss 0.28147, time 475.11ms, data 0.11ms, total_loss 0.28147, dist_loss 0.00201, perc_loss 0.11132, dist_psnr 26.99430, pix_con_dist_loss 0.00486, pix_con_dist_psnr 20.16614, pix_con_perc_loss 0.12225, lat_con_loss 0.04103, avg_mag_z 45.02291, std_mag_z 0.32003, avg_r_NOISY 0.57812, std_r_NOISY 0.36426, x_std_decoder 1.07812, grad_norm 3.27295
+I20260320 00:06:50 __main__ train.py:932] epoch   58 | iter     699 [/781] | step 45998 [/58575]: lr 7.96e-06, loss 0.28870, time 472.03ms, data 0.10ms, total_loss 0.28870, dist_loss 0.00281, perc_loss 0.12611, dist_psnr 25.50530, pix_con_dist_loss 0.00377, pix_con_dist_psnr 21.23130, pix_con_perc_loss 0.11457, lat_con_loss 0.04144, avg_mag_z 44.96800, std_mag_z 0.26468, avg_r_NOISY 0.58203, std_r_NOISY 0.35059, x_std_decoder 1.07812, grad_norm 2.89161
+I20260320 00:07:28 __main__ train.py:932] epoch   59 | iter       0 [/781] | step 46080 [/58575]: lr 7.83e-06, loss 0.26619, time 556.95ms, data 54.31ms, total_loss 0.26619, dist_loss 0.00259, perc_loss 0.11883, dist_psnr 25.86911, pix_con_dist_loss 0.00314, pix_con_dist_psnr 22.03903, pix_con_perc_loss 0.10450, lat_con_loss 0.03713, avg_mag_z 44.97508, std_mag_z 0.28345, avg_r_NOISY 0.50000, std_r_NOISY 0.31348, x_std_decoder 1.07812, grad_norm 2.73915
+I20260320 00:08:16 __main__ train.py:932] epoch   59 | iter      99 [/781] | step 46179 [/58575]: lr 7.68e-06, loss 0.29086, time 488.46ms, data 0.10ms, total_loss 0.29086, dist_loss 0.00253, perc_loss 0.12981, dist_psnr 25.97114, pix_con_dist_loss 0.00369, pix_con_dist_psnr 21.32358, pix_con_perc_loss 0.11502, lat_con_loss 0.03981, avg_mag_z 45.04391, std_mag_z 0.30265, avg_r_NOISY 0.57617, std_r_NOISY 0.35645, x_std_decoder 1.07812, grad_norm 3.10985
+I20260320 00:09:03 __main__ train.py:932] epoch   59 | iter     199 [/781] | step 46279 [/58575]: lr 7.53e-06, loss 0.29458, time 472.03ms, data 0.12ms, total_loss 0.29458, dist_loss 0.00324, perc_loss 0.12928, dist_psnr 24.97544, pix_con_dist_loss 0.00438, pix_con_dist_psnr 20.58540, pix_con_perc_loss 0.11565, lat_con_loss 0.04203, avg_mag_z 44.98133, std_mag_z 0.30965, avg_r_NOISY 0.57812, std_r_NOISY 0.37402, x_std_decoder 1.07812, grad_norm 3.09926
+I20260320 00:09:51 __main__ train.py:932] epoch   59 | iter     299 [/781] | step 46379 [/58575]: lr 7.38e-06, loss 0.27899, time 474.10ms, data 0.12ms, total_loss 0.27899, dist_loss 0.00279, perc_loss 0.12154, dist_psnr 25.54765, pix_con_dist_loss 0.00418, pix_con_dist_psnr 20.78784, pix_con_perc_loss 0.10927, lat_con_loss 0.04121, avg_mag_z 45.08169, std_mag_z 0.31358, avg_r_NOISY 0.55469, std_r_NOISY 0.36133, x_std_decoder 1.07812, grad_norm 3.20562
+I20260320 00:10:39 __main__ train.py:932] epoch   59 | iter     399 [/781] | step 46479 [/58575]: lr 7.23e-06, loss 0.26433, time 474.48ms, data 0.10ms, total_loss 0.26433, dist_loss 0.00250, perc_loss 0.11360, dist_psnr 26.02162, pix_con_dist_loss 0.00350, pix_con_dist_psnr 21.54724, pix_con_perc_loss 0.10669, lat_con_loss 0.03804, avg_mag_z 44.96646, std_mag_z 0.30341, avg_r_NOISY 0.51562, std_r_NOISY 0.32520, x_std_decoder 1.07812, grad_norm 3.10830
+I20260320 00:11:26 __main__ train.py:932] epoch   59 | iter     499 [/781] | step 46579 [/58575]: lr 7.08e-06, loss 0.30565, time 473.88ms, data 0.13ms, total_loss 0.30565, dist_loss 0.00298, perc_loss 0.13693, dist_psnr 25.26459, pix_con_dist_loss 0.00420, pix_con_dist_psnr 20.75311, pix_con_perc_loss 0.11954, lat_con_loss 0.04200, avg_mag_z 44.99304, std_mag_z 0.28214, avg_r_NOISY 0.58398, std_r_NOISY 0.36328, x_std_decoder 1.07812, grad_norm 3.67735
+I20260320 00:12:14 __main__ train.py:932] epoch   59 | iter     599 [/781] | step 46679 [/58575]: lr 6.93e-06, loss 0.27825, time 487.51ms, data 0.19ms, total_loss 0.27825, dist_loss 0.00288, perc_loss 0.11981, dist_psnr 25.41047, pix_con_dist_loss 0.00430, pix_con_dist_psnr 20.76103, pix_con_perc_loss 0.11108, lat_con_loss 0.04017, avg_mag_z 44.92145, std_mag_z 0.25749, avg_r_NOISY 0.57617, std_r_NOISY 0.35938, x_std_decoder 1.07812, grad_norm 2.82407
+I20260320 00:13:01 __main__ train.py:932] epoch   59 | iter     699 [/781] | step 46779 [/58575]: lr 6.79e-06, loss 0.28328, time 481.89ms, data 0.18ms, total_loss 0.28328, dist_loss 0.00258, perc_loss 0.11499, dist_psnr 25.91351, pix_con_dist_loss 0.00444, pix_con_dist_psnr 20.56301, pix_con_perc_loss 0.11957, lat_con_loss 0.04171, avg_mag_z 45.00516, std_mag_z 0.36119, avg_r_NOISY 0.57617, std_r_NOISY 0.34570, x_std_decoder 1.07812, grad_norm 3.49867
+I20260320 00:13:40 sphere.utils utils.py:162] no ema_model to use
+I20260320 00:13:40 sphere.utils utils.py:102] grid saved to the image: /home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/_staging/a83-pilot/sphere-small-small-cifar-10-32px/vis/imgs_ep0059_ema=False_cfg=1.0-combo_steps=2_sched=False.png
+I20260320 00:13:41 sphere.utils utils.py:312] checkpoint saved to /home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/_staging/a83-pilot/sphere-small-small-cifar-10-32px/ckpt/ep0059.pth
+I20260320 00:13:41 __main__ train.py:932] epoch   60 | iter       0 [/781] | step 46861 [/58575]: lr 6.67e-06, loss 0.28776, time 544.49ms, data 39.05ms, total_loss 0.28776, dist_loss 0.00286, perc_loss 0.11980, dist_psnr 25.43185, pix_con_dist_loss 0.00418, pix_con_dist_psnr 20.79302, pix_con_perc_loss 0.12072, lat_con_loss 0.04019, avg_mag_z 45.03482, std_mag_z 0.33185, avg_r_NOISY 0.57812, std_r_NOISY 0.36816, x_std_decoder 1.07812, grad_norm 2.99845
+I20260320 00:14:30 __main__ train.py:932] epoch   60 | iter      99 [/781] | step 46960 [/58575]: lr 6.53e-06, loss 0.27768, time 468.97ms, data 0.10ms, total_loss 0.27768, dist_loss 0.00250, perc_loss 0.12243, dist_psnr 26.03197, pix_con_dist_loss 0.00413, pix_con_dist_psnr 20.89703, pix_con_perc_loss 0.10910, lat_con_loss 0.03953, avg_mag_z 44.94525, std_mag_z 0.27509, avg_r_NOISY 0.55078, std_r_NOISY 0.34961, x_std_decoder 1.07812, grad_norm 3.33373
+I20260320 00:15:17 __main__ train.py:932] epoch   60 | iter     199 [/781] | step 47060 [/58575]: lr 6.39e-06, loss 0.29063, time 504.13ms, data 0.10ms, total_loss 0.29063, dist_loss 0.00283, perc_loss 0.12504, dist_psnr 25.48956, pix_con_dist_loss 0.00384, pix_con_dist_psnr 21.17946, pix_con_perc_loss 0.11988, lat_con_loss 0.03905, avg_mag_z 45.07357, std_mag_z 0.37711, avg_r_NOISY 0.52539, std_r_NOISY 0.33398, x_std_decoder 1.07812, grad_norm 3.57265
+I20260320 00:16:06 __main__ train.py:932] epoch   60 | iter     299 [/781] | step 47160 [/58575]: lr 6.25e-06, loss 0.31164, time 483.97ms, data 0.21ms, total_loss 0.31164, dist_loss 0.00310, perc_loss 0.13741, dist_psnr 25.11206, pix_con_dist_loss 0.00470, pix_con_dist_psnr 20.28907, pix_con_perc_loss 0.12245, lat_con_loss 0.04399, avg_mag_z 44.98308, std_mag_z 0.28097, avg_r_NOISY 0.61914, std_r_NOISY 0.35547, x_std_decoder 1.07812, grad_norm 3.76236
+I20260320 00:16:53 __main__ train.py:932] epoch   60 | iter     399 [/781] | step 47260 [/58575]: lr 6.12e-06, loss 0.27517, time 467.07ms, data 0.24ms, total_loss 0.27517, dist_loss 0.00290, perc_loss 0.12215, dist_psnr 25.41587, pix_con_dist_loss 0.00369, pix_con_dist_psnr 21.35593, pix_con_perc_loss 0.10743, lat_con_loss 0.03901, avg_mag_z 44.97412, std_mag_z 0.31866, avg_r_NOISY 0.55078, std_r_NOISY 0.35156, x_std_decoder 1.07812, grad_norm 4.04397
+I20260320 00:17:42 __main__ train.py:932] epoch   60 | iter     499 [/781] | step 47360 [/58575]: lr 5.98e-06, loss 0.29785, time 492.16ms, data 0.14ms, total_loss 0.29785, dist_loss 0.00265, perc_loss 0.13595, dist_psnr 25.77938, pix_con_dist_loss 0.00373, pix_con_dist_psnr 21.28504, pix_con_perc_loss 0.11651, lat_con_loss 0.03902, avg_mag_z 44.98608, std_mag_z 0.29112, avg_r_NOISY 0.55078, std_r_NOISY 0.32617, x_std_decoder 1.07812, grad_norm 3.69981
+I20260320 00:18:31 __main__ train.py:932] epoch   60 | iter     599 [/781] | step 47460 [/58575]: lr 5.85e-06, loss 0.29496, time 497.07ms, data 0.26ms, total_loss 0.29496, dist_loss 0.00281, perc_loss 0.11761, dist_psnr 25.51635, pix_con_dist_loss 0.00478, pix_con_dist_psnr 20.19645, pix_con_perc_loss 0.12632, lat_con_loss 0.04344, avg_mag_z 45.01128, std_mag_z 0.29858, avg_r_NOISY 0.60352, std_r_NOISY 0.34375, x_std_decoder 1.07812, grad_norm 2.86365
+I20260320 00:19:21 __main__ train.py:932] epoch   60 | iter     699 [/781] | step 47560 [/58575]: lr 5.72e-06, loss 0.27505, time 500.07ms, data 0.22ms, total_loss 0.27505, dist_loss 0.00274, perc_loss 0.11576, dist_psnr 25.63754, pix_con_dist_loss 0.00384, pix_con_dist_psnr 21.14136, pix_con_perc_loss 0.11338, lat_con_loss 0.03932, avg_mag_z 45.02419, std_mag_z 0.30558, avg_r_NOISY 0.53516, std_r_NOISY 0.34473, x_std_decoder 1.07812, grad_norm 3.67573
+I20260320 00:20:03 __main__ train.py:932] epoch   61 | iter       0 [/781] | step 47642 [/58575]: lr 5.61e-06, loss 0.28161, time 551.48ms, data 18.81ms, total_loss 0.28161, dist_loss 0.00258, perc_loss 0.12377, dist_psnr 25.89115, pix_con_dist_loss 0.00403, pix_con_dist_psnr 20.94692, pix_con_perc_loss 0.11054, lat_con_loss 0.04069, avg_mag_z 45.01986, std_mag_z 0.25745, avg_r_NOISY 0.54297, std_r_NOISY 0.34961, x_std_decoder 1.07812, grad_norm 3.29852
+I20260320 00:20:51 __main__ train.py:932] epoch   61 | iter      99 [/781] | step 47741 [/58575]: lr 5.48e-06, loss 0.26915, time 475.04ms, data 0.10ms, total_loss 0.26915, dist_loss 0.00237, perc_loss 0.11017, dist_psnr 26.31103, pix_con_dist_loss 0.00485, pix_con_dist_psnr 20.25661, pix_con_perc_loss 0.11399, lat_con_loss 0.03777, avg_mag_z 45.06750, std_mag_z 0.32100, avg_r_NOISY 0.55078, std_r_NOISY 0.34082, x_std_decoder 1.07812, grad_norm 3.25502
+I20260320 00:21:38 __main__ train.py:932] epoch   61 | iter     199 [/781] | step 47841 [/58575]: lr 5.36e-06, loss 0.26295, time 465.98ms, data 0.11ms, total_loss 0.26295, dist_loss 0.00235, perc_loss 0.10968, dist_psnr 26.32086, pix_con_dist_loss 0.00372, pix_con_dist_psnr 21.37481, pix_con_perc_loss 0.10928, lat_con_loss 0.03793, avg_mag_z 45.02615, std_mag_z 0.27907, avg_r_NOISY 0.55078, std_r_NOISY 0.35938, x_std_decoder 1.07812, grad_norm 3.11487
+I20260320 00:22:27 __main__ train.py:932] epoch   61 | iter     299 [/781] | step 47941 [/58575]: lr 5.23e-06, loss 0.28637, time 498.98ms, data 0.10ms, total_loss 0.28637, dist_loss 0.00249, perc_loss 0.11450, dist_psnr 26.15794, pix_con_dist_loss 0.00431, pix_con_dist_psnr 20.70807, pix_con_perc_loss 0.12469, lat_con_loss 0.04038, avg_mag_z 45.05324, std_mag_z 0.33005, avg_r_NOISY 0.57031, std_r_NOISY 0.33594, x_std_decoder 1.07812, grad_norm 3.95495
+I20260320 00:23:16 __main__ train.py:932] epoch   61 | iter     399 [/781] | step 48041 [/58575]: lr 5.11e-06, loss 0.28264, time 484.31ms, data 0.30ms, total_loss 0.28264, dist_loss 0.00219, perc_loss 0.11434, dist_psnr 26.60462, pix_con_dist_loss 0.00407, pix_con_dist_psnr 20.90112, pix_con_perc_loss 0.12078, lat_con_loss 0.04126, avg_mag_z 44.96198, std_mag_z 0.27282, avg_r_NOISY 0.55078, std_r_NOISY 0.33301, x_std_decoder 1.07812, grad_norm 2.94711
+I20260320 00:24:04 __main__ train.py:932] epoch   61 | iter     499 [/781] | step 48141 [/58575]: lr 4.99e-06, loss 0.27690, time 479.00ms, data 0.13ms, total_loss 0.27690, dist_loss 0.00241, perc_loss 0.11166, dist_psnr 26.20047, pix_con_dist_loss 0.00426, pix_con_dist_psnr 20.69970, pix_con_perc_loss 0.11808, lat_con_loss 0.04049, avg_mag_z 45.08451, std_mag_z 0.32180, avg_r_NOISY 0.58008, std_r_NOISY 0.36035, x_std_decoder 1.07812, grad_norm 3.86346
+I20260320 00:24:53 __main__ train.py:932] epoch   61 | iter     599 [/781] | step 48241 [/58575]: lr 4.87e-06, loss 0.28515, time 473.39ms, data 0.10ms, total_loss 0.28515, dist_loss 0.00286, perc_loss 0.12159, dist_psnr 25.44252, pix_con_dist_loss 0.00444, pix_con_dist_psnr 20.52145, pix_con_perc_loss 0.11578, lat_con_loss 0.04047, avg_mag_z 44.99817, std_mag_z 0.32969, avg_r_NOISY 0.54883, std_r_NOISY 0.34570, x_std_decoder 1.07812, grad_norm 3.03893
+I20260320 00:25:40 __main__ train.py:932] epoch   61 | iter     699 [/781] | step 48341 [/58575]: lr 4.75e-06, loss 0.28251, time 464.13ms, data 0.11ms, total_loss 0.28251, dist_loss 0.00276, perc_loss 0.12182, dist_psnr 25.70231, pix_con_dist_loss 0.00393, pix_con_dist_psnr 21.05565, pix_con_perc_loss 0.11313, lat_con_loss 0.04088, avg_mag_z 45.06483, std_mag_z 0.33735, avg_r_NOISY 0.57422, std_r_NOISY 0.35840, x_std_decoder 1.07812, grad_norm 2.40457
+I20260320 00:26:18 __main__ train.py:932] epoch   62 | iter       0 [/781] | step 48423 [/58575]: lr 4.65e-06, loss 0.27252, time 557.72ms, data 49.64ms, total_loss 0.27252, dist_loss 0.00226, perc_loss 0.11088, dist_psnr 26.46740, pix_con_dist_loss 0.00367, pix_con_dist_psnr 21.36961, pix_con_perc_loss 0.11636, lat_con_loss 0.03935, avg_mag_z 44.96997, std_mag_z 0.29434, avg_r_NOISY 0.54492, std_r_NOISY 0.35156, x_std_decoder 1.07812, grad_norm 3.24400
+I20260320 00:27:06 __main__ train.py:932] epoch   62 | iter      99 [/781] | step 48522 [/58575]: lr 4.54e-06, loss 0.29153, time 474.29ms, data 0.23ms, total_loss 0.29153, dist_loss 0.00307, perc_loss 0.12176, dist_psnr 25.18417, pix_con_dist_loss 0.00408, pix_con_dist_psnr 20.90867, pix_con_perc_loss 0.12130, lat_con_loss 0.04131, avg_mag_z 45.00558, std_mag_z 0.31036, avg_r_NOISY 0.59570, std_r_NOISY 0.36035, x_std_decoder 1.07812, grad_norm 3.03004
+I20260320 00:27:54 __main__ train.py:932] epoch   62 | iter     199 [/781] | step 48622 [/58575]: lr 4.43e-06, loss 0.27793, time 475.15ms, data 0.22ms, total_loss 0.27793, dist_loss 0.00242, perc_loss 0.12145, dist_psnr 26.18620, pix_con_dist_loss 0.00333, pix_con_dist_psnr 21.83260, pix_con_perc_loss 0.11219, lat_con_loss 0.03854, avg_mag_z 45.04404, std_mag_z 0.31070, avg_r_NOISY 0.54102, std_r_NOISY 0.34277, x_std_decoder 1.07812, grad_norm 2.98292
+I20260320 00:28:41 __main__ train.py:932] epoch   62 | iter     299 [/781] | step 48722 [/58575]: lr 4.32e-06, loss 0.30363, time 485.06ms, data 0.11ms, total_loss 0.30363, dist_loss 0.00327, perc_loss 0.12342, dist_psnr 24.93526, pix_con_dist_loss 0.00483, pix_con_dist_psnr 20.39304, pix_con_perc_loss 0.12902, lat_con_loss 0.04309, avg_mag_z 44.99873, std_mag_z 0.30536, avg_r_NOISY 0.60156, std_r_NOISY 0.36523, x_std_decoder 1.07812, grad_norm 2.84612
+I20260320 00:29:30 __main__ train.py:932] epoch   62 | iter     399 [/781] | step 48822 [/58575]: lr 4.21e-06, loss 0.29002, time 475.07ms, data 0.13ms, total_loss 0.29002, dist_loss 0.00274, perc_loss 0.10949, dist_psnr 25.61777, pix_con_dist_loss 0.00505, pix_con_dist_psnr 19.96080, pix_con_perc_loss 0.13158, lat_con_loss 0.04116, avg_mag_z 44.96620, std_mag_z 0.33569, avg_r_NOISY 0.56836, std_r_NOISY 0.35156, x_std_decoder 1.07812, grad_norm 3.26476
+I20260320 00:30:17 __main__ train.py:932] epoch   62 | iter     499 [/781] | step 48922 [/58575]: lr 4.10e-06, loss 0.27985, time 468.11ms, data 0.11ms, total_loss 0.27985, dist_loss 0.00266, perc_loss 0.11203, dist_psnr 25.74859, pix_con_dist_loss 0.00464, pix_con_dist_psnr 20.33252, pix_con_perc_loss 0.11948, lat_con_loss 0.04104, avg_mag_z 45.01335, std_mag_z 0.31666, avg_r_NOISY 0.58398, std_r_NOISY 0.34473, x_std_decoder 1.07812, grad_norm 2.94757
+I20260320 00:31:05 __main__ train.py:932] epoch   62 | iter     599 [/781] | step 49022 [/58575]: lr 3.99e-06, loss 0.25726, time 473.96ms, data 0.11ms, total_loss 0.25726, dist_loss 0.00223, perc_loss 0.10264, dist_psnr 26.50990, pix_con_dist_loss 0.00397, pix_con_dist_psnr 21.00700, pix_con_perc_loss 0.11110, lat_con_loss 0.03732, avg_mag_z 45.04357, std_mag_z 0.36256, avg_r_NOISY 0.56445, std_r_NOISY 0.36328, x_std_decoder 1.07812, grad_norm 2.71652
+I20260320 00:31:52 __main__ train.py:932] epoch   62 | iter     699 [/781] | step 49122 [/58575]: lr 3.89e-06, loss 0.29413, time 472.28ms, data 0.12ms, total_loss 0.29413, dist_loss 0.00255, perc_loss 0.12371, dist_psnr 25.95196, pix_con_dist_loss 0.00440, pix_con_dist_psnr 20.55738, pix_con_perc_loss 0.12184, lat_con_loss 0.04164, avg_mag_z 45.01099, std_mag_z 0.37110, avg_r_NOISY 0.57031, std_r_NOISY 0.35449, x_std_decoder 1.07812, grad_norm 3.22035
+I20260320 00:32:30 __main__ train.py:932] epoch   63 | iter       0 [/781] | step 49204 [/58575]: lr 3.81e-06, loss 0.28541, time 585.27ms, data 40.12ms, total_loss 0.28541, dist_loss 0.00282, perc_loss 0.12174, dist_psnr 25.51476, pix_con_dist_loss 0.00398, pix_con_dist_psnr 21.02396, pix_con_perc_loss 0.11387, lat_con_loss 0.04300, avg_mag_z 44.98007, std_mag_z 0.28427, avg_r_NOISY 0.60352, std_r_NOISY 0.36230, x_std_decoder 1.07812, grad_norm 2.85402
+I20260320 00:33:18 __main__ train.py:932] epoch   63 | iter      99 [/781] | step 49303 [/58575]: lr 3.71e-06, loss 0.28085, time 491.06ms, data 0.10ms, total_loss 0.28085, dist_loss 0.00269, perc_loss 0.11177, dist_psnr 25.72700, pix_con_dist_loss 0.00438, pix_con_dist_psnr 20.58504, pix_con_perc_loss 0.12258, lat_con_loss 0.03944, avg_mag_z 45.00931, std_mag_z 0.33967, avg_r_NOISY 0.55273, std_r_NOISY 0.35254, x_std_decoder 1.07812, grad_norm 3.50991
+I20260320 00:34:07 __main__ train.py:932] epoch   63 | iter     199 [/781] | step 49403 [/58575]: lr 3.61e-06, loss 0.28966, time 491.59ms, data 0.11ms, total_loss 0.28966, dist_loss 0.00238, perc_loss 0.11813, dist_psnr 26.24596, pix_con_dist_loss 0.00390, pix_con_dist_psnr 21.08958, pix_con_perc_loss 0.12408, lat_con_loss 0.04117, avg_mag_z 44.90320, std_mag_z 0.24137, avg_r_NOISY 0.55664, std_r_NOISY 0.33398, x_std_decoder 1.07812, grad_norm 3.28657
+I20260320 00:34:55 __main__ train.py:932] epoch   63 | iter     299 [/781] | step 49503 [/58575]: lr 3.51e-06, loss 0.28190, time 470.44ms, data 0.11ms, total_loss 0.28190, dist_loss 0.00286, perc_loss 0.11980, dist_psnr 25.44689, pix_con_dist_loss 0.00443, pix_con_dist_psnr 20.52976, pix_con_perc_loss 0.11392, lat_con_loss 0.04088, avg_mag_z 45.03202, std_mag_z 0.30129, avg_r_NOISY 0.56055, std_r_NOISY 0.36230, x_std_decoder 1.07812, grad_norm 3.35115
+I20260320 00:35:42 __main__ train.py:932] epoch   63 | iter     399 [/781] | step 49603 [/58575]: lr 3.41e-06, loss 0.28681, time 469.97ms, data 0.13ms, total_loss 0.28681, dist_loss 0.00211, perc_loss 0.11571, dist_psnr 26.76535, pix_con_dist_loss 0.00383, pix_con_dist_psnr 21.15466, pix_con_perc_loss 0.12364, lat_con_loss 0.04152, avg_mag_z 45.00560, std_mag_z 0.31138, avg_r_NOISY 0.55664, std_r_NOISY 0.35059, x_std_decoder 1.07812, grad_norm 3.23250
+I20260320 00:36:30 __main__ train.py:932] epoch   63 | iter     499 [/781] | step 49703 [/58575]: lr 3.32e-06, loss 0.27066, time 468.35ms, data 0.10ms, total_loss 0.27066, dist_loss 0.00247, perc_loss 0.11366, dist_psnr 26.12237, pix_con_dist_loss 0.00327, pix_con_dist_psnr 21.88093, pix_con_perc_loss 0.11299, lat_con_loss 0.03828, avg_mag_z 44.98232, std_mag_z 0.33639, avg_r_NOISY 0.51562, std_r_NOISY 0.32812, x_std_decoder 1.07812, grad_norm 3.33742
+I20260320 00:37:17 __main__ train.py:932] epoch   63 | iter     599 [/781] | step 49803 [/58575]: lr 3.23e-06, loss 0.25950, time 473.77ms, data 0.11ms, total_loss 0.25950, dist_loss 0.00222, perc_loss 0.10696, dist_psnr 26.58252, pix_con_dist_loss 0.00394, pix_con_dist_psnr 21.11771, pix_con_perc_loss 0.10926, lat_con_loss 0.03712, avg_mag_z 44.97478, std_mag_z 0.31670, avg_r_NOISY 0.54492, std_r_NOISY 0.33594, x_std_decoder 1.07812, grad_norm 2.97355
+I20260320 00:38:05 __main__ train.py:932] epoch   63 | iter     699 [/781] | step 49903 [/58575]: lr 3.14e-06, loss 0.27572, time 472.65ms, data 0.24ms, total_loss 0.27572, dist_loss 0.00220, perc_loss 0.10873, dist_psnr 26.60841, pix_con_dist_loss 0.00397, pix_con_dist_psnr 21.00226, pix_con_perc_loss 0.12065, lat_con_loss 0.04017, avg_mag_z 45.06017, std_mag_z 0.36427, avg_r_NOISY 0.56055, std_r_NOISY 0.34473, x_std_decoder 1.07812, grad_norm 3.54359
+I20260320 00:38:44 __main__ train.py:932] epoch   64 | iter       0 [/781] | step 49985 [/58575]: lr 3.07e-06, loss 0.26838, time 555.40ms, data 37.00ms, total_loss 0.26838, dist_loss 0.00225, perc_loss 0.11246, dist_psnr 26.47351, pix_con_dist_loss 0.00444, pix_con_dist_psnr 20.63809, pix_con_perc_loss 0.11082, lat_con_loss 0.03841, avg_mag_z 45.01419, std_mag_z 0.30258, avg_r_NOISY 0.53125, std_r_NOISY 0.33105, x_std_decoder 1.07812, grad_norm 2.97086
+I20260320 00:39:33 __main__ train.py:932] epoch   64 | iter      99 [/781] | step 50084 [/58575]: lr 2.98e-06, loss 0.26451, time 472.23ms, data 0.24ms, total_loss 0.26451, dist_loss 0.00231, perc_loss 0.11516, dist_psnr 26.39891, pix_con_dist_loss 0.00306, pix_con_dist_psnr 22.15491, pix_con_perc_loss 0.10672, lat_con_loss 0.03726, avg_mag_z 45.02635, std_mag_z 0.29347, avg_r_NOISY 0.56836, std_r_NOISY 0.36523, x_std_decoder 1.07812, grad_norm 3.29830
+I20260320 00:40:20 __main__ train.py:932] epoch   64 | iter     199 [/781] | step 50184 [/58575]: lr 2.90e-06, loss 0.27686, time 478.87ms, data 0.21ms, total_loss 0.27686, dist_loss 0.00254, perc_loss 0.12205, dist_psnr 25.96805, pix_con_dist_loss 0.00411, pix_con_dist_psnr 21.01675, pix_con_perc_loss 0.10800, lat_con_loss 0.04016, avg_mag_z 45.03385, std_mag_z 0.35920, avg_r_NOISY 0.55273, std_r_NOISY 0.32520, x_std_decoder 1.07812, grad_norm 2.77065
+I20260320 00:41:07 __main__ train.py:932] epoch   64 | iter     299 [/781] | step 50284 [/58575]: lr 2.81e-06, loss 0.26970, time 466.39ms, data 0.19ms, total_loss 0.26970, dist_loss 0.00279, perc_loss 0.11892, dist_psnr 25.62866, pix_con_dist_loss 0.00298, pix_con_dist_psnr 22.26624, pix_con_perc_loss 0.10596, lat_con_loss 0.03906, avg_mag_z 45.00416, std_mag_z 0.27583, avg_r_NOISY 0.54102, std_r_NOISY 0.34375, x_std_decoder 1.07812, grad_norm 3.24562
+I20260320 00:41:55 __main__ train.py:932] epoch   64 | iter     399 [/781] | step 50384 [/58575]: lr 2.73e-06, loss 0.27581, time 475.26ms, data 0.23ms, total_loss 0.27581, dist_loss 0.00258, perc_loss 0.12353, dist_psnr 25.95126, pix_con_dist_loss 0.00387, pix_con_dist_psnr 21.15462, pix_con_perc_loss 0.10659, lat_con_loss 0.03924, avg_mag_z 45.01145, std_mag_z 0.35795, avg_r_NOISY 0.52148, std_r_NOISY 0.32715, x_std_decoder 1.07422, grad_norm 3.17686
+I20260320 00:42:42 __main__ train.py:932] epoch   64 | iter     499 [/781] | step 50484 [/58575]: lr 2.65e-06, loss 0.28473, time 476.78ms, data 0.12ms, total_loss 0.28473, dist_loss 0.00268, perc_loss 0.12150, dist_psnr 25.76652, pix_con_dist_loss 0.00407, pix_con_dist_psnr 20.89324, pix_con_perc_loss 0.11696, lat_con_loss 0.03953, avg_mag_z 44.94401, std_mag_z 0.33268, avg_r_NOISY 0.56836, std_r_NOISY 0.35742, x_std_decoder 1.07812, grad_norm 3.55061
+I20260320 00:43:30 __main__ train.py:932] epoch   64 | iter     599 [/781] | step 50584 [/58575]: lr 2.57e-06, loss 0.26831, time 498.85ms, data 0.11ms, total_loss 0.26831, dist_loss 0.00225, perc_loss 0.10249, dist_psnr 26.48701, pix_con_dist_loss 0.00514, pix_con_dist_psnr 19.96292, pix_con_perc_loss 0.11663, lat_con_loss 0.04181, avg_mag_z 44.91947, std_mag_z 0.27482, avg_r_NOISY 0.60547, std_r_NOISY 0.37793, x_std_decoder 1.07812, grad_norm 3.16478
+I20260320 00:44:18 __main__ train.py:932] epoch   64 | iter     699 [/781] | step 50684 [/58575]: lr 2.50e-06, loss 0.27526, time 465.17ms, data 0.18ms, total_loss 0.27526, dist_loss 0.00316, perc_loss 0.12050, dist_psnr 25.01485, pix_con_dist_loss 0.00362, pix_con_dist_psnr 21.41806, pix_con_perc_loss 0.10848, lat_con_loss 0.03949, avg_mag_z 44.99497, std_mag_z 0.31406, avg_r_NOISY 0.54492, std_r_NOISY 0.33496, x_std_decoder 1.07812, grad_norm 2.96899
+I20260320 00:44:58 sphere.utils utils.py:312] checkpoint saved to /home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/_staging/a83-pilot/sphere-small-small-cifar-10-32px/ckpt/ep0064.pth
+I20260320 00:44:59 __main__ train.py:932] epoch   65 | iter       0 [/781] | step 50766 [/58575]: lr 2.44e-06, loss 0.28377, time 591.61ms, data 31.07ms, total_loss 0.28377, dist_loss 0.00254, perc_loss 0.11734, dist_psnr 25.98019, pix_con_dist_loss 0.00392, pix_con_dist_psnr 21.06490, pix_con_perc_loss 0.11864, lat_con_loss 0.04133, avg_mag_z 44.97087, std_mag_z 0.35830, avg_r_NOISY 0.59180, std_r_NOISY 0.36914, x_std_decoder 1.07422, grad_norm 3.29938
+I20260320 00:45:46 __main__ train.py:932] epoch   65 | iter      99 [/781] | step 50865 [/58575]: lr 2.37e-06, loss 0.28742, time 466.76ms, data 0.11ms, total_loss 0.28742, dist_loss 0.00237, perc_loss 0.12442, dist_psnr 26.30316, pix_con_dist_loss 0.00395, pix_con_dist_psnr 21.21317, pix_con_perc_loss 0.11686, lat_con_loss 0.03981, avg_mag_z 45.04296, std_mag_z 0.29588, avg_r_NOISY 0.54297, std_r_NOISY 0.33594, x_std_decoder 1.07422, grad_norm 3.43776
+I20260320 00:46:34 __main__ train.py:932] epoch   65 | iter     199 [/781] | step 50965 [/58575]: lr 2.30e-06, loss 0.28212, time 507.35ms, data 0.22ms, total_loss 0.28212, dist_loss 0.00331, perc_loss 0.12239, dist_psnr 24.85361, pix_con_dist_loss 0.00419, pix_con_dist_psnr 20.79918, pix_con_perc_loss 0.11334, lat_con_loss 0.03889, avg_mag_z 45.01680, std_mag_z 0.32992, avg_r_NOISY 0.54492, std_r_NOISY 0.34766, x_std_decoder 1.07812, grad_norm 3.62345
+I20260320 00:47:23 __main__ train.py:932] epoch   65 | iter     299 [/781] | step 51065 [/58575]: lr 2.23e-06, loss 0.28360, time 480.34ms, data 0.25ms, total_loss 0.28360, dist_loss 0.00254, perc_loss 0.11717, dist_psnr 25.95290, pix_con_dist_loss 0.00433, pix_con_dist_psnr 20.62957, pix_con_perc_loss 0.11892, lat_con_loss 0.04063, avg_mag_z 45.14621, std_mag_z 0.42394, avg_r_NOISY 0.56641, std_r_NOISY 0.36426, x_std_decoder 1.07031, grad_norm 2.98937
+I20260320 00:48:13 __main__ train.py:932] epoch   65 | iter     399 [/781] | step 51165 [/58575]: lr 2.16e-06, loss 0.28288, time 502.50ms, data 0.13ms, total_loss 0.28288, dist_loss 0.00267, perc_loss 0.11687, dist_psnr 25.73240, pix_con_dist_loss 0.00422, pix_con_dist_psnr 20.78480, pix_con_perc_loss 0.11853, lat_con_loss 0.04059, avg_mag_z 45.03440, std_mag_z 0.38599, avg_r_NOISY 0.59180, std_r_NOISY 0.35645, x_std_decoder 1.07812, grad_norm 2.50372
+I20260320 00:49:04 __main__ train.py:932] epoch   65 | iter     499 [/781] | step 51265 [/58575]: lr 2.10e-06, loss 0.25970, time 519.90ms, data 0.24ms, total_loss 0.25970, dist_loss 0.00212, perc_loss 0.10316, dist_psnr 26.73589, pix_con_dist_loss 0.00420, pix_con_dist_psnr 20.78712, pix_con_perc_loss 0.11257, lat_con_loss 0.03766, avg_mag_z 45.08792, std_mag_z 0.35376, avg_r_NOISY 0.54102, std_r_NOISY 0.36035, x_std_decoder 1.07812, grad_norm 3.36225
+I20260320 00:49:52 __main__ train.py:932] epoch   65 | iter     599 [/781] | step 51365 [/58575]: lr 2.03e-06, loss 0.28555, time 469.16ms, data 0.24ms, total_loss 0.28555, dist_loss 0.00260, perc_loss 0.12393, dist_psnr 25.84346, pix_con_dist_loss 0.00393, pix_con_dist_psnr 21.05154, pix_con_perc_loss 0.11485, lat_con_loss 0.04022, avg_mag_z 44.95971, std_mag_z 0.28445, avg_r_NOISY 0.57422, std_r_NOISY 0.34277, x_std_decoder 1.07812, grad_norm 3.02813
+I20260320 00:50:39 __main__ train.py:932] epoch   65 | iter     699 [/781] | step 51465 [/58575]: lr 1.97e-06, loss 0.27882, time 471.09ms, data 0.11ms, total_loss 0.27882, dist_loss 0.00336, perc_loss 0.12636, dist_psnr 24.77419, pix_con_dist_loss 0.00358, pix_con_dist_psnr 21.50098, pix_con_perc_loss 0.10659, lat_con_loss 0.03893, avg_mag_z 44.96253, std_mag_z 0.30318, avg_r_NOISY 0.52734, std_r_NOISY 0.33984, x_std_decoder 1.07812, grad_norm 2.88903
+I20260320 00:51:18 __main__ train.py:932] epoch   66 | iter       0 [/781] | step 51547 [/58575]: lr 1.92e-06, loss 0.27192, time 548.36ms, data 27.42ms, total_loss 0.27192, dist_loss 0.00237, perc_loss 0.11689, dist_psnr 26.25058, pix_con_dist_loss 0.00343, pix_con_dist_psnr 21.70916, pix_con_perc_loss 0.11193, lat_con_loss 0.03729, avg_mag_z 45.02981, std_mag_z 0.32358, avg_r_NOISY 0.54492, std_r_NOISY 0.35547, x_std_decoder 1.07422, grad_norm 3.19728
+I20260320 00:52:04 __main__ train.py:932] epoch   66 | iter      99 [/781] | step 51646 [/58575]: lr 1.86e-06, loss 0.28449, time 466.74ms, data 0.11ms, total_loss 0.28449, dist_loss 0.00231, perc_loss 0.11493, dist_psnr 26.36289, pix_con_dist_loss 0.00431, pix_con_dist_psnr 20.68768, pix_con_perc_loss 0.12228, lat_con_loss 0.04067, avg_mag_z 45.04639, std_mag_z 0.32068, avg_r_NOISY 0.59961, std_r_NOISY 0.35742, x_std_decoder 1.07812, grad_norm 3.45719
+I20260320 00:52:52 __main__ train.py:932] epoch   66 | iter     199 [/781] | step 51746 [/58575]: lr 1.81e-06, loss 0.29621, time 475.59ms, data 0.24ms, total_loss 0.29621, dist_loss 0.00283, perc_loss 0.12712, dist_psnr 25.49326, pix_con_dist_loss 0.00458, pix_con_dist_psnr 20.38844, pix_con_perc_loss 0.11898, lat_con_loss 0.04270, avg_mag_z 45.00734, std_mag_z 0.27657, avg_r_NOISY 0.55078, std_r_NOISY 0.35645, x_std_decoder 1.07812, grad_norm 3.24263
+I20260320 00:53:41 __main__ train.py:932] epoch   66 | iter     299 [/781] | step 51846 [/58575]: lr 1.75e-06, loss 0.27132, time 481.04ms, data 0.14ms, total_loss 0.27132, dist_loss 0.00225, perc_loss 0.10068, dist_psnr 26.48616, pix_con_dist_loss 0.00433, pix_con_dist_psnr 20.62723, pix_con_perc_loss 0.12166, lat_con_loss 0.04239, avg_mag_z 44.97936, std_mag_z 0.31251, avg_r_NOISY 0.58789, std_r_NOISY 0.35938, x_std_decoder 1.07812, grad_norm 3.02788
+I20260320 00:54:30 __main__ train.py:932] epoch   66 | iter     399 [/781] | step 51946 [/58575]: lr 1.70e-06, loss 0.28849, time 474.17ms, data 0.10ms, total_loss 0.28849, dist_loss 0.00291, perc_loss 0.11744, dist_psnr 25.37550, pix_con_dist_loss 0.00520, pix_con_dist_psnr 19.84244, pix_con_perc_loss 0.12045, lat_con_loss 0.04249, avg_mag_z 45.05245, std_mag_z 0.34435, avg_r_NOISY 0.59180, std_r_NOISY 0.35547, x_std_decoder 1.07812, grad_norm 3.55589
+I20260320 00:55:18 __main__ train.py:932] epoch   66 | iter     499 [/781] | step 52046 [/58575]: lr 1.65e-06, loss 0.29302, time 473.94ms, data 0.11ms, total_loss 0.29302, dist_loss 0.00299, perc_loss 0.12382, dist_psnr 25.24335, pix_con_dist_loss 0.00530, pix_con_dist_psnr 19.74614, pix_con_perc_loss 0.11808, lat_con_loss 0.04282, avg_mag_z 45.06094, std_mag_z 0.30936, avg_r_NOISY 0.58789, std_r_NOISY 0.34180, x_std_decoder 1.07812, grad_norm 3.99394
+I20260320 00:56:05 __main__ train.py:932] epoch   66 | iter     599 [/781] | step 52146 [/58575]: lr 1.60e-06, loss 0.28683, time 469.26ms, data 0.11ms, total_loss 0.28683, dist_loss 0.00241, perc_loss 0.12314, dist_psnr 26.20150, pix_con_dist_loss 0.00435, pix_con_dist_psnr 20.63026, pix_con_perc_loss 0.11920, lat_con_loss 0.03773, avg_mag_z 45.00407, std_mag_z 0.34506, avg_r_NOISY 0.53711, std_r_NOISY 0.34277, x_std_decoder 1.07812, grad_norm 3.24453
+I20260320 00:56:51 __main__ train.py:932] epoch   66 | iter     699 [/781] | step 52246 [/58575]: lr 1.56e-06, loss 0.27933, time 465.32ms, data 0.10ms, total_loss 0.27933, dist_loss 0.00306, perc_loss 0.12749, dist_psnr 25.15689, pix_con_dist_loss 0.00341, pix_con_dist_psnr 21.67679, pix_con_perc_loss 0.10637, lat_con_loss 0.03899, avg_mag_z 45.00894, std_mag_z 0.26240, avg_r_NOISY 0.52734, std_r_NOISY 0.34180, x_std_decoder 1.07812, grad_norm 2.84167
+I20260320 00:57:31 __main__ train.py:932] epoch   67 | iter       0 [/781] | step 52328 [/58575]: lr 1.52e-06, loss 0.26510, time 550.04ms, data 23.02ms, total_loss 0.26510, dist_loss 0.00217, perc_loss 0.09618, dist_psnr 26.63003, pix_con_dist_loss 0.00400, pix_con_dist_psnr 20.96794, pix_con_perc_loss 0.12346, lat_con_loss 0.03929, avg_mag_z 45.01390, std_mag_z 0.30481, avg_r_NOISY 0.58594, std_r_NOISY 0.33887, x_std_decoder 1.07422, grad_norm 2.86839
+I20260320 00:58:19 __main__ train.py:932] epoch   67 | iter      99 [/781] | step 52427 [/58575]: lr 1.48e-06, loss 0.28931, time 475.60ms, data 0.19ms, total_loss 0.28931, dist_loss 0.00233, perc_loss 0.12576, dist_psnr 26.33761, pix_con_dist_loss 0.00475, pix_con_dist_psnr 20.30659, pix_con_perc_loss 0.11651, lat_con_loss 0.03997, avg_mag_z 45.03812, std_mag_z 0.35035, avg_r_NOISY 0.55273, std_r_NOISY 0.35156, x_std_decoder 1.07422, grad_norm 3.12173
+I20260320 00:59:07 __main__ train.py:932] epoch   67 | iter     199 [/781] | step 52527 [/58575]: lr 1.44e-06, loss 0.28391, time 470.17ms, data 0.18ms, total_loss 0.28391, dist_loss 0.00360, perc_loss 0.12804, dist_psnr 24.48207, pix_con_dist_loss 0.00360, pix_con_dist_psnr 21.49953, pix_con_perc_loss 0.10973, lat_con_loss 0.03895, avg_mag_z 45.02591, std_mag_z 0.33684, avg_r_NOISY 0.55273, std_r_NOISY 0.35352, x_std_decoder 1.07812, grad_norm 3.46128
+I20260320 00:59:54 __main__ train.py:932] epoch   67 | iter     299 [/781] | step 52627 [/58575]: lr 1.40e-06, loss 0.27095, time 469.64ms, data 0.20ms, total_loss 0.27095, dist_loss 0.00216, perc_loss 0.11323, dist_psnr 26.65368, pix_con_dist_loss 0.00507, pix_con_dist_psnr 20.00945, pix_con_perc_loss 0.11175, lat_con_loss 0.03873, avg_mag_z 45.03113, std_mag_z 0.35448, avg_r_NOISY 0.54688, std_r_NOISY 0.34668, x_std_decoder 1.07812, grad_norm 3.47430
+I20260320 01:00:41 __main__ train.py:932] epoch   67 | iter     399 [/781] | step 52727 [/58575]: lr 1.36e-06, loss 0.28210, time 483.58ms, data 0.10ms, total_loss 0.28210, dist_loss 0.00210, perc_loss 0.12440, dist_psnr 26.81273, pix_con_dist_loss 0.00365, pix_con_dist_psnr 21.36529, pix_con_perc_loss 0.11334, lat_con_loss 0.03861, avg_mag_z 44.98145, std_mag_z 0.31281, avg_r_NOISY 0.54492, std_r_NOISY 0.34180, x_std_decoder 1.07422, grad_norm 3.14394
+I20260320 01:01:30 __main__ train.py:932] epoch   67 | iter     499 [/781] | step 52827 [/58575]: lr 1.32e-06, loss 0.27128, time 490.42ms, data 0.11ms, total_loss 0.27128, dist_loss 0.00241, perc_loss 0.11581, dist_psnr 26.21570, pix_con_dist_loss 0.00402, pix_con_dist_psnr 20.95187, pix_con_perc_loss 0.10957, lat_con_loss 0.03947, avg_mag_z 45.04566, std_mag_z 0.33983, avg_r_NOISY 0.56055, std_r_NOISY 0.35156, x_std_decoder 1.07812, grad_norm 3.54524
+I20260320 01:02:17 __main__ train.py:932] epoch   67 | iter     599 [/781] | step 52927 [/58575]: lr 1.29e-06, loss 0.28846, time 469.34ms, data 0.11ms, total_loss 0.28846, dist_loss 0.00285, perc_loss 0.12595, dist_psnr 25.51096, pix_con_dist_loss 0.00412, pix_con_dist_psnr 20.85345, pix_con_perc_loss 0.11661, lat_con_loss 0.03893, avg_mag_z 44.99217, std_mag_z 0.26962, avg_r_NOISY 0.53320, std_r_NOISY 0.32910, x_std_decoder 1.07812, grad_norm 3.61599
+I20260320 01:03:05 __main__ train.py:932] epoch   67 | iter     699 [/781] | step 53027 [/58575]: lr 1.26e-06, loss 0.26557, time 475.92ms, data 0.11ms, total_loss 0.26557, dist_loss 0.00229, perc_loss 0.10789, dist_psnr 26.41250, pix_con_dist_loss 0.00383, pix_con_dist_psnr 21.15445, pix_con_perc_loss 0.11458, lat_con_loss 0.03698, avg_mag_z 44.96945, std_mag_z 0.29249, avg_r_NOISY 0.52734, std_r_NOISY 0.34570, x_std_decoder 1.07031, grad_norm 3.64700
+I20260320 01:03:45 __main__ train.py:932] epoch   68 | iter       0 [/781] | step 53109 [/58575]: lr 1.23e-06, loss 0.27847, time 561.79ms, data 43.44ms, total_loss 0.27847, dist_loss 0.00272, perc_loss 0.11546, dist_psnr 25.73374, pix_con_dist_loss 0.00388, pix_con_dist_psnr 21.15038, pix_con_perc_loss 0.11686, lat_con_loss 0.03955, avg_mag_z 45.07583, std_mag_z 0.34515, avg_r_NOISY 0.56445, std_r_NOISY 0.35742, x_std_decoder 1.07812, grad_norm 4.01418
+I20260320 01:04:33 __main__ train.py:932] epoch   68 | iter      99 [/781] | step 53208 [/58575]: lr 1.20e-06, loss 0.27019, time 476.98ms, data 0.27ms, total_loss 0.27019, dist_loss 0.00238, perc_loss 0.11697, dist_psnr 26.29077, pix_con_dist_loss 0.00397, pix_con_dist_psnr 21.04795, pix_con_perc_loss 0.10940, lat_con_loss 0.03748, avg_mag_z 44.98447, std_mag_z 0.32565, avg_r_NOISY 0.53906, std_r_NOISY 0.35547, x_std_decoder 1.07422, grad_norm 4.02324
+I20260320 01:05:21 __main__ train.py:932] epoch   68 | iter     199 [/781] | step 53308 [/58575]: lr 1.18e-06, loss 0.28347, time 481.79ms, data 0.11ms, total_loss 0.28347, dist_loss 0.00287, perc_loss 0.12906, dist_psnr 25.47352, pix_con_dist_loss 0.00344, pix_con_dist_psnr 21.64083, pix_con_perc_loss 0.10919, lat_con_loss 0.03892, avg_mag_z 44.93352, std_mag_z 0.24063, avg_r_NOISY 0.52734, std_r_NOISY 0.33984, x_std_decoder 1.07812, grad_norm 3.10788
+I20260320 01:06:11 __main__ train.py:932] epoch   68 | iter     299 [/781] | step 53408 [/58575]: lr 1.15e-06, loss 0.26326, time 503.75ms, data 0.22ms, total_loss 0.26326, dist_loss 0.00261, perc_loss 0.11125, dist_psnr 25.84895, pix_con_dist_loss 0.00357, pix_con_dist_psnr 21.46074, pix_con_perc_loss 0.10713, lat_con_loss 0.03870, avg_mag_z 45.00348, std_mag_z 0.34999, avg_r_NOISY 0.53320, std_r_NOISY 0.35156, x_std_decoder 1.07031, grad_norm 3.60002
+I20260320 01:07:01 __main__ train.py:932] epoch   68 | iter     399 [/781] | step 53508 [/58575]: lr 1.13e-06, loss 0.28210, time 503.74ms, data 0.12ms, total_loss 0.28210, dist_loss 0.00261, perc_loss 0.11495, dist_psnr 25.84517, pix_con_dist_loss 0.00391, pix_con_dist_psnr 21.07112, pix_con_perc_loss 0.12027, lat_con_loss 0.04036, avg_mag_z 44.94418, std_mag_z 0.31660, avg_r_NOISY 0.57227, std_r_NOISY 0.34863, x_std_decoder 1.07812, grad_norm 2.67200
+I20260320 01:07:50 __main__ train.py:932] epoch   68 | iter     499 [/781] | step 53608 [/58575]: lr 1.11e-06, loss 0.28150, time 471.52ms, data 0.11ms, total_loss 0.28150, dist_loss 0.00279, perc_loss 0.11715, dist_psnr 25.54066, pix_con_dist_loss 0.00369, pix_con_dist_psnr 21.31816, pix_con_perc_loss 0.11735, lat_con_loss 0.04051, avg_mag_z 45.03819, std_mag_z 0.29644, avg_r_NOISY 0.57422, std_r_NOISY 0.35156, x_std_decoder 1.07812, grad_norm 2.74908
+I20260320 01:08:38 __main__ train.py:932] epoch   68 | iter     599 [/781] | step 53708 [/58575]: lr 1.09e-06, loss 0.29417, time 481.30ms, data 0.11ms, total_loss 0.29417, dist_loss 0.00273, perc_loss 0.12838, dist_psnr 25.63946, pix_con_dist_loss 0.00372, pix_con_dist_psnr 21.31248, pix_con_perc_loss 0.11799, lat_con_loss 0.04135, avg_mag_z 44.94528, std_mag_z 0.33047, avg_r_NOISY 0.55273, std_r_NOISY 0.34473, x_std_decoder 1.07422, grad_norm 4.27752
+I20260320 01:09:27 __main__ train.py:932] epoch   68 | iter     699 [/781] | step 53808 [/58575]: lr 1.07e-06, loss 0.27700, time 485.14ms, data 0.12ms, total_loss 0.27700, dist_loss 0.00241, perc_loss 0.11392, dist_psnr 26.19930, pix_con_dist_loss 0.00515, pix_con_dist_psnr 19.95549, pix_con_perc_loss 0.11490, lat_con_loss 0.04062, avg_mag_z 45.00255, std_mag_z 0.38884, avg_r_NOISY 0.56055, std_r_NOISY 0.34668, x_std_decoder 1.07812, grad_norm 3.26750
+I20260320 01:10:06 __main__ train.py:932] epoch   69 | iter       0 [/781] | step 53890 [/58575]: lr 1.06e-06, loss 0.29318, time 556.69ms, data 38.33ms, total_loss 0.29318, dist_loss 0.00300, perc_loss 0.11686, dist_psnr 25.25930, pix_con_dist_loss 0.00416, pix_con_dist_psnr 20.79864, pix_con_perc_loss 0.12601, lat_con_loss 0.04315, avg_mag_z 45.00396, std_mag_z 0.31051, avg_r_NOISY 0.60742, std_r_NOISY 0.36621, x_std_decoder 1.07812, grad_norm 3.26825
+I20260320 01:10:55 __main__ train.py:932] epoch   69 | iter      99 [/781] | step 53989 [/58575]: lr 1.04e-06, loss 0.28887, time 508.76ms, data 0.12ms, total_loss 0.28887, dist_loss 0.00290, perc_loss 0.12774, dist_psnr 25.37192, pix_con_dist_loss 0.00401, pix_con_dist_psnr 20.95505, pix_con_perc_loss 0.11505, lat_con_loss 0.03916, avg_mag_z 45.05918, std_mag_z 0.35740, avg_r_NOISY 0.55859, std_r_NOISY 0.34082, x_std_decoder 1.07422, grad_norm 3.68306
+I20260320 01:11:43 __main__ train.py:932] epoch   69 | iter     199 [/781] | step 54089 [/58575]: lr 1.03e-06, loss 0.26996, time 471.61ms, data 0.11ms, total_loss 0.26996, dist_loss 0.00265, perc_loss 0.11350, dist_psnr 25.76571, pix_con_dist_loss 0.00455, pix_con_dist_psnr 20.45730, pix_con_perc_loss 0.11071, lat_con_loss 0.03855, avg_mag_z 45.01168, std_mag_z 0.36565, avg_r_NOISY 0.54297, std_r_NOISY 0.35254, x_std_decoder 1.07812, grad_norm 3.20792
+I20260320 01:12:31 __main__ train.py:932] epoch   69 | iter     299 [/781] | step 54189 [/58575]: lr 1.02e-06, loss 0.28769, time 484.06ms, data 0.28ms, total_loss 0.28769, dist_loss 0.00287, perc_loss 0.12010, dist_psnr 25.43441, pix_con_dist_loss 0.00399, pix_con_dist_psnr 20.99616, pix_con_perc_loss 0.12054, lat_con_loss 0.04020, avg_mag_z 44.97074, std_mag_z 0.25755, avg_r_NOISY 0.56641, std_r_NOISY 0.34570, x_std_decoder 1.07422, grad_norm 3.11506
+I20260320 01:13:19 __main__ train.py:932] epoch   69 | iter     399 [/781] | step 54289 [/58575]: lr 1.01e-06, loss 0.26559, time 478.53ms, data 0.25ms, total_loss 0.26559, dist_loss 0.00322, perc_loss 0.12564, dist_psnr 24.92014, pix_con_dist_loss 0.00322, pix_con_dist_psnr 21.91611, pix_con_perc_loss 0.09648, lat_con_loss 0.03702, avg_mag_z 44.92592, std_mag_z 0.28983, avg_r_NOISY 0.51562, std_r_NOISY 0.33496, x_std_decoder 1.07422, grad_norm 3.03484
+I20260320 01:14:08 __main__ train.py:932] epoch   69 | iter     499 [/781] | step 54389 [/58575]: lr 1.01e-06, loss 0.28531, time 473.69ms, data 0.12ms, total_loss 0.28531, dist_loss 0.00232, perc_loss 0.11903, dist_psnr 26.35165, pix_con_dist_loss 0.00435, pix_con_dist_psnr 20.74589, pix_con_perc_loss 0.11976, lat_con_loss 0.03986, avg_mag_z 44.96582, std_mag_z 0.38618, avg_r_NOISY 0.57422, std_r_NOISY 0.35938, x_std_decoder 1.07812, grad_norm 3.68495
+I20260320 01:14:57 __main__ train.py:932] epoch   69 | iter     599 [/781] | step 54489 [/58575]: lr 1.00e-06, loss 0.26551, time 480.64ms, data 0.12ms, total_loss 0.26551, dist_loss 0.00279, perc_loss 0.11349, dist_psnr 25.54180, pix_con_dist_loss 0.00362, pix_con_dist_psnr 21.39837, pix_con_perc_loss 0.10944, lat_con_loss 0.03616, avg_mag_z 45.08171, std_mag_z 0.38146, avg_r_NOISY 0.54102, std_r_NOISY 0.34180, x_std_decoder 1.07812, grad_norm 3.36522
+I20260320 01:15:47 __main__ train.py:932] epoch   69 | iter     699 [/781] | step 54589 [/58575]: lr 1.00e-06, loss 0.28508, time 480.61ms, data 0.11ms, total_loss 0.28508, dist_loss 0.00252, perc_loss 0.12056, dist_psnr 26.05308, pix_con_dist_loss 0.00439, pix_con_dist_psnr 20.57522, pix_con_perc_loss 0.11735, lat_con_loss 0.04026, avg_mag_z 45.01476, std_mag_z 0.29616, avg_r_NOISY 0.55664, std_r_NOISY 0.35352, x_std_decoder 1.07812, grad_norm 3.92269
+I20260320 01:16:26 sphere.utils utils.py:162] no ema_model to use
+I20260320 01:16:26 sphere.utils utils.py:102] grid saved to the image: /home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/_staging/a83-pilot/sphere-small-small-cifar-10-32px/vis/imgs_ep0069_ema=False_cfg=1.0-combo_steps=2_sched=False.png
+I20260320 01:16:27 sphere.utils utils.py:312] checkpoint saved to /home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/_staging/a83-pilot/sphere-small-small-cifar-10-32px/ckpt/ep0069.pth
+I20260320 01:16:27 __main__ train.py:932] epoch   70 | iter       0 [/781] | step 54671 [/58575]: lr 1.00e-06, loss 0.27906, time 576.74ms, data 39.86ms, total_loss 0.27906, dist_loss 0.00224, perc_loss 0.11788, dist_psnr 26.50412, pix_con_dist_loss 0.00349, pix_con_dist_psnr 21.56708, pix_con_perc_loss 0.11579, lat_con_loss 0.03966, avg_mag_z 44.96665, std_mag_z 0.23574, avg_r_NOISY 0.55859, std_r_NOISY 0.36133, x_std_decoder 1.07422, grad_norm 3.44235
+I20260320 01:17:15 __main__ train.py:932] epoch   70 | iter      99 [/781] | step 54770 [/58575]: lr 1.00e-06, loss 0.26707, time 486.20ms, data 0.11ms, total_loss 0.26707, dist_loss 0.00223, perc_loss 0.11071, dist_psnr 26.51897, pix_con_dist_loss 0.00400, pix_con_dist_psnr 20.98160, pix_con_perc_loss 0.11204, lat_con_loss 0.03809, avg_mag_z 45.01409, std_mag_z 0.36317, avg_r_NOISY 0.55273, std_r_NOISY 0.35547, x_std_decoder 1.07812, grad_norm 2.97695
+I20260320 01:18:03 __main__ train.py:932] epoch   70 | iter     199 [/781] | step 54870 [/58575]: lr 1.00e-06, loss 0.27862, time 474.56ms, data 0.23ms, total_loss 0.27862, dist_loss 0.00237, perc_loss 0.11141, dist_psnr 26.34146, pix_con_dist_loss 0.00354, pix_con_dist_psnr 21.51773, pix_con_perc_loss 0.12175, lat_con_loss 0.03955, avg_mag_z 44.97620, std_mag_z 0.35273, avg_r_NOISY 0.55859, std_r_NOISY 0.35352, x_std_decoder 1.07422, grad_norm 3.48776
+I20260320 01:18:50 __main__ train.py:932] epoch   70 | iter     299 [/781] | step 54970 [/58575]: lr 1.00e-06, loss 0.27775, time 475.64ms, data 0.23ms, total_loss 0.27775, dist_loss 0.00293, perc_loss 0.11903, dist_psnr 25.33521, pix_con_dist_loss 0.00364, pix_con_dist_psnr 21.38790, pix_con_perc_loss 0.11198, lat_con_loss 0.04017, avg_mag_z 44.98974, std_mag_z 0.27687, avg_r_NOISY 0.56445, std_r_NOISY 0.35059, x_std_decoder 1.07812, grad_norm 3.73392
+I20260320 01:19:37 __main__ train.py:932] epoch   70 | iter     399 [/781] | step 55070 [/58575]: lr 1.00e-06, loss 0.27532, time 462.64ms, data 0.10ms, total_loss 0.27532, dist_loss 0.00266, perc_loss 0.11416, dist_psnr 25.83442, pix_con_dist_loss 0.00380, pix_con_dist_psnr 21.19604, pix_con_perc_loss 0.11550, lat_con_loss 0.03919, avg_mag_z 45.01863, std_mag_z 0.31427, avg_r_NOISY 0.54492, std_r_NOISY 0.35840, x_std_decoder 1.07812, grad_norm 3.43970
+I20260320 01:20:24 __main__ train.py:932] epoch   70 | iter     499 [/781] | step 55170 [/58575]: lr 1.00e-06, loss 0.26444, time 485.53ms, data 0.11ms, total_loss 0.26444, dist_loss 0.00239, perc_loss 0.10889, dist_psnr 26.22694, pix_con_dist_loss 0.00380, pix_con_dist_psnr 21.19096, pix_con_perc_loss 0.10975, lat_con_loss 0.03962, avg_mag_z 44.95414, std_mag_z 0.24105, avg_r_NOISY 0.55469, std_r_NOISY 0.35547, x_std_decoder 1.07422, grad_norm 3.29476
+I20260320 01:21:13 __main__ train.py:932] epoch   70 | iter     599 [/781] | step 55270 [/58575]: lr 1.00e-06, loss 0.27301, time 501.18ms, data 0.11ms, total_loss 0.27301, dist_loss 0.00231, perc_loss 0.10367, dist_psnr 26.39423, pix_con_dist_loss 0.00443, pix_con_dist_psnr 20.58982, pix_con_perc_loss 0.12233, lat_con_loss 0.04026, avg_mag_z 45.08673, std_mag_z 0.32824, avg_r_NOISY 0.58398, std_r_NOISY 0.35840, x_std_decoder 1.07812, grad_norm 3.87574
+I20260320 01:22:02 __main__ train.py:932] epoch   70 | iter     699 [/781] | step 55370 [/58575]: lr 1.00e-06, loss 0.25474, time 508.68ms, data 0.24ms, total_loss 0.25474, dist_loss 0.00258, perc_loss 0.10722, dist_psnr 26.07350, pix_con_dist_loss 0.00361, pix_con_dist_psnr 21.45566, pix_con_perc_loss 0.10359, lat_con_loss 0.03774, avg_mag_z 45.00555, std_mag_z 0.33143, avg_r_NOISY 0.55664, std_r_NOISY 0.36328, x_std_decoder 1.07812, grad_norm 2.79095
+I20260320 01:22:42 __main__ train.py:932] epoch   71 | iter       0 [/781] | step 55452 [/58575]: lr 1.00e-06, loss 0.26457, time 606.14ms, data 43.77ms, total_loss 0.26457, dist_loss 0.00255, perc_loss 0.12394, dist_psnr 25.93709, pix_con_dist_loss 0.00287, pix_con_dist_psnr 22.44740, pix_con_perc_loss 0.09863, lat_con_loss 0.03659, avg_mag_z 44.99381, std_mag_z 0.29887, avg_r_NOISY 0.52930, std_r_NOISY 0.34082, x_std_decoder 1.07031, grad_norm 3.28040
+I20260320 01:23:32 __main__ train.py:932] epoch   71 | iter      99 [/781] | step 55551 [/58575]: lr 1.00e-06, loss 0.26113, time 488.46ms, data 0.11ms, total_loss 0.26113, dist_loss 0.00229, perc_loss 0.10406, dist_psnr 26.43079, pix_con_dist_loss 0.00429, pix_con_dist_psnr 20.66908, pix_con_perc_loss 0.11179, lat_con_loss 0.03871, avg_mag_z 45.02234, std_mag_z 0.30339, avg_r_NOISY 0.53516, std_r_NOISY 0.33301, x_std_decoder 1.07812, grad_norm 3.80170
+I20260320 01:24:19 __main__ train.py:932] epoch   71 | iter     199 [/781] | step 55651 [/58575]: lr 1.00e-06, loss 0.28059, time 460.70ms, data 0.11ms, total_loss 0.28059, dist_loss 0.00262, perc_loss 0.12291, dist_psnr 25.93418, pix_con_dist_loss 0.00381, pix_con_dist_psnr 21.20547, pix_con_perc_loss 0.11141, lat_con_loss 0.03984, avg_mag_z 44.97729, std_mag_z 0.26445, avg_r_NOISY 0.55273, std_r_NOISY 0.35742, x_std_decoder 1.07812, grad_norm 4.08878
+I20260320 01:25:08 __main__ train.py:932] epoch   71 | iter     299 [/781] | step 55751 [/58575]: lr 1.00e-06, loss 0.27138, time 496.53ms, data 0.11ms, total_loss 0.27138, dist_loss 0.00297, perc_loss 0.11100, dist_psnr 25.29134, pix_con_dist_loss 0.00455, pix_con_dist_psnr 20.43211, pix_con_perc_loss 0.11235, lat_con_loss 0.04051, avg_mag_z 44.96551, std_mag_z 0.30773, avg_r_NOISY 0.56641, std_r_NOISY 0.35645, x_std_decoder 1.07812, grad_norm 2.97315
+I20260320 01:25:57 __main__ train.py:932] epoch   71 | iter     399 [/781] | step 55851 [/58575]: lr 1.00e-06, loss 0.28833, time 475.39ms, data 0.12ms, total_loss 0.28833, dist_loss 0.00257, perc_loss 0.11384, dist_psnr 25.93362, pix_con_dist_loss 0.00518, pix_con_dist_psnr 19.86647, pix_con_perc_loss 0.12342, lat_con_loss 0.04332, avg_mag_z 45.00437, std_mag_z 0.33881, avg_r_NOISY 0.59961, std_r_NOISY 0.37109, x_std_decoder 1.07812, grad_norm 2.90430
+I20260320 01:26:45 __main__ train.py:932] epoch   71 | iter     499 [/781] | step 55951 [/58575]: lr 1.00e-06, loss 0.27014, time 469.60ms, data 0.22ms, total_loss 0.27014, dist_loss 0.00267, perc_loss 0.11500, dist_psnr 25.74374, pix_con_dist_loss 0.00378, pix_con_dist_psnr 21.21642, pix_con_perc_loss 0.11035, lat_con_loss 0.03835, avg_mag_z 45.05341, std_mag_z 0.30025, avg_r_NOISY 0.55469, std_r_NOISY 0.34863, x_std_decoder 1.07812, grad_norm 3.22849
+I20260320 01:27:34 __main__ train.py:932] epoch   71 | iter     599 [/781] | step 56051 [/58575]: lr 1.00e-06, loss 0.28510, time 491.23ms, data 0.11ms, total_loss 0.28510, dist_loss 0.00279, perc_loss 0.12013, dist_psnr 25.57283, pix_con_dist_loss 0.00407, pix_con_dist_psnr 20.89095, pix_con_perc_loss 0.11740, lat_con_loss 0.04070, avg_mag_z 45.01643, std_mag_z 0.33336, avg_r_NOISY 0.57031, std_r_NOISY 0.36230, x_std_decoder 1.07812, grad_norm 3.56549
+I20260320 01:28:23 __main__ train.py:932] epoch   71 | iter     699 [/781] | step 56151 [/58575]: lr 1.00e-06, loss 0.28250, time 486.35ms, data 0.12ms, total_loss 0.28250, dist_loss 0.00303, perc_loss 0.12582, dist_psnr 25.19364, pix_con_dist_loss 0.00475, pix_con_dist_psnr 20.24582, pix_con_perc_loss 0.10773, lat_con_loss 0.04117, avg_mag_z 45.09135, std_mag_z 0.33864, avg_r_NOISY 0.56055, std_r_NOISY 0.35645, x_std_decoder 1.07812, grad_norm 3.20250
+I20260320 01:29:01 __main__ train.py:932] epoch   72 | iter       0 [/781] | step 56233 [/58575]: lr 1.00e-06, loss 0.27480, time 603.11ms, data 50.45ms, total_loss 0.27480, dist_loss 0.00244, perc_loss 0.12371, dist_psnr 26.12415, pix_con_dist_loss 0.00347, pix_con_dist_psnr 21.66385, pix_con_perc_loss 0.10762, lat_con_loss 0.03756, avg_mag_z 44.99051, std_mag_z 0.33073, avg_r_NOISY 0.54883, std_r_NOISY 0.34277, x_std_decoder 1.07031, grad_norm 2.97255
+I20260320 01:29:49 __main__ train.py:932] epoch   72 | iter      99 [/781] | step 56332 [/58575]: lr 1.00e-06, loss 0.27182, time 471.69ms, data 0.24ms, total_loss 0.27182, dist_loss 0.00223, perc_loss 0.10832, dist_psnr 26.53181, pix_con_dist_loss 0.00427, pix_con_dist_psnr 20.69477, pix_con_perc_loss 0.11756, lat_con_loss 0.03944, avg_mag_z 45.04833, std_mag_z 0.34587, avg_r_NOISY 0.58008, std_r_NOISY 0.38281, x_std_decoder 1.07812, grad_norm 3.37446
+I20260320 01:30:36 __main__ train.py:932] epoch   72 | iter     199 [/781] | step 56432 [/58575]: lr 1.00e-06, loss 0.29235, time 469.73ms, data 0.11ms, total_loss 0.29235, dist_loss 0.00262, perc_loss 0.11913, dist_psnr 25.83322, pix_con_dist_loss 0.00399, pix_con_dist_psnr 20.97827, pix_con_perc_loss 0.12576, lat_con_loss 0.04085, avg_mag_z 44.99278, std_mag_z 0.33364, avg_r_NOISY 0.56445, std_r_NOISY 0.35156, x_std_decoder 1.07812, grad_norm 3.27058
+I20260320 01:31:24 __main__ train.py:932] epoch   72 | iter     299 [/781] | step 56532 [/58575]: lr 1.00e-06, loss 0.27428, time 481.14ms, data 0.25ms, total_loss 0.27428, dist_loss 0.00260, perc_loss 0.11827, dist_psnr 25.84645, pix_con_dist_loss 0.00367, pix_con_dist_psnr 21.34896, pix_con_perc_loss 0.11062, lat_con_loss 0.03911, avg_mag_z 45.03070, std_mag_z 0.36400, avg_r_NOISY 0.55273, std_r_NOISY 0.35938, x_std_decoder 1.07422, grad_norm 3.16385
+I20260320 01:32:13 __main__ train.py:932] epoch   72 | iter     399 [/781] | step 56632 [/58575]: lr 1.00e-06, loss 0.27607, time 478.80ms, data 0.22ms, total_loss 0.27607, dist_loss 0.00247, perc_loss 0.11641, dist_psnr 26.07031, pix_con_dist_loss 0.00354, pix_con_dist_psnr 21.50433, pix_con_perc_loss 0.11461, lat_con_loss 0.03904, avg_mag_z 44.91456, std_mag_z 0.31085, avg_r_NOISY 0.52539, std_r_NOISY 0.33691, x_std_decoder 1.07812, grad_norm 3.20136
+I20260320 01:33:00 __main__ train.py:932] epoch   72 | iter     499 [/781] | step 56732 [/58575]: lr 1.00e-06, loss 0.28587, time 469.42ms, data 0.12ms, total_loss 0.28587, dist_loss 0.00223, perc_loss 0.11821, dist_psnr 26.52414, pix_con_dist_loss 0.00410, pix_con_dist_psnr 20.87234, pix_con_perc_loss 0.12055, lat_con_loss 0.04078, avg_mag_z 45.01836, std_mag_z 0.31751, avg_r_NOISY 0.55469, std_r_NOISY 0.34863, x_std_decoder 1.07422, grad_norm 2.90770
+I20260320 01:33:46 __main__ train.py:932] epoch   72 | iter     599 [/781] | step 56832 [/58575]: lr 1.00e-06, loss 0.25584, time 459.68ms, data 0.10ms, total_loss 0.25584, dist_loss 0.00238, perc_loss 0.10804, dist_psnr 26.23550, pix_con_dist_loss 0.00346, pix_con_dist_psnr 21.61693, pix_con_perc_loss 0.10455, lat_con_loss 0.03741, avg_mag_z 44.93866, std_mag_z 0.30516, avg_r_NOISY 0.54102, std_r_NOISY 0.35254, x_std_decoder 1.07812, grad_norm 2.77120
+I20260320 01:34:34 __main__ train.py:932] epoch   72 | iter     699 [/781] | step 56932 [/58575]: lr 1.00e-06, loss 0.27911, time 491.76ms, data 0.13ms, total_loss 0.27911, dist_loss 0.00247, perc_loss 0.12310, dist_psnr 26.08029, pix_con_dist_loss 0.00350, pix_con_dist_psnr 21.57883, pix_con_perc_loss 0.10981, lat_con_loss 0.04022, avg_mag_z 44.93697, std_mag_z 0.32191, avg_r_NOISY 0.53711, std_r_NOISY 0.34668, x_std_decoder 1.07422, grad_norm 3.65216
+I20260320 01:35:14 __main__ train.py:932] epoch   73 | iter       0 [/781] | step 57014 [/58575]: lr 1.00e-06, loss 0.26915, time 543.84ms, data 28.72ms, total_loss 0.26915, dist_loss 0.00238, perc_loss 0.11134, dist_psnr 26.23003, pix_con_dist_loss 0.00410, pix_con_dist_psnr 20.86874, pix_con_perc_loss 0.11391, lat_con_loss 0.03741, avg_mag_z 45.00432, std_mag_z 0.36714, avg_r_NOISY 0.56836, std_r_NOISY 0.36035, x_std_decoder 1.07812, grad_norm 3.30745
+I20260320 01:36:02 __main__ train.py:932] epoch   73 | iter      99 [/781] | step 57113 [/58575]: lr 1.00e-06, loss 0.28820, time 473.44ms, data 0.24ms, total_loss 0.28820, dist_loss 0.00284, perc_loss 0.12734, dist_psnr 25.47008, pix_con_dist_loss 0.00408, pix_con_dist_psnr 20.99006, pix_con_perc_loss 0.11277, lat_con_loss 0.04116, avg_mag_z 44.96736, std_mag_z 0.30820, avg_r_NOISY 0.57031, std_r_NOISY 0.34863, x_std_decoder 1.07812, grad_norm 3.31360
+I20260320 01:36:50 __main__ train.py:932] epoch   73 | iter     199 [/781] | step 57213 [/58575]: lr 1.00e-06, loss 0.26808, time 469.95ms, data 0.10ms, total_loss 0.26808, dist_loss 0.00238, perc_loss 0.11493, dist_psnr 26.24819, pix_con_dist_loss 0.00384, pix_con_dist_psnr 21.17819, pix_con_perc_loss 0.10908, lat_con_loss 0.03786, avg_mag_z 44.92673, std_mag_z 0.30291, avg_r_NOISY 0.53516, std_r_NOISY 0.33203, x_std_decoder 1.07812, grad_norm 3.44289
+I20260320 01:37:38 __main__ train.py:932] epoch   73 | iter     299 [/781] | step 57313 [/58575]: lr 1.00e-06, loss 0.27862, time 482.07ms, data 0.12ms, total_loss 0.27862, dist_loss 0.00258, perc_loss 0.11994, dist_psnr 25.89007, pix_con_dist_loss 0.00357, pix_con_dist_psnr 21.45925, pix_con_perc_loss 0.11261, lat_con_loss 0.03991, avg_mag_z 44.99391, std_mag_z 0.32359, avg_r_NOISY 0.56250, std_r_NOISY 0.36133, x_std_decoder 1.07422, grad_norm 3.52128
+I20260320 01:38:25 __main__ train.py:932] epoch   73 | iter     399 [/781] | step 57413 [/58575]: lr 1.00e-06, loss 0.26559, time 474.25ms, data 0.10ms, total_loss 0.26559, dist_loss 0.00231, perc_loss 0.12134, dist_psnr 26.37816, pix_con_dist_loss 0.00340, pix_con_dist_psnr 21.67383, pix_con_perc_loss 0.10160, lat_con_loss 0.03694, avg_mag_z 44.97579, std_mag_z 0.28836, avg_r_NOISY 0.54102, std_r_NOISY 0.33398, x_std_decoder 1.07422, grad_norm 2.84253
+I20260320 01:39:13 __main__ train.py:932] epoch   73 | iter     499 [/781] | step 57513 [/58575]: lr 1.00e-06, loss 0.27540, time 470.74ms, data 0.12ms, total_loss 0.27540, dist_loss 0.00263, perc_loss 0.12082, dist_psnr 25.79984, pix_con_dist_loss 0.00372, pix_con_dist_psnr 21.37853, pix_con_perc_loss 0.10889, lat_con_loss 0.03934, avg_mag_z 44.94809, std_mag_z 0.31242, avg_r_NOISY 0.55176, std_r_NOISY 0.34277, x_std_decoder 1.07812, grad_norm 3.89700
+I20260320 01:40:01 __main__ train.py:932] epoch   73 | iter     599 [/781] | step 57613 [/58575]: lr 1.00e-06, loss 0.26924, time 482.33ms, data 0.10ms, total_loss 0.26924, dist_loss 0.00306, perc_loss 0.11391, dist_psnr 25.15215, pix_con_dist_loss 0.00402, pix_con_dist_psnr 20.95547, pix_con_perc_loss 0.10803, lat_con_loss 0.04022, avg_mag_z 44.97980, std_mag_z 0.28397, avg_r_NOISY 0.56250, std_r_NOISY 0.33984, x_std_decoder 1.07422, grad_norm 3.17560
+I20260320 01:40:49 __main__ train.py:932] epoch   73 | iter     699 [/781] | step 57713 [/58575]: lr 1.00e-06, loss 0.27225, time 484.19ms, data 0.10ms, total_loss 0.27225, dist_loss 0.00245, perc_loss 0.11348, dist_psnr 26.15139, pix_con_dist_loss 0.00454, pix_con_dist_psnr 20.42510, pix_con_perc_loss 0.11125, lat_con_loss 0.04053, avg_mag_z 44.95634, std_mag_z 0.26468, avg_r_NOISY 0.57617, std_r_NOISY 0.36523, x_std_decoder 1.07422, grad_norm 2.74897
+I20260320 01:41:30 __main__ train.py:932] epoch   74 | iter       0 [/781] | step 57795 [/58575]: lr 1.00e-06, loss 0.26970, time 556.83ms, data 35.04ms, total_loss 0.26970, dist_loss 0.00244, perc_loss 0.11073, dist_psnr 26.12650, pix_con_dist_loss 0.00470, pix_con_dist_psnr 20.27262, pix_con_perc_loss 0.11349, lat_con_loss 0.03833, avg_mag_z 44.96622, std_mag_z 0.40947, avg_r_NOISY 0.55859, std_r_NOISY 0.35254, x_std_decoder 1.07812, grad_norm 2.62336
+I20260320 01:42:17 __main__ train.py:932] epoch   74 | iter      99 [/781] | step 57894 [/58575]: lr 1.00e-06, loss 0.27564, time 515.50ms, data 0.12ms, total_loss 0.27564, dist_loss 0.00223, perc_loss 0.11205, dist_psnr 26.83709, pix_con_dist_loss 0.00393, pix_con_dist_psnr 21.06182, pix_con_perc_loss 0.11785, lat_con_loss 0.03959, avg_mag_z 45.04498, std_mag_z 0.33751, avg_r_NOISY 0.59180, std_r_NOISY 0.36523, x_std_decoder 1.07422, grad_norm 3.14070
+I20260320 01:43:06 __main__ train.py:932] epoch   74 | iter     199 [/781] | step 57994 [/58575]: lr 1.00e-06, loss 0.28217, time 475.22ms, data 0.21ms, total_loss 0.28217, dist_loss 0.00291, perc_loss 0.12237, dist_psnr 25.41298, pix_con_dist_loss 0.00398, pix_con_dist_psnr 21.00544, pix_con_perc_loss 0.11418, lat_con_loss 0.03873, avg_mag_z 45.02305, std_mag_z 0.26504, avg_r_NOISY 0.52930, std_r_NOISY 0.34180, x_std_decoder 1.07812, grad_norm 2.97983
+I20260320 01:43:53 __main__ train.py:932] epoch   74 | iter     299 [/781] | step 58094 [/58575]: lr 1.00e-06, loss 0.28281, time 479.67ms, data 0.23ms, total_loss 0.28281, dist_loss 0.00252, perc_loss 0.12206, dist_psnr 25.99401, pix_con_dist_loss 0.00359, pix_con_dist_psnr 21.47017, pix_con_perc_loss 0.11618, lat_con_loss 0.03847, avg_mag_z 44.97483, std_mag_z 0.33968, avg_r_NOISY 0.56445, std_r_NOISY 0.35547, x_std_decoder 1.07812, grad_norm 3.62951
+I20260320 01:44:40 __main__ train.py:932] epoch   74 | iter     399 [/781] | step 58194 [/58575]: lr 1.00e-06, loss 0.28274, time 468.30ms, data 0.09ms, total_loss 0.28274, dist_loss 0.00283, perc_loss 0.12420, dist_psnr 25.72294, pix_con_dist_loss 0.00357, pix_con_dist_psnr 21.46317, pix_con_perc_loss 0.11195, lat_con_loss 0.04019, avg_mag_z 45.01297, std_mag_z 0.33835, avg_r_NOISY 0.57422, std_r_NOISY 0.35547, x_std_decoder 1.07422, grad_norm 3.48580
+I20260320 01:45:27 __main__ train.py:932] epoch   74 | iter     499 [/781] | step 58294 [/58575]: lr 1.00e-06, loss 0.26699, time 471.92ms, data 0.12ms, total_loss 0.26699, dist_loss 0.00242, perc_loss 0.10938, dist_psnr 26.16941, pix_con_dist_loss 0.00406, pix_con_dist_psnr 20.90538, pix_con_perc_loss 0.11292, lat_con_loss 0.03821, avg_mag_z 44.99280, std_mag_z 0.34294, avg_r_NOISY 0.57617, std_r_NOISY 0.38379, x_std_decoder 1.07422, grad_norm 3.16313
+I20260320 01:46:15 __main__ train.py:932] epoch   74 | iter     599 [/781] | step 58394 [/58575]: lr 1.00e-06, loss 0.27592, time 477.24ms, data 0.23ms, total_loss 0.27592, dist_loss 0.00258, perc_loss 0.12911, dist_psnr 25.90782, pix_con_dist_loss 0.00312, pix_con_dist_psnr 22.06757, pix_con_perc_loss 0.10400, lat_con_loss 0.03711, avg_mag_z 45.01209, std_mag_z 0.36084, avg_r_NOISY 0.54492, std_r_NOISY 0.35156, x_std_decoder 1.07422, grad_norm 3.26007
+I20260320 01:47:02 __main__ train.py:932] epoch   74 | iter     699 [/781] | step 58494 [/58575]: lr 1.00e-06, loss 0.25810, time 476.20ms, data 0.12ms, total_loss 0.25810, dist_loss 0.00254, perc_loss 0.10605, dist_psnr 26.07167, pix_con_dist_loss 0.00365, pix_con_dist_psnr 21.37991, pix_con_perc_loss 0.10851, lat_con_loss 0.03735, avg_mag_z 45.03719, std_mag_z 0.37771, avg_r_NOISY 0.55273, std_r_NOISY 0.34375, x_std_decoder 1.07422, grad_norm 3.54908
+I20260320 01:47:41 sphere.utils utils.py:312] checkpoint saved to /home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/_staging/a83-pilot/sphere-small-small-cifar-10-32px/ckpt/ep0074.pth
+I20260320 01:48:11 sphere.utils utils.py:102] grid saved to the image: /home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/_staging/a83-pilot/sphere-small-small-cifar-10-32px/research/light_eval/ep0074_step0058575_fwd01/snapshot.png
+I20260320 01:48:19 sphere.utils utils.py:102] grid saved to the image: /home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/_staging/a83-pilot/sphere-small-small-cifar-10-32px/research/light_eval/ep0074_step0058575_fwd04/snapshot.png
+I20260320 01:48:19 research.train_dynamics train_dynamics.py:731] saved training dynamics payload to /home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/_staging/a83-pilot/sphere-small-small-cifar-10-32px/research/training_dynamics/ep0074_step0058575.json
+I20260320 01:48:19 __main__ train.py:1087] saved training dynamics payload: /home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/_staging/a83-pilot/sphere-small-small-cifar-10-32px/research/training_dynamics/ep0074_step0058575.json
+I20260320 01:48:21 sphere.utils utils.py:312] checkpoint saved to /home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/_staging/a83-pilot/sphere-small-small-cifar-10-32px/ckpt/ep0074.pth

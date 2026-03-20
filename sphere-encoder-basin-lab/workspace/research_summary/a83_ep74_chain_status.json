@@ -1,0 +1,28 @@
+{
+  "focus_config": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/configs/canonical_probe_focus.yaml",
+  "sphere_repo": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder",
+  "job_dir": "sphere-small-small-cifar-10-32px-a83-pilot",
+  "target_ckpt_epoch": 74,
+  "train_gpu_group": "0,1",
+  "train_ckpt_save_interval": 5,
+  "wandb_name": "sphere-small-small-cifar-10-32px-a83-pilot-ep74-auto-chain",
+  "dry_run": false,
+  "steps": [
+    {
+      "name": "focus_canonical_probe",
+      "state": "completed"
+    },
+    {
+      "name": "focus_canonical_master",
+      "state": "completed"
+    },
+    {
+      "name": "a83_followup_ep74",
+      "state": "completed"
+    }
+  ],
+  "state": "completed",
+  "current_step": null,
+  "final_canonical_master": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/research_summary/canonical_master.csv",
+  "final_compare_csv": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/research_summary/sphere-small-small-cifar-10-32px-a83-pilot-ep0074-followup_compare.csv"
+}
