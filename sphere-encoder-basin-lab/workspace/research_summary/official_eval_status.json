@@ -1,0 +1,18 @@
+{
+  "config": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/configs/official_eval_keypoints.yaml",
+  "sphere_repo": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder",
+  "dry_run": false,
+  "steps": [
+    {
+      "name": "official_eval_matrix",
+      "state": "completed"
+    },
+    {
+      "name": "official_eval_master",
+      "state": "completed"
+    }
+  ],
+  "state": "completed",
+  "current_step": null,
+  "final_master": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/research_summary/official_eval_master.csv"
+}

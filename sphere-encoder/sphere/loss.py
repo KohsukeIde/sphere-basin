@@ -159,6 +159,7 @@ class ReconstructionLoss(nn.Module):
         perc_loss = self.perceptual_weight * perc_loss.mean(dim=dim).mean()
 
         # calc latent bootstrap loss
+        lat_con_loss = torch.zeros((), device=device)
         if (
             self.lat_con_weight > 0
             and noisy_latent is not None

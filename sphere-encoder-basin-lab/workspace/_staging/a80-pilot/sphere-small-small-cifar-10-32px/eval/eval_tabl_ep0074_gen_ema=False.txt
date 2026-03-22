@@ -1,0 +1,12 @@
+
+ckpt: ep0074, time: 2026-03-20 15:26:17
+-----
+| task_mode   | use_ema   | seed_sampling   | use_sampling_scheduler   | cache_sampling_noise   | fid_stats_used_from   |   image_size |   num_imgs |     fid |   isc_mean |   isc_std |   forward_steps |   cfg | cfg_position   |
+|:------------|:----------|:----------------|:-------------------------|:-----------------------|:----------------------|-------------:|-----------:|--------:|-----------:|----------:|----------------:|------:|:---------------|
+| generation  | False     | False           | False                    | True                   | extr                  |           32 |      50000 | 19.9076 |    7.88513 | 0.0714122 |               4 |     1 | combo          |
+
+ckpt: ep0074, time: 2026-03-20 15:41:39
+-----
+| task_mode   | use_ema   | seed_sampling   | use_sampling_scheduler   | cache_sampling_noise   | fid_stats_used_from   |   image_size |   num_imgs |     fid |   isc_mean |   isc_std |   forward_steps |   cfg | cfg_position   |
+|:------------|:----------|:----------------|:-------------------------|:-----------------------|:----------------------|-------------:|-----------:|--------:|-----------:|----------:|----------------:|------:|:---------------|
+| generation  | False     | False           | False                    | False                  | extr                  |           32 |      50000 | 30.9595 |    7.71871 | 0.0649297 |               4 |     1 | combo          |

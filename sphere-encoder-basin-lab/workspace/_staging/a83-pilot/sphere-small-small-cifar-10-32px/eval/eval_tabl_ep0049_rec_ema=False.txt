@@ -1,0 +1,6 @@
+
+ckpt: ep0049, time: 2026-03-20 15:27:43
+-----
+| task_mode      | use_ema   | seed_sampling   | use_sampling_scheduler   | cache_sampling_noise   | fid_stats_used_from   |   image_size |   num_imgs |     fid |   isc_mean |   isc_std |   forward_steps |   cfg | cfg_position   |
+|:---------------|:----------|:----------------|:-------------------------|:-----------------------|:----------------------|-------------:|-----------:|--------:|-----------:|----------:|----------------:|------:|:---------------|
+| reconstruction | False     | False           | False                    | False                  | extr                  |           32 |      50000 | 0.82091 |    10.9344 |  0.161067 |               1 |     1 | combo          |

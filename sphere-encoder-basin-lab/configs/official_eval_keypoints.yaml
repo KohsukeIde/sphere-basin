@@ -1,0 +1,60 @@
+experiment:
+  name: official_eval_keypoints
+  dev_dir: workspace
+  dist_mode: local
+  gpu_groups:
+    - [0, 1]
+
+eval:
+  forward_steps: [4]
+  report_fid: [rfid, gfid]
+  use_cfg: false
+  cfg_min: 1.0
+  cfg_max: 1.0
+  cfg_position: combo
+  rm_folder_after_eval: true
+  num_eval_samples: 50000
+  batch_size_per_rank: 25
+  use_ema_model: false
+
+tasks:
+  - job_dir: sphere-small-small-cifar-10-32px-a80-pilot
+    ckpt_fname: ep0049.pth
+    regime_name: shared-fixed
+    cache_sampling_noise: true
+    use_sampling_scheduler: false
+  - job_dir: sphere-small-small-cifar-10-32px-a80-pilot
+    ckpt_fname: ep0074.pth
+    regime_name: shared-fixed
+    cache_sampling_noise: true
+    use_sampling_scheduler: false
+  - job_dir: sphere-small-small-cifar-10-32px-a83-pilot
+    ckpt_fname: ep0049.pth
+    regime_name: shared-fixed
+    cache_sampling_noise: true
+    use_sampling_scheduler: false
+  - job_dir: sphere-small-small-cifar-10-32px-a83-pilot
+    ckpt_fname: ep0074.pth
+    regime_name: shared-fixed
+    cache_sampling_noise: true
+    use_sampling_scheduler: false
+  - job_dir: sphere-small-small-cifar-10-32px-a85-pilot
+    ckpt_fname: ep0024.pth
+    regime_name: shared-fixed
+    cache_sampling_noise: true
+    use_sampling_scheduler: false
+  - job_dir: sphere-small-small-cifar-10-32px-a80-pilot
+    ckpt_fname: ep0074.pth
+    regime_name: independent-fixed
+    cache_sampling_noise: false
+    use_sampling_scheduler: false
+  - job_dir: sphere-small-small-cifar-10-32px-a83-pilot
+    ckpt_fname: ep0074.pth
+    regime_name: independent-fixed
+    cache_sampling_noise: false
+    use_sampling_scheduler: false
+  - job_dir: sphere-small-small-cifar-10-32px-a85-pilot
+    ckpt_fname: ep0024.pth
+    regime_name: independent-fixed
+    cache_sampling_noise: false
+    use_sampling_scheduler: false

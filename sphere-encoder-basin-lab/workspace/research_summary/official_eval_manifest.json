@@ -1,0 +1,80 @@
+{
+  "config_path": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/configs/official_eval_keypoints.yaml",
+  "sphere_repo": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder",
+  "workspace_root": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace",
+  "task_count": 8,
+  "results": [
+    {
+      "job_dir": "sphere-small-small-cifar-10-32px-a80-pilot",
+      "ckpt_epoch": "ep0049",
+      "ckpt_fname": "ep0049.pth",
+      "regime_name": "shared-fixed",
+      "cache_sampling_noise": true,
+      "use_sampling_scheduler": false,
+      "state": "completed"
+    },
+    {
+      "job_dir": "sphere-small-small-cifar-10-32px-a80-pilot",
+      "ckpt_epoch": "ep0074",
+      "ckpt_fname": "ep0074.pth",
+      "regime_name": "shared-fixed",
+      "cache_sampling_noise": true,
+      "use_sampling_scheduler": false,
+      "state": "completed"
+    },
+    {
+      "job_dir": "sphere-small-small-cifar-10-32px-a83-pilot",
+      "ckpt_epoch": "ep0049",
+      "ckpt_fname": "ep0049.pth",
+      "regime_name": "shared-fixed",
+      "cache_sampling_noise": true,
+      "use_sampling_scheduler": false,
+      "state": "completed"
+    },
+    {
+      "job_dir": "sphere-small-small-cifar-10-32px-a83-pilot",
+      "ckpt_epoch": "ep0074",
+      "ckpt_fname": "ep0074.pth",
+      "regime_name": "shared-fixed",
+      "cache_sampling_noise": true,
+      "use_sampling_scheduler": false,
+      "state": "completed"
+    },
+    {
+      "job_dir": "sphere-small-small-cifar-10-32px-a85-pilot",
+      "ckpt_epoch": "ep0024",
+      "ckpt_fname": "ep0024.pth",
+      "regime_name": "shared-fixed",
+      "cache_sampling_noise": true,
+      "use_sampling_scheduler": false,
+      "state": "completed"
+    },
+    {
+      "job_dir": "sphere-small-small-cifar-10-32px-a80-pilot",
+      "ckpt_epoch": "ep0074",
+      "ckpt_fname": "ep0074.pth",
+      "regime_name": "independent-fixed",
+      "cache_sampling_noise": false,
+      "use_sampling_scheduler": false,
+      "state": "completed"
+    },
+    {
+      "job_dir": "sphere-small-small-cifar-10-32px-a83-pilot",
+      "ckpt_epoch": "ep0074",
+      "ckpt_fname": "ep0074.pth",
+      "regime_name": "independent-fixed",
+      "cache_sampling_noise": false,
+      "use_sampling_scheduler": false,
+      "state": "completed"
+    },
+    {
+      "job_dir": "sphere-small-small-cifar-10-32px-a85-pilot",
+      "ckpt_epoch": "ep0024",
+      "ckpt_fname": "ep0024.pth",
+      "regime_name": "independent-fixed",
+      "cache_sampling_noise": false,
+      "use_sampling_scheduler": false,
+      "state": "completed"
+    }
+  ]
+}

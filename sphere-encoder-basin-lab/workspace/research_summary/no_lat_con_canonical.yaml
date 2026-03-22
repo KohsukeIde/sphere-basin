@@ -1,0 +1,61 @@
+experiment:
+  name: no_lat_con_canonical
+  dev_dir: workspace
+  dist_mode: local
+  gpu_groups:
+  - - 0
+  - - 1
+probe:
+  cfg: 1.0
+  cfg_position: combo
+  seed: 0
+  taus_deg:
+  - 5.0
+  - 10.0
+  - 20.0
+  - 30.0
+  - 45.0
+  - 60.0
+  forward_steps:
+  - 1
+  - 4
+  num_prior_samples: 4096
+  num_data_samples: 4096
+  batch_size_per_rank: 64
+  contraction_noise_scalers:
+  - 0.25
+  - 0.5
+  - 0.75
+  - 1.0
+  num_workers: 4
+  use_ema_model: false
+  regimes:
+  - name: independent-fixed
+    cache_sampling_noise: false
+    use_sampling_scheduler: false
+  - name: shared-fixed
+    cache_sampling_noise: true
+    use_sampling_scheduler: false
+master:
+  contraction_noise_scaler: 1.0
+  phase_ckpt_epoch: ep0074
+  phase_regime_name: shared-fixed
+  phase_forward_steps: 4
+  phase_tau_deg: 60.0
+jobs:
+- job_dir: sphere-small-small-cifar-10-32px-a80-pilot
+  checkpoints:
+  - ep0024
+  - ep0074
+- job_dir: sphere-small-small-cifar-10-32px-a83-pilot
+  checkpoints:
+  - ep0024
+  - ep0074
+- job_dir: sphere-small-small-cifar-10-32px-a80-no-lat-con-causal
+  checkpoints:
+  - ep0024
+  - ep0074
+- job_dir: sphere-small-small-cifar-10-32px-a83-no-lat-con-causal
+  checkpoints:
+  - ep0024
+  - ep0074
