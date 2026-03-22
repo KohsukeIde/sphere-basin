@@ -90,6 +90,7 @@ parser.add_argument(
         "flowers-102",
         "animal-faces",
         "imagenet",
+        "imagenet-100",
     ],
 )
 parser.add_argument("--image_size", type=int, default=256)
@@ -366,6 +367,7 @@ def main(args):
         "cifar-10": 10,
         "cifar-100": 100,
         "imagenet": 1000,
+        "imagenet-100": 100,
     }[args.dataset_name]
 
     if args.dataset_name == "imagenet":
@@ -422,6 +424,9 @@ def main(args):
         args.patch_size = 16
     elif args.image_size in [512]:
         args.patch_size = 32
+    elif args.image_size % 16 == 0:
+        # Keep the same 16x16 low-resolution token grid used by the built-in sizes.
+        args.patch_size = args.image_size // 16
 
     if args.latent_resolution == "low":
         args.patch_size = args.patch_size // 1

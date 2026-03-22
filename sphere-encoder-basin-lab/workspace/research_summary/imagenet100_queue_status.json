@@ -1,0 +1,17 @@
+{
+  "wait_status": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/research_summary/no_lat_con_status.json",
+  "cwd": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab",
+  "cmd": [
+    "./.venv/bin/python",
+    "-m",
+    "sphere_basin.unattended_imagenet100_second_axis",
+    "--config",
+    "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/configs/imagenet100_second_axis.yaml",
+    "--sphere-repo",
+    "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder"
+  ],
+  "poll_seconds": 60.0,
+  "state": "waiting",
+  "upstream_state": "running",
+  "upstream_current_step": "train_no_lat_con"
+}

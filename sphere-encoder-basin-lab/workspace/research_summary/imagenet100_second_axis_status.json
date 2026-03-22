@@ -1,0 +1,32 @@
+{
+  "config": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/configs/imagenet100_second_axis.yaml",
+  "sphere_repo": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder",
+  "dry_run": true,
+  "skip_fid_stats": true,
+  "steps": [
+    {
+      "name": "prepare_dataset",
+      "state": "completed"
+    },
+    {
+      "name": "train_second_axis",
+      "state": "completed"
+    },
+    {
+      "name": "canonical_probe",
+      "state": "completed"
+    },
+    {
+      "name": "official_eval",
+      "state": "completed"
+    }
+  ],
+  "state": "completed",
+  "current_step": null,
+  "trained_jobs": [
+    "sphere-small-small-imagenet-100-160px-a83-second-axis",
+    "sphere-small-small-imagenet-100-160px-a85-second-axis"
+  ],
+  "canonical_config": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/research_summary/imagenet100_second_axis_canonical.yaml",
+  "official_eval_config": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/research_summary/imagenet100_second_axis_official_eval.yaml"
+}

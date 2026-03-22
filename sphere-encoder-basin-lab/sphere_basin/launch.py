@@ -469,6 +469,7 @@ def _run_eval(
     dist_mode: str,
     forward_steps: list[int],
     report_fid: list[str],
+    fid_stats_used_from: str | None,
     use_cfg: bool,
     cfg_min: float,
     cfg_max: float,
@@ -494,6 +495,11 @@ def _run_eval(
             *[str(x) for x in forward_steps],
             '--report_fid',
             *report_fid,
+            *(
+                []
+                if fid_stats_used_from is None
+                else ['--fid_stats_used_from', fid_stats_used_from]
+            ),
             '--use_cfg',
             _bool_to_str(use_cfg),
             '--cfg_min',
@@ -730,6 +736,7 @@ def cmd_official_eval(args: argparse.Namespace) -> None:
         dist_mode=args.dist_mode,
         forward_steps=args.forward_steps,
         report_fid=args.report_fid,
+        fid_stats_used_from=args.fid_stats_used_from,
         use_cfg=args.use_cfg,
         cfg_min=args.cfg_min,
         cfg_max=args.cfg_max,
@@ -837,6 +844,7 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument('--gpu-group', type=str, default=None)
     p.add_argument('--forward-steps', type=int, nargs='+', default=[1, 4])
     p.add_argument('--report-fid', type=str, nargs='+', default=['rfid', 'gfid'])
+    p.add_argument('--fid-stats-used-from', type=str, default=None)
     p.add_argument('--use-cfg', action='store_true')
     p.add_argument('--cfg-min', type=float, default=1.0)
     p.add_argument('--cfg-max', type=float, default=1.0)

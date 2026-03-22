@@ -124,13 +124,14 @@ def _run_task(
         if done:
             return _task_status(task, state='skipped', note='existing eval rows')
 
-    _run_eval(
+        _run_eval(
         sphere_repo=sphere_repo,
         job_dir=task['job_dir'],
         dev_dir=dev_dir,
         dist_mode=dist_mode,
         forward_steps=forward_steps,
         report_fid=list(eval_cfg.get('report_fid', ['rfid', 'gfid'])),
+        fid_stats_used_from=eval_cfg.get('fid_stats_used_from'),
         use_cfg=bool(eval_cfg.get('use_cfg', False)),
         cfg_min=float(eval_cfg.get('cfg_min', 1.0)),
         cfg_max=float(eval_cfg.get('cfg_max', 1.0)),

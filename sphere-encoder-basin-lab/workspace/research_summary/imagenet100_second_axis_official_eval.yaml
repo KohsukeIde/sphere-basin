@@ -1,0 +1,32 @@
+experiment:
+  name: imagenet100_second_axis_official_eval
+  dev_dir: workspace
+  dist_mode: local
+  gpu_groups:
+  - - 0
+    - 1
+eval:
+  forward_steps:
+  - 4
+  report_fid:
+  - gfid
+  fid_stats_used_from: extr
+  use_cfg: false
+  cfg_min: 1.0
+  cfg_max: 1.0
+  cfg_position: combo
+  rm_folder_after_eval: true
+  num_eval_samples: 10000
+  batch_size_per_rank: 8
+  use_ema_model: false
+tasks:
+- job_dir: sphere-small-small-imagenet-100-160px-a83-second-axis
+  ckpt_fname: ep0024.pth
+  regime_name: shared-fixed
+  cache_sampling_noise: true
+  use_sampling_scheduler: false
+- job_dir: sphere-small-small-imagenet-100-160px-a85-second-axis
+  ckpt_fname: ep0024.pth
+  regime_name: shared-fixed
+  cache_sampling_noise: true
+  use_sampling_scheduler: false

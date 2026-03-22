@@ -22,3 +22,6 @@ workspace/_staging/**/*.jpeg
 
 # Never commit datasets
 workspace/datasets/
+
+# FID refs: symlinks to local ImageNet (machine-specific)
+workspace/fid_refs/
