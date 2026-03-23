@@ -4,7 +4,7 @@
     "data_dir": "datasets",
     "log_interval": 100,
     "vis_interval": 10,
-    "ckpt_save_interval": 25,
+    "ckpt_save_interval": 5,
     "class_of_interest": null,
     "forward_steps": 2,
     "cfg_position": "combo",

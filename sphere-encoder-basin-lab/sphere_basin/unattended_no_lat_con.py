@@ -50,6 +50,7 @@ def _build_train_specs(cfg: dict[str, Any], workspace_root: Path) -> tuple[list[
         'dist_mode': experiment.get('dist_mode', 'local'),
         'skip_existing': bool(experiment.get('skip_existing', True)),
         'gpu_groups': _normalize_gpu_groups(experiment.get('gpu_groups')),
+        'retry_attempts': int(experiment.get('retry_attempts', 0)),
     }
     return specs, meta
 
@@ -74,7 +75,7 @@ def _build_canonical_cfg(
             'forward_steps': [1, 4],
             'num_prior_samples': 4096,
             'num_data_samples': 4096,
-            'batch_size_per_rank': 64,
+            'batch_size_per_rank': 32,
             'contraction_noise_scalers': [0.25, 0.5, 0.75, 1.0],
             'num_workers': 4,
             'use_ema_model': False,
@@ -272,6 +273,7 @@ def main() -> None:
             skip_existing=meta['skip_existing'],
             dry_run=args.dry_run,
             gpu_groups=meta['gpu_groups'],
+            retry_attempts=meta['retry_attempts'],
         )
         status['steps'][-1]['state'] = 'completed'
         status['trained_jobs'] = jobs

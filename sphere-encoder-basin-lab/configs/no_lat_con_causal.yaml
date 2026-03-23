@@ -4,6 +4,7 @@ experiment:
   dev_dir: workspace
   tag: causal
   skip_existing: true
+  retry_attempts: 3
   gpu_groups:
     - [0, 1]
 
@@ -20,7 +21,7 @@ train:
   affine_latent_mlp_mixer: true
   pixel_head_type: conv
   compile_model: false
-  ckpt_save_interval: 25
+  ckpt_save_interval: 5
   vis_interval: 10
   out_dir: experiments
   lat_con_loss_weight: 0.0

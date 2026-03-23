@@ -7,6 +7,7 @@ import shlex
 import socket
 import subprocess
 import sys
+import time
 from concurrent.futures import FIRST_COMPLETED, ThreadPoolExecutor, wait
 from pathlib import Path
 from typing import Any
@@ -231,6 +232,7 @@ def _execute_train_spec(
     skip_existing: bool,
     dry_run: bool,
     gpu_group: str | None,
+    retry_attempts: int,
 ) -> str:
     target_job = spec['target_job']
     if skip_existing and spec['target_path'].exists():
@@ -238,17 +240,28 @@ def _execute_train_spec(
         return target_job
 
     train_args = dict(spec['train_args'])
-    _run(
-        _build_repo_cmd(
-            entry_script='train.py',
-            script_args=_kv_args(train_args),
-            dist_mode=dist_mode,
-            gpu_group=gpu_group,
-        ),
-        cwd=sphere_repo,
-        dry_run=dry_run,
-        gpu_group=gpu_group,
-    )
+    max_attempts = max(1, retry_attempts + 1)
+    for attempt in range(1, max_attempts + 1):
+        try:
+            _run(
+                _build_repo_cmd(
+                    entry_script='train.py',
+                    script_args=_kv_args(train_args),
+                    dist_mode=dist_mode,
+                    gpu_group=gpu_group,
+                ),
+                cwd=sphere_repo,
+                dry_run=dry_run,
+                gpu_group=gpu_group,
+            )
+            break
+        except subprocess.CalledProcessError:
+            if dry_run or attempt >= max_attempts:
+                raise
+            retry_total = max_attempts - 1
+            suffix = f' on GPUs {gpu_group}' if gpu_group is not None else ''
+            print(f'>>> train retry {attempt}/{retry_total} for {target_job}{suffix}')
+            time.sleep(10)
     if dry_run:
         return target_job
 
@@ -273,6 +286,7 @@ def _schedule_train_specs(
     skip_existing: bool,
     dry_run: bool,
     gpu_groups: list[str | None],
+    retry_attempts: int = 0,
 ) -> list[str]:
     if not specs:
         return []
@@ -288,6 +302,7 @@ def _schedule_train_specs(
                 skip_existing=skip_existing,
                 dry_run=dry_run,
                 gpu_group=gpu_group,
+                retry_attempts=retry_attempts,
             )
             for spec in specs
         ]
@@ -309,6 +324,7 @@ def _schedule_train_specs(
                 skip_existing=skip_existing,
                 dry_run=dry_run,
                 gpu_group=gpu_group,
+                retry_attempts=retry_attempts,
             )
             future_to_group[future] = gpu_group
 
@@ -328,6 +344,7 @@ def _schedule_train_specs(
                         skip_existing=skip_existing,
                         dry_run=dry_run,
                         gpu_group=gpu_group,
+                        retry_attempts=retry_attempts,
                     )
                     future_to_group[next_future] = gpu_group
     return results
@@ -367,6 +384,7 @@ def _build_alpha_specs(
         'dist_mode': experiment.get('dist_mode', 'local'),
         'skip_existing': bool(experiment.get('skip_existing', True)),
         'gpu_groups': _normalize_gpu_groups(experiment.get('gpu_groups')),
+        'retry_attempts': int(experiment.get('retry_attempts', 0)),
     }
     return specs, meta
 
@@ -407,6 +425,7 @@ def _build_loss_specs(
         'dist_mode': experiment.get('dist_mode', 'local'),
         'skip_existing': bool(experiment.get('skip_existing', True)),
         'gpu_groups': _normalize_gpu_groups(experiment.get('gpu_groups')),
+        'retry_attempts': int(experiment.get('retry_attempts', 0)),
     }
     return specs, meta
 
@@ -427,6 +446,7 @@ def _run_alpha_training(
         skip_existing=meta['skip_existing'],
         dry_run=dry_run,
         gpu_groups=meta['gpu_groups'],
+        retry_attempts=meta['retry_attempts'],
     )
 
 
@@ -446,6 +466,7 @@ def _run_loss_training(
         skip_existing=meta['skip_existing'],
         dry_run=dry_run,
         gpu_groups=meta['gpu_groups'],
+        retry_attempts=meta['retry_attempts'],
     )
 
 

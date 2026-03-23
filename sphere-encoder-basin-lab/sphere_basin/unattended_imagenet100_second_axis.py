@@ -50,6 +50,7 @@ def _build_train_specs(cfg: dict[str, Any], workspace_root: Path) -> tuple[list[
         'dist_mode': experiment.get('dist_mode', 'local'),
         'skip_existing': bool(experiment.get('skip_existing', True)),
         'gpu_groups': _normalize_gpu_groups(experiment.get('gpu_groups')),
+        'retry_attempts': int(experiment.get('retry_attempts', 0)),
     }
     return specs, meta
 
@@ -61,7 +62,7 @@ def _build_canonical_cfg(*, cfg: dict[str, Any], workspace_root: Path, new_jobs:
             'name': 'imagenet100_second_axis_canonical',
             'dev_dir': 'workspace',
             'dist_mode': 'local',
-            'gpu_groups': [[0], [1]],
+            'gpu_groups': [[0, 1]],
         },
         'probe': {
             'cfg': canonical.get('cfg', 1.0),
@@ -257,6 +258,7 @@ def main() -> None:
             skip_existing=meta['skip_existing'],
             dry_run=args.dry_run,
             gpu_groups=meta['gpu_groups'],
+            retry_attempts=meta['retry_attempts'],
         )
         status['steps'][-1]['state'] = 'completed'
         status['trained_jobs'] = jobs
