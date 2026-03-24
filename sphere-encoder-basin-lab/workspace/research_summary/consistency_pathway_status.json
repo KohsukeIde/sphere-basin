@@ -1,0 +1,44 @@
+{
+  "config": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/configs/a80_consistency_pathway.yaml",
+  "sphere_repo": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder",
+  "upstream_status": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/research_summary/no_lat_con_status.json",
+  "new_jobs": [
+    "sphere-small-small-cifar-10-32px-a80-no_pix_con-causal",
+    "sphere-small-small-cifar-10-32px-a80-recon_only-causal"
+  ],
+  "variant_job_map": {
+    "no_pix_con": "sphere-small-small-cifar-10-32px-a80-no_pix_con-causal",
+    "recon_only": "sphere-small-small-cifar-10-32px-a80-recon_only-causal"
+  },
+  "dry_run": false,
+  "steps": [
+    {
+      "name": "wait_for_a80_no_lat_con",
+      "state": "completed"
+    },
+    {
+      "name": "train_consistency_pathway",
+      "state": "completed"
+    },
+    {
+      "name": "canonical_probe",
+      "state": "completed"
+    },
+    {
+      "name": "official_eval",
+      "state": "completed"
+    }
+  ],
+  "state": "completed",
+  "current_step": null,
+  "upstream_state": "completed",
+  "trained_jobs": [
+    "sphere-small-small-cifar-10-32px-a80-no_pix_con-causal",
+    "sphere-small-small-cifar-10-32px-a80-recon_only-causal"
+  ],
+  "canonical_config": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/research_summary/a80_consistency_pathway_canonical.yaml",
+  "official_eval_config": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/research_summary/a80_consistency_pathway_official_eval.yaml",
+  "canonical_master_copy": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/research_summary/consistency_pathway_canonical_master.csv",
+  "official_eval_master_copy": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/research_summary/consistency_pathway_official_eval_master.csv",
+  "compare_csv": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/research_summary/consistency_pathway_compare.csv"
+}

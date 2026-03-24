@@ -1,17 +1,20 @@
 {
-  "config": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/configs/no_lat_con_causal.yaml",
+  "config": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/configs/no_lat_con_a80_finish.yaml",
   "sphere_repo": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder",
   "new_jobs": [
-    "sphere-small-small-cifar-10-32px-a80-no-lat-con-causal",
-    "sphere-small-small-cifar-10-32px-a83-no-lat-con-causal"
+    "sphere-small-small-cifar-10-32px-a80-no-lat-con-causal"
   ],
   "dry_run": false,
+  "stop_after_train": true,
   "steps": [
     {
       "name": "train_no_lat_con",
-      "state": "running"
+      "state": "completed"
     }
   ],
-  "state": "running",
-  "current_step": "train_no_lat_con"
+  "state": "completed",
+  "current_step": null,
+  "trained_jobs": [
+    "sphere-small-small-cifar-10-32px-a80-no-lat-con-causal"
+  ]
 }

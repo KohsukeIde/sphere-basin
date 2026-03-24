@@ -11,7 +11,8 @@
     "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder"
   ],
   "poll_seconds": 60.0,
-  "state": "waiting",
+  "state": "cancelled",
   "upstream_state": "running",
-  "upstream_current_step": "train_no_lat_con"
+  "upstream_current_step": "train_no_lat_con",
+  "note": "queue disabled after chain replanning; ImageNet-100 will not auto-start from this status file"
 }
