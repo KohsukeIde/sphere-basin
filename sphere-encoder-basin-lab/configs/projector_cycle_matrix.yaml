@@ -1,0 +1,36 @@
+experiment:
+  name: projector_cycle_matrix
+  dev_dir: workspace
+
+probe:
+  cfg: 1.0
+  cfg_position: combo
+  forward_steps: 4
+  num_prior_samples: 1024
+  batch_size_per_rank: 32
+  num_data_samples: 4096
+  num_workers: 4
+  cache_sampling_noise: true
+  use_sampling_scheduler: false
+  fixed_class: 0
+  lpips_ckpt_path: pretrained/lpips
+
+tasks:
+  - job_dir: sphere-small-small-cifar-10-32px-a80-pilot
+    ckpt_fname: ep0074.pth
+    label: a80_full_ep74
+  - job_dir: sphere-small-small-cifar-10-32px-a80-no-lat-con-causal
+    ckpt_fname: ep0074.pth
+    label: a80_no_lat_con_ep74
+  - job_dir: sphere-small-small-cifar-10-32px-a80-no_pix_con-causal
+    ckpt_fname: ep0074.pth
+    label: a80_no_pix_con_ep74
+  - job_dir: sphere-small-small-cifar-10-32px-a80-recon_only-causal
+    ckpt_fname: ep0074.pth
+    label: a80_recon_only_ep74
+  - job_dir: sphere-small-small-cifar-10-32px-a83-pilot
+    ckpt_fname: ep0074.pth
+    label: a83_full_ep74
+  - job_dir: sphere-small-small-cifar-10-32px-a85-pilot
+    ckpt_fname: ep0024.pth
+    label: a85_full_ep24

@@ -1,0 +1,20 @@
+{
+  "sphere_repo": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder",
+  "workspace": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace",
+  "steps": [
+    {
+      "name": "continuous_summary",
+      "state": "completed"
+    },
+    {
+      "name": "projector_cycle",
+      "state": "completed"
+    },
+    {
+      "name": "a83_consistency_pathway",
+      "state": "running"
+    }
+  ],
+  "state": "running",
+  "current_step": "a83_consistency_pathway"
+}

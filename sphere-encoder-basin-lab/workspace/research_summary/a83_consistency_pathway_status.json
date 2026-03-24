@@ -1,0 +1,21 @@
+{
+  "config": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/configs/a83_consistency_pathway_short.yaml",
+  "sphere_repo": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder",
+  "new_jobs": [
+    "sphere-small-small-cifar-10-32px-a83-no_pix_con-causal",
+    "sphere-small-small-cifar-10-32px-a83-recon_only-causal"
+  ],
+  "variant_job_map": {
+    "no_pix_con": "sphere-small-small-cifar-10-32px-a83-no_pix_con-causal",
+    "recon_only": "sphere-small-small-cifar-10-32px-a83-recon_only-causal"
+  },
+  "dry_run": false,
+  "steps": [
+    {
+      "name": "train_a83_consistency_pathway",
+      "state": "running"
+    }
+  ],
+  "state": "running",
+  "current_step": "train_a83_consistency_pathway"
+}
