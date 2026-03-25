@@ -12,9 +12,10 @@
     },
     {
       "name": "a83_consistency_pathway",
-      "state": "running"
+      "state": "failed"
     }
   ],
-  "state": "running",
-  "current_step": "a83_consistency_pathway"
+  "state": "failed",
+  "current_step": "a83_consistency_pathway",
+  "error": "CalledProcessError: Command '['/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/.venv/bin/python', '-m', 'sphere_basin.unattended_a83_consistency_pathway', '--config', '/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/configs/a83_consistency_pathway_short.yaml', '--sphere-repo', '/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder']' returned non-zero exit status 1."
 }

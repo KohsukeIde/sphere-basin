@@ -1,13 +1,13 @@
 {
-  "config_path": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/research_summary/a80_consistency_pathway_official_eval.yaml",
+  "config_path": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/research_summary/a83_consistency_pathway_official_eval.yaml",
   "sphere_repo": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder",
   "workspace_root": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace",
-  "task_count": 4,
+  "task_count": 3,
   "results": [
     {
-      "job_dir": "sphere-small-small-cifar-10-32px-a80-pilot",
-      "ckpt_epoch": "ep0074",
-      "ckpt_fname": "ep0074.pth",
+      "job_dir": "sphere-small-small-cifar-10-32px-a83-pilot",
+      "ckpt_epoch": "ep0049",
+      "ckpt_fname": "ep0049.pth",
       "regime_name": "shared-fixed",
       "cache_sampling_noise": true,
       "use_sampling_scheduler": false,
@@ -15,27 +15,18 @@
       "note": "existing eval rows"
     },
     {
-      "job_dir": "sphere-small-small-cifar-10-32px-a80-no-lat-con-causal",
-      "ckpt_epoch": "ep0074",
-      "ckpt_fname": "ep0074.pth",
+      "job_dir": "sphere-small-small-cifar-10-32px-a83-no_pix_con-causal",
+      "ckpt_epoch": "ep0049",
+      "ckpt_fname": "ep0049.pth",
       "regime_name": "shared-fixed",
       "cache_sampling_noise": true,
       "use_sampling_scheduler": false,
       "state": "completed"
     },
     {
-      "job_dir": "sphere-small-small-cifar-10-32px-a80-no_pix_con-causal",
-      "ckpt_epoch": "ep0074",
-      "ckpt_fname": "ep0074.pth",
-      "regime_name": "shared-fixed",
-      "cache_sampling_noise": true,
-      "use_sampling_scheduler": false,
-      "state": "completed"
-    },
-    {
-      "job_dir": "sphere-small-small-cifar-10-32px-a80-recon_only-causal",
-      "ckpt_epoch": "ep0074",
-      "ckpt_fname": "ep0074.pth",
+      "job_dir": "sphere-small-small-cifar-10-32px-a83-recon_only-causal",
+      "ckpt_epoch": "ep0049",
+      "ckpt_fname": "ep0049.pth",
       "regime_name": "shared-fixed",
       "cache_sampling_noise": true,
       "use_sampling_scheduler": false,
