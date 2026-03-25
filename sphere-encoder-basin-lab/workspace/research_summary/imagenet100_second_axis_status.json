@@ -1,32 +1,15 @@
 {
   "config": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/configs/imagenet100_second_axis.yaml",
   "sphere_repo": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder",
-  "dry_run": true,
-  "skip_fid_stats": true,
+  "dry_run": false,
+  "skip_fid_stats": false,
   "steps": [
     {
       "name": "prepare_dataset",
-      "state": "completed"
-    },
-    {
-      "name": "train_second_axis",
-      "state": "completed"
-    },
-    {
-      "name": "canonical_probe",
-      "state": "completed"
-    },
-    {
-      "name": "official_eval",
-      "state": "completed"
+      "state": "failed"
     }
   ],
-  "state": "completed",
-  "current_step": null,
-  "trained_jobs": [
-    "sphere-small-small-imagenet-100-160px-a83-second-axis",
-    "sphere-small-small-imagenet-100-160px-a85-second-axis"
-  ],
-  "canonical_config": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/research_summary/imagenet100_second_axis_canonical.yaml",
-  "official_eval_config": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/research_summary/imagenet100_second_axis_official_eval.yaml"
+  "state": "failed",
+  "current_step": "prepare_dataset",
+  "error": "CalledProcessError: Command '['/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/.venv/bin/python', '-m', 'sphere_basin.prepare_imagenet100_cmc', '--source-root', '/home/cvrt/Desktop/dev/10Y_VSSL/data/ImageNet', '--dev-dir', '/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace', '--dataset-name', 'imagenet-100', '--image-size', '160', '--class-list-path', 'references/imagenet100_cmc.txt', '--fid-stats-mode', 'extr', '--fid-stats-batch-size', '64', '--fid-stats-cuda']' returned non-zero exit status 1."
 }

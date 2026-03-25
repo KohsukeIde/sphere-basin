@@ -136,7 +136,8 @@ def _write_compare_csv(
         variant_group_map[job_dir] = f'a83_{variant_name}'
     merged['variant_group'] = merged['job_dir'].map(variant_group_map)
     merged = merged.sort_values(['variant_group', 'ckpt_epoch'])
-    out_path.to_csv(merged, index=False)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    merged.to_csv(out_path, index=False)
 
 
 def main() -> None:

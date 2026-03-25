@@ -21,16 +21,18 @@
     },
     {
       "name": "official_eval",
-      "state": "failed"
+      "state": "completed"
     }
   ],
-  "state": "failed",
-  "current_step": "official_eval",
+  "state": "completed",
+  "current_step": null,
   "trained_jobs": [
     "sphere-small-small-cifar-10-32px-a83-no_pix_con-causal",
     "sphere-small-small-cifar-10-32px-a83-recon_only-causal"
   ],
   "canonical_config": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/research_summary/a83_consistency_pathway_canonical.yaml",
   "official_eval_config": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/research_summary/a83_consistency_pathway_official_eval.yaml",
-  "error": "AttributeError: 'PosixPath' object has no attribute 'to_csv'"
+  "canonical_master_copy": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/research_summary/a83_consistency_pathway_canonical_master.csv",
+  "official_eval_master_copy": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/research_summary/a83_consistency_pathway_official_eval_master.csv",
+  "compare_csv": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/research_summary/a83_consistency_pathway_compare.csv"
 }

@@ -21,7 +21,8 @@
       "regime_name": "shared-fixed",
       "cache_sampling_noise": true,
       "use_sampling_scheduler": false,
-      "state": "completed"
+      "state": "skipped",
+      "note": "existing eval rows"
     },
     {
       "job_dir": "sphere-small-small-cifar-10-32px-a83-recon_only-causal",
@@ -30,7 +31,8 @@
       "regime_name": "shared-fixed",
       "cache_sampling_noise": true,
       "use_sampling_scheduler": false,
-      "state": "completed"
+      "state": "skipped",
+      "note": "existing eval rows"
     }
   ]
 }
