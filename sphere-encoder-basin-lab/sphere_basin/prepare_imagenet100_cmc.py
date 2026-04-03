@@ -76,14 +76,26 @@ def _ensure_ref_images(source_root: Path, classes: list[str], ref_dir: Path) -> 
     images_root.mkdir(parents=True, exist_ok=True)
     for synset in classes:
         target = source_root / 'train' / synset
-        link = images_root / synset
-        if link.is_symlink() or link.exists():
-            if link.is_symlink() and link.resolve() == target.resolve():
-                continue
-            if link.is_dir() and not link.is_symlink():
-                raise FileExistsError(f'ref image path exists and is a real directory: {link}')
-            link.unlink()
-        os.symlink(target.resolve(), link)
+        class_dir = images_root / synset
+        if class_dir.is_symlink():
+            class_dir.unlink()
+        elif class_dir.exists() and not class_dir.is_dir():
+            raise FileExistsError(f'ref image path exists and is not a directory: {class_dir}')
+        class_dir.mkdir(parents=True, exist_ok=True)
+
+        target_files = list(_iter_images(target))
+        if not target_files:
+            raise FileNotFoundError(f'no images found under: {target}')
+
+        for img_path in target_files:
+            link = class_dir / img_path.name
+            if link.is_symlink():
+                if link.resolve() == img_path.resolve():
+                    continue
+                link.unlink()
+            elif link.exists():
+                raise FileExistsError(f'ref image file exists and is not a symlink: {link}')
+            os.symlink(img_path.resolve(), link)
 
 
 def _compute_fid_stats(

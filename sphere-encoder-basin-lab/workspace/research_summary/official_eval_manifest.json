@@ -1,38 +1,26 @@
 {
-  "config_path": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/research_summary/a83_consistency_pathway_official_eval.yaml",
+  "config_path": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/research_summary/imagenet100_second_axis_official_eval.yaml",
   "sphere_repo": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder",
   "workspace_root": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace",
-  "task_count": 3,
+  "task_count": 2,
   "results": [
     {
-      "job_dir": "sphere-small-small-cifar-10-32px-a83-pilot",
-      "ckpt_epoch": "ep0049",
-      "ckpt_fname": "ep0049.pth",
+      "job_dir": "sphere-small-small-imagenet-100-160px-a83-second-axis",
+      "ckpt_epoch": "ep0024",
+      "ckpt_fname": "ep0024.pth",
       "regime_name": "shared-fixed",
       "cache_sampling_noise": true,
       "use_sampling_scheduler": false,
-      "state": "skipped",
-      "note": "existing eval rows"
+      "state": "completed"
     },
     {
-      "job_dir": "sphere-small-small-cifar-10-32px-a83-no_pix_con-causal",
-      "ckpt_epoch": "ep0049",
-      "ckpt_fname": "ep0049.pth",
+      "job_dir": "sphere-small-small-imagenet-100-160px-a85-second-axis",
+      "ckpt_epoch": "ep0024",
+      "ckpt_fname": "ep0024.pth",
       "regime_name": "shared-fixed",
       "cache_sampling_noise": true,
       "use_sampling_scheduler": false,
-      "state": "skipped",
-      "note": "existing eval rows"
-    },
-    {
-      "job_dir": "sphere-small-small-cifar-10-32px-a83-recon_only-causal",
-      "ckpt_epoch": "ep0049",
-      "ckpt_fname": "ep0049.pth",
-      "regime_name": "shared-fixed",
-      "cache_sampling_noise": true,
-      "use_sampling_scheduler": false,
-      "state": "skipped",
-      "note": "existing eval rows"
+      "state": "completed"
     }
   ]
 }

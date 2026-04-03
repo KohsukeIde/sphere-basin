@@ -30,7 +30,7 @@ train:
   affine_latent_mlp_mixer: true
   pixel_head_type: conv
   compile_model: false
-  ckpt_save_interval: 5
+  ckpt_save_interval: 1
   vis_interval: 25
   out_dir: experiments
   lat_con_loss_weight: 0.1
@@ -58,7 +58,7 @@ train:
   recon_eval_interval: 25
   recon_num_samples: 512
   light_eval_interval: 25
-  light_eval_num_samples: 1024
+  light_eval_num_samples: 1200
   light_eval_batch_size_per_rank: 8
   light_eval_forward_steps: [1, 4]
   light_eval_num_snapshot_samples: 32

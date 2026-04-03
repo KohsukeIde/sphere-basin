@@ -4,7 +4,7 @@ experiment:
   dist_mode: local
   gpu_groups:
   - - 0
-  - - 1
+    - 1
 probe:
   cfg: 1.0
   cfg_position: combo
