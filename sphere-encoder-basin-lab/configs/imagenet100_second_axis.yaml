@@ -9,7 +9,7 @@ experiment:
     - [0, 1]
 
 dataset:
-  source_root: /home/cvrt/Desktop/dev/10Y_VSSL/data/ImageNet
+  source_root: /home/cvrt/.local/share/Trash/files/10Y_VSSL/data/ImageNet
   dataset_name: imagenet-100
   image_size: 160
   class_list_path: references/imagenet100_cmc.txt

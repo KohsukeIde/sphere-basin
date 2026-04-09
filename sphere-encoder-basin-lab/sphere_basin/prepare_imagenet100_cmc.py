@@ -87,6 +87,14 @@ def _ensure_ref_images(source_root: Path, classes: list[str], ref_dir: Path) -> 
         if not target_files:
             raise FileNotFoundError(f'no images found under: {target}')
 
+        keep_names = {img_path.name for img_path in target_files}
+        for child in list(class_dir.iterdir()):
+            if child.name not in keep_names:
+                if child.is_symlink() or child.is_file():
+                    child.unlink()
+                else:
+                    raise FileExistsError(f'unexpected non-file path under ref image dir: {child}')
+
         for img_path in target_files:
             link = class_dir / img_path.name
             if link.is_symlink():

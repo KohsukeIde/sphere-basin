@@ -1,0 +1,28 @@
+{
+  "config": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/configs/imagenet100_followup_minimal.yaml",
+  "sphere_repo": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder",
+  "dry_run": false,
+  "state": "paused",
+  "steps": [
+    {
+      "name": "refresh_dataset",
+      "state": "completed"
+    },
+    {
+      "name": "resume_a85_full",
+      "state": "paused"
+    }
+  ],
+  "backed_up_summary_files": [
+    "canonical_master.csv",
+    "canonical_prior_long.csv",
+    "canonical_contraction_long.csv",
+    "canonical_probe_matrix_manifest.json",
+    "official_eval_master.csv",
+    "official_eval_manifest.json"
+  ],
+  "current_step": null,
+  "paused_at_step": "resume_a85_full",
+  "latest_checkpoint": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/_staging/a85-ep0049-followup/sphere-small-small-imagenet-100-160px/ckpt/ep0041.pth",
+  "note": "Paused by user request on 2026-04-04 Asia/Tokyo. Resume from ep0041 or rerun the follow-up chain after deciding whether to continue from the staged job."
+}
