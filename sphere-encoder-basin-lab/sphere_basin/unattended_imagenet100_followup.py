@@ -70,6 +70,25 @@ def _make_resume_ckpt(base_ckpt: Path, out_path: Path, next_epoch: int) -> Path:
     return out_path
 
 
+def _latest_staged_ckpt(workspace_root: Path, run_slug: str, default_job: str, target_epoch: int) -> Path | None:
+    ckpt_dir = workspace_root / '_staging' / run_slug / default_job / 'ckpt'
+    if not ckpt_dir.exists():
+        return None
+
+    candidates: list[tuple[int, Path]] = []
+    for path in ckpt_dir.glob('ep*.pth'):
+        try:
+            epoch = int(path.stem.replace('ep', ''))
+        except ValueError:
+            continue
+        if epoch < target_epoch:
+            candidates.append((epoch, path))
+
+    if not candidates:
+        return None
+    return max(candidates, key=lambda item: item[0])[1]
+
+
 def _resume_full_a85(
     *,
     cfg: dict[str, Any],
@@ -90,20 +109,6 @@ def _resume_full_a85(
         return target_job_dir
 
     resume_from_name = str(resume_cfg.get('resume_ckpt', 'ep0024.pth'))
-    base_ckpt = job_path / 'ckpt' / resume_from_name
-    if not base_ckpt.exists():
-        raise FileNotFoundError(f'missing resume checkpoint: {base_ckpt}')
-
-    next_epoch = int(base_ckpt.stem.replace('ep', '')) + 1
-    patched_resume = (
-        workspace_root
-        / 'research_summary'
-        / '_resume_ckpts'
-        / f'{source_job_dir}-{base_ckpt.stem}-resume-next={next_epoch:04d}.pth'
-    )
-    if not dry_run:
-        _make_resume_ckpt(base_ckpt, patched_resume, next_epoch=next_epoch)
-
     train_args = {
         **train_common,
         'noise_sigma_max_angle': int(resume_cfg['alpha']),
@@ -111,7 +116,6 @@ def _resume_full_a85(
         'wandb_group': str(resume_cfg.get('wandb_group', 'imagenet100_followup')),
         'init_from': 'resume',
         'auto_resume': False,
-        'resume_from': str(patched_resume),
     }
     manifest = {
         'sweep_name': str(exp_cfg.get('name', 'imagenet100_followup_minimal')),
@@ -130,6 +134,39 @@ def _resume_full_a85(
         manifest=manifest,
         workspace_root=workspace_root,
     )
+
+    base_ckpt = job_path / 'ckpt' / resume_from_name
+    if not base_ckpt.exists():
+        raise FileNotFoundError(f'missing resume checkpoint: {base_ckpt}')
+
+    target_epoch = int(str(target_ckpt_epoch).replace('ep', ''))
+    staged_ckpt = _latest_staged_ckpt(
+        workspace_root,
+        run_slug=str(resume_cfg.get('run_slug', 'a85-ep0049-followup')),
+        default_job=str(spec['default_job']),
+        target_epoch=target_epoch,
+    )
+    resume_ckpt = staged_ckpt or base_ckpt
+    next_epoch = int(resume_ckpt.stem.replace('ep', '')) + 1
+    resume_label = (
+        f'{target_job_dir}-{resume_ckpt.stem}'
+        if staged_ckpt is not None
+        else f'{source_job_dir}-{resume_ckpt.stem}'
+    )
+    patched_resume = (
+        workspace_root
+        / 'research_summary'
+        / '_resume_ckpts'
+        / f'{resume_label}-resume-next={next_epoch:04d}.pth'
+    )
+    if not dry_run:
+        _make_resume_ckpt(resume_ckpt, patched_resume, next_epoch=next_epoch)
+
+    spec['train_args']['resume_from'] = str(patched_resume)
+    manifest['source_ckpt'] = str(resume_ckpt)
+    manifest['resume_next_epoch'] = next_epoch
+    manifest['resume_from_staged'] = staged_ckpt is not None
+
     jobs = _schedule_train_specs(
         [spec],
         sphere_repo=sphere_repo,
@@ -168,33 +205,68 @@ def _refresh_dataset(*, cfg: dict[str, Any], sphere_repo: str, dry_run: bool) ->
     dataset_cfg = dict(cfg['dataset'])
     exp_cfg = dict(cfg['experiment'])
     workspace_root = ensure_workspace_compat(exp_cfg.get('dev_dir'))
-    fid_stats_path = (
-        workspace_root
-        / 'fid_stats'
-        / f"fid_stats_{dataset_cfg.get('fid_stats_mode', 'extr')}_{dataset_cfg.get('dataset_name', 'imagenet-100')}_{int(dataset_cfg.get('image_size', 160))}px.npz"
-    )
-    cmd = [
-        sys.executable,
-        '-m',
-        'sphere_basin.prepare_imagenet100_cmc',
-        '--source-root',
-        str(dataset_cfg['source_root']),
-        '--dev-dir',
-        str(exp_cfg.get('dev_dir', 'workspace')),
-        '--dataset-name',
-        str(dataset_cfg.get('dataset_name', 'imagenet-100')),
-        '--image-size',
-        str(int(dataset_cfg.get('image_size', 160))),
-        '--class-list-path',
-        str(dataset_cfg.get('class_list_path', 'references/imagenet100_cmc.txt')),
-        '--fid-stats-mode',
-        str(dataset_cfg.get('fid_stats_mode', 'extr')),
-        '--fid-stats-batch-size',
-        str(int(dataset_cfg.get('fid_stats_batch_size', 64))),
-        '--force',
-    ]
-    if fid_stats_path.exists():
-        cmd.append('--skip-fid-stats')
+    source_type = str(dataset_cfg.get('source_type', 'local')).lower()
+    if source_type in {'hf', 'huggingface', 'huggingface_parquet'}:
+        cmd = [
+            sys.executable,
+            '-m',
+            'sphere_basin.prepare_imagenet100_hf',
+            '--repo-id',
+            str(dataset_cfg.get('hf_repo_id', 'clane9/imagenet-100')),
+            '--download-dir',
+            str(dataset_cfg.get('download_dir', 'workspace/downloads/imagenet-100-hf')),
+            '--source-root',
+            str(dataset_cfg.get('source_root', 'workspace/datasets/imagenet-100/images')),
+            '--dev-dir',
+            str(exp_cfg.get('dev_dir', 'workspace')),
+            '--dataset-name',
+            str(dataset_cfg.get('dataset_name', 'imagenet-100')),
+            '--image-size',
+            str(int(dataset_cfg.get('image_size', 160))),
+            '--class-list-path',
+            str(dataset_cfg.get('class_list_path', 'references/imagenet100_cmc.txt')),
+            '--fid-stats-mode',
+            str(dataset_cfg.get('fid_stats_mode', 'extr')),
+            '--fid-stats-batch-size',
+            str(int(dataset_cfg.get('fid_stats_batch_size', 64))),
+            '--force',
+        ]
+        if dataset_cfg.get('hf_revision') is not None:
+            cmd.extend(['--revision', str(dataset_cfg['hf_revision'])])
+        if bool(dataset_cfg.get('force_images', False)):
+            cmd.append('--force-images')
+        if bool(dataset_cfg.get('force_fid_stats', False)):
+            cmd.append('--force-fid-stats')
+        if bool(dataset_cfg.get('skip_fid_stats', False)):
+            cmd.append('--skip-fid-stats')
+    else:
+        fid_stats_path = (
+            workspace_root
+            / 'fid_stats'
+            / f"fid_stats_{dataset_cfg.get('fid_stats_mode', 'extr')}_{dataset_cfg.get('dataset_name', 'imagenet-100')}_{int(dataset_cfg.get('image_size', 160))}px.npz"
+        )
+        cmd = [
+            sys.executable,
+            '-m',
+            'sphere_basin.prepare_imagenet100_cmc',
+            '--source-root',
+            str(dataset_cfg['source_root']),
+            '--dev-dir',
+            str(exp_cfg.get('dev_dir', 'workspace')),
+            '--dataset-name',
+            str(dataset_cfg.get('dataset_name', 'imagenet-100')),
+            '--image-size',
+            str(int(dataset_cfg.get('image_size', 160))),
+            '--class-list-path',
+            str(dataset_cfg.get('class_list_path', 'references/imagenet100_cmc.txt')),
+            '--fid-stats-mode',
+            str(dataset_cfg.get('fid_stats_mode', 'extr')),
+            '--fid-stats-batch-size',
+            str(int(dataset_cfg.get('fid_stats_batch_size', 64))),
+            '--force',
+        ]
+        if fid_stats_path.exists():
+            cmd.append('--skip-fid-stats')
     if bool(dataset_cfg.get('fid_stats_cuda', True)):
         cmd.append('--fid-stats-cuda')
     _run(cmd, cwd=str(project_root()), dry_run=dry_run, gpu_group=None)

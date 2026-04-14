@@ -222,27 +222,62 @@ def main() -> None:
         status['current_step'] = 'prepare_dataset'
         status['steps'].append({'name': 'prepare_dataset', 'state': 'running'})
         _write_status(status_path, status)
-        prepare_cmd = [
-            sys.executable,
-            '-m',
-            'sphere_basin.prepare_imagenet100_cmc',
-            '--source-root',
-            str(dataset_cfg['source_root']),
-            '--dev-dir',
-            str(resolve_dev_dir(cfg['experiment'].get('dev_dir'))),
-            '--dataset-name',
-            str(dataset_cfg.get('dataset_name', 'imagenet-100')),
-            '--image-size',
-            str(int(dataset_cfg.get('image_size', 160))),
-            '--class-list-path',
-            str(dataset_cfg.get('class_list_path', 'references/imagenet100_cmc.txt')),
-            '--fid-stats-mode',
-            str(dataset_cfg.get('fid_stats_mode', 'extr')),
-            '--fid-stats-batch-size',
-            str(int(dataset_cfg.get('fid_stats_batch_size', 64))),
-            *(['--fid-stats-cuda'] if bool(dataset_cfg.get('fid_stats_cuda', True)) else []),
-            *(['--skip-fid-stats'] if args.skip_fid_stats else []),
-        ]
+        source_type = str(dataset_cfg.get('source_type', 'local')).lower()
+        if source_type in {'hf', 'huggingface', 'huggingface_parquet'}:
+            prepare_cmd = [
+                sys.executable,
+                '-m',
+                'sphere_basin.prepare_imagenet100_hf',
+                '--repo-id',
+                str(dataset_cfg.get('hf_repo_id', 'clane9/imagenet-100')),
+                '--download-dir',
+                str(dataset_cfg.get('download_dir', 'workspace/downloads/imagenet-100-hf')),
+                '--source-root',
+                str(dataset_cfg.get('source_root', 'workspace/datasets/imagenet-100/images')),
+                '--dev-dir',
+                str(resolve_dev_dir(cfg['experiment'].get('dev_dir'))),
+                '--dataset-name',
+                str(dataset_cfg.get('dataset_name', 'imagenet-100')),
+                '--image-size',
+                str(int(dataset_cfg.get('image_size', 160))),
+                '--class-list-path',
+                str(dataset_cfg.get('class_list_path', 'references/imagenet100_cmc.txt')),
+                '--fid-stats-mode',
+                str(dataset_cfg.get('fid_stats_mode', 'extr')),
+                '--fid-stats-batch-size',
+                str(int(dataset_cfg.get('fid_stats_batch_size', 64))),
+                '--force',
+                *(['--fid-stats-cuda'] if bool(dataset_cfg.get('fid_stats_cuda', True)) else []),
+                *(['--skip-fid-stats'] if args.skip_fid_stats else []),
+            ]
+            if dataset_cfg.get('hf_revision') is not None:
+                prepare_cmd.extend(['--revision', str(dataset_cfg['hf_revision'])])
+            if bool(dataset_cfg.get('force_images', False)):
+                prepare_cmd.append('--force-images')
+            if bool(dataset_cfg.get('force_fid_stats', False)):
+                prepare_cmd.append('--force-fid-stats')
+        else:
+            prepare_cmd = [
+                sys.executable,
+                '-m',
+                'sphere_basin.prepare_imagenet100_cmc',
+                '--source-root',
+                str(dataset_cfg['source_root']),
+                '--dev-dir',
+                str(resolve_dev_dir(cfg['experiment'].get('dev_dir'))),
+                '--dataset-name',
+                str(dataset_cfg.get('dataset_name', 'imagenet-100')),
+                '--image-size',
+                str(int(dataset_cfg.get('image_size', 160))),
+                '--class-list-path',
+                str(dataset_cfg.get('class_list_path', 'references/imagenet100_cmc.txt')),
+                '--fid-stats-mode',
+                str(dataset_cfg.get('fid_stats_mode', 'extr')),
+                '--fid-stats-batch-size',
+                str(int(dataset_cfg.get('fid_stats_batch_size', 64))),
+                *(['--fid-stats-cuda'] if bool(dataset_cfg.get('fid_stats_cuda', True)) else []),
+                *(['--skip-fid-stats'] if args.skip_fid_stats else []),
+            ]
         _run(prepare_cmd, cwd=str(project_root()), dry_run=args.dry_run)
         status['steps'][-1]['state'] = 'completed'
         _write_status(status_path, status)

@@ -68,7 +68,7 @@
     "pix_con_perc_loss_weight": 0.5,
     "lat_con_loss_weight": 0.1,
     "load_from": null,
-    "resume_from": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/research_summary/_resume_ckpts/sphere-small-small-imagenet-100-160px-a85-second-axis-ep0024-resume-next=0025.pth",
+    "resume_from": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/research_summary/_resume_ckpts/sphere-small-small-imagenet-100-160px-a85-second-axis-ep0049-followup-ep0041-resume-next=0042.pth",
     "init_from": "resume",
     "auto_resume": false,
     "override_model_with_ema": false,

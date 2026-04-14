@@ -9,7 +9,10 @@ experiment:
     - [0, 1]
 
 dataset:
-  source_root: /home/cvrt/.local/share/Trash/files/10Y_VSSL/data/ImageNet
+  source_type: huggingface_parquet
+  hf_repo_id: clane9/imagenet-100
+  download_dir: workspace/downloads/imagenet-100-hf
+  source_root: workspace/datasets/imagenet-100/images
   dataset_name: imagenet-100
   image_size: 160
   class_list_path: references/imagenet100_cmc.txt
