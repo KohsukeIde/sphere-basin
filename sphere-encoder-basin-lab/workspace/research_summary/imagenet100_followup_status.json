@@ -2,7 +2,7 @@
   "config": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/configs/imagenet100_followup_minimal.yaml",
   "sphere_repo": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder",
   "dry_run": false,
-  "state": "running",
+  "state": "completed",
   "steps": [
     {
       "name": "refresh_dataset",
@@ -10,7 +10,19 @@
     },
     {
       "name": "resume_a85_full",
-      "state": "running"
+      "state": "completed"
+    },
+    {
+      "name": "train_a85_no_pix_con",
+      "state": "completed"
+    },
+    {
+      "name": "canonical_probe",
+      "state": "completed"
+    },
+    {
+      "name": "official_eval",
+      "state": "completed"
     }
   ],
   "backed_up_summary_files": [
@@ -21,5 +33,18 @@
     "official_eval_master.csv",
     "official_eval_manifest.json"
   ],
-  "current_step": "resume_a85_full"
+  "current_step": null,
+  "resumed_job": "sphere-small-small-imagenet-100-160px-a85-second-axis-ep0049-followup",
+  "ablation_config": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/research_summary/imagenet100_followup_loss_ablation.yaml",
+  "new_jobs": [
+    "sphere-small-small-imagenet-100-160px-a85-no_pix_con-followup"
+  ],
+  "trained_jobs": [
+    "sphere-small-small-imagenet-100-160px-a85-no_pix_con-followup"
+  ],
+  "canonical_config": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/research_summary/imagenet100_followup_canonical.yaml",
+  "official_eval_config": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/research_summary/imagenet100_followup_official_eval.yaml",
+  "canonical_master_copy": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/research_summary/imagenet100_followup_canonical_master.csv",
+  "official_eval_master_copy": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/research_summary/imagenet100_followup_official_eval_master.csv",
+  "compare_csv": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/research_summary/imagenet100_followup_compare.csv"
 }
