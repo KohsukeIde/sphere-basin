@@ -1,0 +1,45 @@
+{
+  "config": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/configs/imagenet100_a83_no_pix_check.yaml",
+  "sphere_repo": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder",
+  "dry_run": false,
+  "state": "completed",
+  "steps": [
+    {
+      "name": "refresh_dataset",
+      "state": "completed"
+    },
+    {
+      "name": "train_a83_no_pix_con",
+      "state": "completed"
+    },
+    {
+      "name": "canonical_probe",
+      "state": "completed"
+    },
+    {
+      "name": "official_eval",
+      "state": "completed"
+    }
+  ],
+  "backed_up_summary_files": [
+    "canonical_master.csv",
+    "canonical_prior_long.csv",
+    "canonical_contraction_long.csv",
+    "canonical_probe_matrix_manifest.json",
+    "official_eval_master.csv",
+    "official_eval_manifest.json"
+  ],
+  "current_step": null,
+  "ablation_config": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/research_summary/imagenet100_a83_no_pix_check_loss_ablation.yaml",
+  "new_jobs": [
+    "sphere-small-small-imagenet-100-160px-a83-no_pix_con-no_pix_check"
+  ],
+  "trained_jobs": [
+    "sphere-small-small-imagenet-100-160px-a83-no_pix_con-no_pix_check"
+  ],
+  "canonical_config": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/research_summary/imagenet100_a83_no_pix_check_canonical.yaml",
+  "official_eval_config": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/research_summary/imagenet100_a83_no_pix_check_official_eval.yaml",
+  "canonical_master_copy": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/research_summary/imagenet100_a83_no_pix_check_canonical_master.csv",
+  "official_eval_master_copy": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/research_summary/imagenet100_a83_no_pix_check_official_eval_master.csv",
+  "compare_csv": "/home/cvrt/Desktop/dev/sphere-monorepo/sphere-encoder-basin-lab/workspace/research_summary/imagenet100_a83_no_pix_check_compare.csv"
+}
